@@ -1,5 +1,8 @@
 import React from 'react';
+import './App.css';
 
-const App: React.FC = () => <h1>Medby Web</h1>;
+import LoginPage from './pages/login';
+
+const App: React.FC = () => <LoginPage />;
 
 export default App;

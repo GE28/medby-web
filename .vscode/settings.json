@@ -4,5 +4,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "eslint.alwaysShowStatus": true,
+  "css.customData": ["./.vscode/app.css.json"]
 }

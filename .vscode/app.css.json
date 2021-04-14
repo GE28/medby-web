@@ -1,0 +1,12 @@
+{
+  "version": 1.1,
+  "properties": [],
+  "atDirectives": [
+    {
+      "name": "@import-normalize",
+      "description": "Import normalize.css to the project"
+    }
+  ],
+  "pseudoClasses": [],
+  "pseudoElements": []
+}

@@ -1,0 +1,43 @@
+@import-normalize;
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #f9fff5;
+  color: #23212c;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0; /* prevent "0.67em 0" from normalize.css */
+  font-size: 27px;
+}
+
+a {
+  text-decoration: solid;
+}
+
+button {
+  cursor: pointer;
+  font: inherit; /* chrome */
+}
