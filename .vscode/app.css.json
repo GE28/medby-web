@@ -4,7 +4,13 @@
   "atDirectives": [
     {
       "name": "@import-normalize",
-      "description": "Import normalize.css to the project"
+      "description": "Bring in normalize.css styles",
+      "references": [
+        {
+          "name": "Create React App documentation",
+          "url": "https://create-react-app.dev/docs/adding-css-reset/"
+        }
+      ]
     }
   ],
   "pseudoClasses": [],

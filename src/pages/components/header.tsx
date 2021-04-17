@@ -1,11 +1,11 @@
-import React, { HTMLAttributes } from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 
 import { DefaultHeader } from './styles';
 
 type HTMLProps = HTMLAttributes<HTMLElement>;
 
-const Header: React.FC<HTMLProps> = ({ children, ...props }) => (
-  <DefaultHeader id="header" {...props}>
+const Header: FC<HTMLProps> = ({ children, ...rest }) => (
+  <DefaultHeader id="header" {...rest}>
     {children}
   </DefaultHeader>
 );

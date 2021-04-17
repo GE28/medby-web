@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { FiAtSign, FiKey } from 'react-icons/fi';
 
 import Header from '../components/header';
-import LogoContainer from '../components/logocontainer';
+import LogoContainer from '../components/logoContainer';
 import Field from '../components/field';
 import Button from '../components/button';
 import GitHubLink from '../components/githubLink';
@@ -11,7 +11,7 @@ import Footer from '../components/footer';
 
 import { Container, MainContent, Form } from './styles';
 
-const LoginPage: React.FC = () => (
+const LoginPage: FC = () => (
   <Container>
     <Header>
       <LogoContainer />
@@ -20,12 +20,8 @@ const LoginPage: React.FC = () => (
       <h1>Área do cliente</h1>
 
       <Form>
-        <Field icon={FiAtSign} name="email">
-          E-mail
-        </Field>
-        <Field icon={FiKey} name="password">
-          Senha
-        </Field>
+        <Field icon={FiAtSign} label="E-mail" name="email" />
+        <Field icon={FiKey} label="Password" name="password" />
 
         <Button type="submit">ENTRAR</Button>
 

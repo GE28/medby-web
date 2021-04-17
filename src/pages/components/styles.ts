@@ -23,7 +23,7 @@ export const LogoContainer = styled.div`
   align-items: center;
 
   img {
-    height: 78%;
+    height: 65%;
   }
 
   span {
@@ -53,6 +53,12 @@ export const InputContainer = styled.div`
     gap: 12px;
   }
 
+  div:focus-within {
+    border: 1px solid #5b8c30;
+    box-shadow: 0 0 0 3px #5b8c3020;
+    transition: 0.05s;
+  }
+
   svg {
     flex-shrink: 0;
     color: #a6a6a6;
@@ -61,6 +67,7 @@ export const InputContainer = styled.div`
   input {
     font-size: 16px;
     flex-grow: 1;
+    outline: 0;
     color: #23212c;
     background-color: transparent;
     border: 0;

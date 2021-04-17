@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { LogoContainer } from './styles';
 
 import medbyLogo from '../../assets/logo.svg';
 
-const Header: React.FC = () => (
+const Header: FC = () => (
   <LogoContainer>
     <img alt="Medby Logo" src={medbyLogo} />
     <span>MEDBY</span>

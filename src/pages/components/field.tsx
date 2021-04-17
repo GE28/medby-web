@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 
 import { IconBaseProps } from 'react-icons';
 
@@ -7,20 +7,15 @@ import { InputContainer } from './styles';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
   name: string;
+  label: string;
 }
 
-const Field: React.FC<InputProps> = ({
-  name,
-  children: labelText,
-  icon: Icon,
-  ...props
-}) => {
+const Field: FC<InputProps> = ({ name, label, icon: Icon, ...rest }) => {
   const inputDefaultProps = {
-    id: `${name}_field`,
+    id: `${name}_input`,
     type: 'text',
     autoComplete: 'off',
-    ...props,
-    required: true,
+    ...rest,
   };
 
   const IconInputContainer = () =>
@@ -37,9 +32,9 @@ const Field: React.FC<InputProps> = ({
 
   return (
     <InputContainer>
-      {labelText ? (
+      {label ? (
         <>
-          <label htmlFor={inputDefaultProps.id}>{labelText}</label>
+          <label htmlFor={inputDefaultProps.id}>{label}</label>
           <IconInputContainer />
         </>
       ) : (
