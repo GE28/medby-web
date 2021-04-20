@@ -25,7 +25,8 @@
       80,
       2,
       {
-        "ignoreTrailingComments": true
+        "ignoreTrailingComments": true,
+        "ignoreStrings": true
       }
     ],
     "react-hooks/rules-of-hooks": "error",
@@ -37,6 +38,7 @@
     "import/extensions": "off",
     "camelcase": "off",
     "no-use-before-define": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "@typescript-eslint/no-use-before-define": ["error"]
   },
   "settings": {

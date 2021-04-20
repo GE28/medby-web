@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface InputContainer {
+  isError?: string | false;
+  isTouched?: boolean;
+}
 
 export const DefaultHeader = styled.header`
   display: flex;
@@ -33,7 +38,7 @@ export const LogoContainer = styled.div`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<InputContainer>`
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -59,7 +64,11 @@ export const InputContainer = styled.div`
     transition: 0.05s;
   }
 
-  svg {
+  span {
+    color: #dd614a;
+  }
+
+  div svg {
     flex-shrink: 0;
     color: #a6a6a6;
   }
@@ -72,6 +81,33 @@ export const InputContainer = styled.div`
     background-color: transparent;
     border: 0;
   }
+
+  ${(props) =>
+    props.isError &&
+    props.isTouched &&
+    css`
+      div {
+        border: 1px solid #dd614a;
+        box-shadow: 0 0 0 3px #dd614a20;
+      }
+
+      div svg {
+        color: #dd614a;
+      }
+    `}
+
+  ${(props) =>
+    props.isError ||
+    (props.isTouched &&
+      css`
+        div {
+          border: 1px solid #5b8c30;
+        }
+
+        div svg {
+          color: #5b8c30;
+        }
+      `)}
 `;
 
 export const DefaultButton = styled.button`

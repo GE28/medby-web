@@ -1,13 +1,9 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC } from 'react';
 
 import { Footer } from './styles';
 
-type HTMLProps = HTMLAttributes<HTMLElement>;
-
-const GitHubLink: FC<HTMLProps> = ({ children, ...rest }) => (
-  <Footer id="footer" {...rest}>
-    {children}
-  </Footer>
+const GitHubLink: FC = ({ children }) => (
+  <Footer id="footer">{children}</Footer>
 );
 
 /* const GitHubLink: FC<HTMLProps> = React.memo((props) => (
