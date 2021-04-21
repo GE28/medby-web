@@ -38,7 +38,6 @@
     "import/extensions": "off",
     "camelcase": "off",
     "no-use-before-define": "off",
-    "jsx-a11y/label-has-associated-control": "off",
     "@typescript-eslint/no-use-before-define": ["error"]
   },
   "settings": {

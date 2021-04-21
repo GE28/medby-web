@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 
-import { FiAtSign, FiKey } from 'react-icons/fi';
-
 import Header from '../components/header';
 import LogoContainer from '../components/logoContainer';
-import Field from '../components/field';
-import Button from '../components/button';
 import GitHubLink from '../components/githubLink';
 import Footer from '../components/footer';
 
-import { Container, MainContent, Form } from './styles';
+import { Container, MainContent } from './styles';
+
+import LoginForm from './form';
 
 const LoginPage: FC = () => (
   <Container>
@@ -19,16 +17,7 @@ const LoginPage: FC = () => (
     <MainContent>
       <h1>Área do cliente</h1>
 
-      <Form>
-        <Field icon={FiAtSign} label="E-mail" name="email" />
-        <Field icon={FiKey} label="Password" name="password" />
-
-        <Button type="submit">ENTRAR</Button>
-
-        <p>
-          <a href="/register">Não possui cadastro?</a>
-        </p>
-      </Form>
+      <LoginForm />
     </MainContent>
 
     <Footer>

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import RegisterPage from './pages/register';
+import LoginPage from './pages/login';
 
-const App: React.FC = () => <RegisterPage />;
+const App: React.FC = () => <LoginPage />;
 
 export default App;

@@ -65,7 +65,7 @@ export const InputContainer = styled.div<InputContainer>`
   }
 
   span {
-    color: #dd614a;
+    font-size: 14px;
   }
 
   div svg {
@@ -92,6 +92,10 @@ export const InputContainer = styled.div<InputContainer>`
       }
 
       div svg {
+        color: #dd614a;
+      }
+
+      span {
         color: #dd614a;
       }
     `}

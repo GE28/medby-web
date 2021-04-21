@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   isError?: string | false;
   isTouched?: boolean;
+  helpText?: string;
 }
 
 const InputContainer: FC<InputProps> = ({
@@ -19,6 +20,7 @@ const InputContainer: FC<InputProps> = ({
   label,
   isError,
   isTouched,
+  helpText,
 }) => (
   <>
     <StyledInputContainer isError={isError} isTouched={isTouched}>
@@ -27,7 +29,11 @@ const InputContainer: FC<InputProps> = ({
         {Icon && <Icon size="18px" />}
         {children}
       </div>
-      {isError && isTouched && <span>{`* ${isError}`}</span>}
+      {isError && isTouched ? (
+        <span>{`* ${isError}`}</span>
+      ) : (
+        helpText && <span>{helpText}</span>
+      )}
     </StyledInputContainer>
   </>
 );
