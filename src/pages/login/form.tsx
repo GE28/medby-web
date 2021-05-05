@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { useFormik } from 'formik';
+
+import { userContext } from '../../global/UserContext';
 
 import InputContainer from '../components/inputContainer';
 import Button from '../components/button';
@@ -13,13 +15,17 @@ interface FormValues {
 }
 
 const LoginForm: FC = () => {
+  const { login } = useContext(userContext);
+
   const formik = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: '',
     },
     onSubmit: (values) => {
-      console.log(values);
+      const { email, password } = values;
+
+      login({ email, password });
     },
   });
   return (
