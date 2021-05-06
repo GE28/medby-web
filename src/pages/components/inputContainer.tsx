@@ -22,19 +22,17 @@ const InputContainer: FC<InputProps> = ({
   isTouched,
   helpText,
 }) => (
-  <>
-    <StyledInputContainer isError={isError} isTouched={isTouched}>
-      {inputId && <label htmlFor={inputId}>{label}</label>}
-      <div>
-        {Icon && <Icon size="18px" />}
-        {children}
-      </div>
-      {isError && isTouched ? (
-        <span>{`* ${isError}`}</span>
-      ) : (
-        helpText && <span>{helpText}</span>
-      )}
-    </StyledInputContainer>
-  </>
+  <StyledInputContainer isError={isError} isTouched={isTouched}>
+    {inputId && <label htmlFor={inputId}>{label}</label>}
+    <div>
+      {Icon && <Icon size="18px" />}
+      {children}
+    </div>
+    {isError && isTouched ? (
+      <span>{`* ${isError}`}</span>
+    ) : (
+      helpText && <span>{helpText}</span>
+    )}
+  </StyledInputContainer>
 );
 export default InputContainer;
