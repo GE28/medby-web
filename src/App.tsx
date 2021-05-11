@@ -1,14 +1,21 @@
 import React from 'react';
+
 import './App.css';
 
 import { UserProvider } from './global/UserContext';
+import { ToastProvider } from './global/ToastContext';
 
-import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
+
+import ToastContainer from './components/toastContainer';
 
 const App: React.FC = () => (
-  <UserProvider>
-    <LoginPage />
-  </UserProvider>
+  <ToastProvider>
+    <UserProvider>
+      <RegisterPage />
+      <ToastContainer />
+    </UserProvider>
+  </ToastProvider>
 );
 
 export default App;
