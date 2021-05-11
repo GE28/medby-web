@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { GithubContainer } from './styles';
 
-import githubLogo from '../../assets/github.svg';
+import githubLogo from '../assets/github.svg';
 
 const GitHubLink: FC = () => (
   <GithubContainer href="https://github.com/GE28">

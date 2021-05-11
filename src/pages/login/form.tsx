@@ -4,8 +4,8 @@ import { useFormik } from 'formik';
 
 import { userContext } from '../../global/UserContext';
 
-import InputContainer from '../components/inputContainer';
-import Button from '../components/button';
+import InputContainer from '../../components/inputContainer';
+import Button from '../../components/button';
 
 import { Form } from './styles';
 
@@ -28,19 +28,22 @@ const LoginForm: FC = () => {
       login({ email, password });
     },
   });
+
   return (
     <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
-      <InputContainer label="E-mail" inputId="email">
-        <input id="email" {...formik.getFieldProps('email')} />
-      </InputContainer>
+      <InputContainer
+        label="E-mail"
+        inputId="email"
+        type="email"
+        {...formik.getFieldProps('email')}
+      />
 
-      <InputContainer label="Senha" inputId="password">
-        <input
-          id="password"
-          type="password"
-          {...formik.getFieldProps('password')}
-        />
-      </InputContainer>
+      <InputContainer
+        label="Senha"
+        inputId="password"
+        type="password"
+        {...formik.getFieldProps('password')}
+      />
 
       <Button type="submit">ENTRAR</Button>
 

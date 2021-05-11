@@ -1,8 +1,17 @@
 import styled, { css } from 'styled-components';
 
+// import { ToastData } from '../global/ToastContext';
+
 interface InputContainer {
-  isError?: string | false;
+  error?: boolean;
   isTouched?: boolean;
+}
+
+interface Toast {
+  id: string;
+  title: string;
+  message: string;
+  type?: 'error' | 'success';
 }
 
 export const DefaultHeader = styled.header`
@@ -50,7 +59,7 @@ export const InputContainer = styled.div<InputContainer>`
   div {
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: #fcfff9;
     border-radius: 6px;
     border: 1px solid #a6a6a6;
     height: 36px;
@@ -83,7 +92,7 @@ export const InputContainer = styled.div<InputContainer>`
   }
 
   ${(props) =>
-    props.isError &&
+    props.error &&
     props.isTouched &&
     css`
       div {
@@ -101,17 +110,22 @@ export const InputContainer = styled.div<InputContainer>`
     `}
 
   ${(props) =>
-    props.isError ||
-    (props.isTouched &&
-      css`
-        div {
-          border: 1px solid #5b8c30;
-        }
+    !props.error &&
+    props.isTouched &&
+    css`
+      div {
+        border: 1px solid #5b8c30;
+      }
 
-        div svg {
-          color: #5b8c30;
-        }
-      `)}
+      div svg {
+        color: #5b8c30;
+      }
+
+      span {
+        display: none;
+        visibility: hidden;
+      }
+    `}
 `;
 
 export const DefaultButton = styled.button`
@@ -146,4 +160,91 @@ export const GithubContainer = styled.a`
     fill: #5b8c30;
     width: 36px;
   }
+`;
+
+export const ToastWrapper = styled.div<Toast>`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  height: 60px;
+
+  background-color: #fcfff9;
+  border-radius: 8px;
+
+  border: 1px solid #f3a104;
+
+  div {
+    height: 100%;
+    display: flex;
+    padding: 0 4px;
+    background-color: #f2e926;
+    align-items: center;
+
+    svg {
+      opacity: 50%;
+    }
+  }
+
+  dl {
+    display: block;
+    padding-left: 12px;
+
+    dt {
+      font-weight: 700;
+    }
+
+    dd {
+      font-size: 16px;
+      color: #6b6b6b;
+    }
+
+    button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+
+      background: transparent;
+      border: 0;
+    }
+  }
+
+  ${(props) =>
+    (props.type === 'error' &&
+      css`
+        border: 1px solid #de0f20;
+
+        div {
+          background-color: #dd614a;
+        }
+      `) ||
+    (props.type === 'success' &&
+      css`
+        border: 1px solid #5b8c30;
+
+        div {
+          background-color: #5ad45a;
+        }
+      `)}
+`;
+
+// 091 140 048
+// 090 212 090
+// -001 +072 +042
+
+// 243 161 004
+// 242 233 038
+// 001 072 042
+
+export const ToastsContainer = styled.dl`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  position: fixed;
+  width: 400px;
+  bottom: 36px;
+  right: 36px;
 `;

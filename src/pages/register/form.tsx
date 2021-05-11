@@ -8,10 +8,12 @@ import { validate } from 'gerador-validador-cpf';
 
 import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
 
-import InputContainer from '../components/inputContainer';
-import Button from '../components/button';
+import InputContainer from '../../components/inputContainer';
+import Button from '../../components/button';
 
 import { Form } from './styles';
+
+const register = (a: unknown) => a;
 
 interface FormValues {
   fullName: string;
@@ -31,7 +33,7 @@ const RegisterForm: FC = () => {
       password: '',
     },
     onSubmit: (values) => {
-      console.log(values);
+      register(values);
     },
     validationSchema: Yup.object().shape({
       fullName: Yup.string()
@@ -52,7 +54,7 @@ const RegisterForm: FC = () => {
         .min(8, 'Sua senha deve conter ao menos 8 caracteres')
         .matches(
           /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-          'Sua senha deve conter ao menos um número, uma letra maíscula e outra minúscula',
+          'Sua senha deve conter ao menos 8 caracteres, uma letra maiúscula e um número',
         )
         .required('É necessário preencher este campo'),
       confirm_password: Yup.string().oneOf(
@@ -69,60 +71,49 @@ const RegisterForm: FC = () => {
         inputId="fullName"
         icon={FiUser}
         isTouched={formik.touched.fullName}
-        isError={formik.errors.fullName}
-      >
-        <input id="fullName" {...formik.getFieldProps('fullName')} />
-      </InputContainer>
+        error={formik.errors.fullName}
+        {...formik.getFieldProps('fullName')}
+      />
 
       <InputContainer
         label="CPF"
         inputId="cpf"
         icon={FiFileText}
         isTouched={formik.touched.cpf}
-        isError={formik.errors.cpf}
-      >
-        <input id="cpf" {...formik.getFieldProps('cpf')} />
-      </InputContainer>
+        error={formik.errors.cpf}
+        {...formik.getFieldProps('cpf')}
+      />
 
       <InputContainer
         label="E-mail"
         inputId="email"
+        type="email"
         icon={FiAtSign}
         isTouched={formik.touched.email}
-        isError={formik.errors.email}
-      >
-        <input id="email" {...formik.getFieldProps('email')} />
-      </InputContainer>
+        error={formik.errors.email}
+        {...formik.getFieldProps('email')}
+      />
 
       <InputContainer
         label="Crie sua senha"
         inputId="password"
+        type="password"
         icon={FiKey}
         isTouched={formik.touched.password}
-        isError={formik.errors.password}
-        helpText="Sua senha deve conter no mínimo 8 caracteres, uma letra maiúscula e
-            um número"
-      >
-        <input
-          id="password"
-          type="password"
-          {...formik.getFieldProps('password')}
-        />
-      </InputContainer>
+        error={formik.errors.password}
+        helpText="Sua senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número"
+        {...formik.getFieldProps('password')}
+      />
 
       <InputContainer
         label="Repita a senha"
-        inputId="confirm_password"
+        inputId="confirm-password"
+        type="password"
         icon={FiKey}
         isTouched={formik.touched.confirm_password}
-        isError={formik.errors.confirm_password}
-      >
-        <input
-          id="confirm_password"
-          type="password"
-          {...formik.getFieldProps('confirm_password')}
-        />
-      </InputContainer>
+        error={formik.errors.confirm_password}
+        {...formik.getFieldProps('confirm-password')}
+      />
 
       <Button type="submit">CADASTRAR</Button>
 

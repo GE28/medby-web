@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { LogoContainer } from './styles';
 
-import medbyLogo from '../../assets/logo.svg';
+import medbyLogo from '../assets/logo.svg';
 
 const Header: FC = () => (
   <LogoContainer>
