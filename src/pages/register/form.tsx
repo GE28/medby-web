@@ -112,7 +112,7 @@ const RegisterForm: FC = () => {
         icon={FiKey}
         isTouched={formik.touched.confirm_password}
         error={formik.errors.confirm_password}
-        {...formik.getFieldProps('confirm-password')}
+        {...formik.getFieldProps('confirm_password')}
       />
 
       <Button type="submit">CADASTRAR</Button>
