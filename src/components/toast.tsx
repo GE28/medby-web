@@ -10,11 +10,11 @@ const ToastIcons = {
   error: <FiXCircle size="24px" />,
 };
 
-const ToastWrapper: FC<ToastData> = ({ id, title, message, type }) => {
+const ToastWrapper: FC<ToastData> = ({ title, message, type }) => {
   const [hide, setHide] = useState(false);
 
   return !hide ? (
-    <StyledToastWrapper id={id} title={title} message={message} type={type}>
+    <StyledToastWrapper type={type}>
       <div>{type ? ToastIcons[type] : <FiAlertTriangle size="24px" />}</div>
       <dl>
         <dt>{title}</dt>

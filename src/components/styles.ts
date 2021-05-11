@@ -1,16 +1,11 @@
 import styled, { css } from 'styled-components';
 
-// import { ToastData } from '../global/ToastContext';
-
 interface InputContainer {
   error?: boolean;
   isTouched?: boolean;
 }
 
 interface Toast {
-  id: string;
-  title: string;
-  message: string;
   type?: 'error' | 'success';
 }
 
@@ -138,6 +133,10 @@ export const DefaultButton = styled.button`
   font-size: 18px;
   font-weight: 700;
   margin-top: 25px;
+
+  &:hover {
+    background-color: #3b5b1f;
+  }
 `;
 
 export const Footer = styled.footer`
@@ -229,14 +228,6 @@ export const ToastWrapper = styled.div<Toast>`
         }
       `)}
 `;
-
-// 091 140 048
-// 090 212 090
-// -001 +072 +042
-
-// 243 161 004
-// 242 233 038
-// 001 072 042
 
 export const ToastsContainer = styled.dl`
   display: flex;
