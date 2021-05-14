@@ -20,6 +20,7 @@ import axios from '../services/axios';
 
 type UserData = Record<string, unknown> & {
   name: string;
+  avatar: string;
 };
 
 interface LoginParams {
@@ -41,9 +42,9 @@ interface UserState {
 
 interface UserContext {
   user: UserState;
-  login(data: LoginParams): void;
+  login(data: LoginParams): Promise<void>;
   logout(): void;
-  register(data: RegisterParams): void;
+  register(data: RegisterParams): Promise<void>;
   isTokenValid(): boolean;
 }
 
@@ -66,29 +67,22 @@ export const UserProvider: FC = ({ children }) => {
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
-    try {
-      const response = await axios.post('login', { email, password });
-      const { user: data, token } = response.data;
+    const response = await axios.post('login', { email, password });
 
-      localStorage.setItem('@medby/user_token', token);
-      localStorage.setItem('@medby/user_data', JSON.stringify(data));
+    const { user: data, token } = response.data;
 
-      setUser({ token, data });
+    localStorage.setItem('@medby/user_token', token);
+    localStorage.setItem('@medby/user_data', JSON.stringify(data));
 
-      addToast({
-        type: 'success',
-        title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
-        message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
-          locale: ptBR,
-        }),
-      });
-    } catch (err) {
-      addToast({
-        type: 'error',
-        title: 'Falha no login',
-        message: 'Confira os dados inseridos e tente novamente',
-      });
-    }
+    setUser({ token, data });
+
+    addToast({
+      type: 'success',
+      title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
+      message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
+        locale: ptBR,
+      }),
+    });
   }, []);
 
   const logout = useCallback(() => {
@@ -101,35 +95,19 @@ export const UserProvider: FC = ({ children }) => {
   const register = useCallback(async (registerParams: RegisterParams) => {
     const { name, email, cpf, password } = registerParams;
 
-    try {
-      const response = await axios.post('register', {
-        name,
-        email,
-        cpf,
-        password,
-      });
+    const response = await axios.post('register', {
+      name,
+      email,
+      cpf,
+      password,
+    });
 
-      const { user: data, token } = response.data;
+    const { user: data, token } = response.data;
 
-      localStorage.setItem('@medby/user_token', token);
-      localStorage.setItem('@medby/user_data', JSON.stringify(data));
+    localStorage.setItem('@medby/user_token', token);
+    localStorage.setItem('@medby/user_data', JSON.stringify(data));
 
-      setUser({ token, data });
-
-      addToast({
-        type: 'success',
-        title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
-        message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
-          locale: ptBR,
-        }),
-      });
-    } catch (err) {
-      addToast({
-        type: 'error',
-        title: 'Falha ao realizar registro',
-        message: 'Confira os dados inseridos e tente novamente',
-      });
-    }
+    setUser({ token, data });
   }, []);
 
   const isTokenValid = useCallback(() => {
