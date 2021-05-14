@@ -37,6 +37,10 @@ a {
   text-decoration: solid;
 }
 
+a:hover {
+  filter: brightness(70%);
+}
+
 button {
   cursor: pointer;
   font: inherit; /* chrome */
