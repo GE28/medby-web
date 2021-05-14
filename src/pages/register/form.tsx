@@ -43,9 +43,9 @@ const RegisterForm: FC = () => {
       fullName: '',
       password: '',
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       try {
-        register({ ...values, name: values.fullName });
+        await register({ ...values, name: values.fullName });
 
         history.push('/home');
 
