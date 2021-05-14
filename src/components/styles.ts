@@ -68,6 +68,10 @@ export const InputContainer = styled.div<InputContainer>`
     transition: 0.05s;
   }
 
+  div:hover {
+    box-shadow: 0 0 0 3px #5b8c3020;
+  }
+
   span {
     font-size: 14px;
   }
@@ -164,11 +168,8 @@ export const GithubContainer = styled.a`
 export const ToastWrapper = styled.div<Toast>`
   position: relative;
   display: flex;
-  align-items: center;
 
   overflow: hidden;
-
-  height: 60px;
 
   background-color: #fcfff9;
   border-radius: 8px;
@@ -176,9 +177,9 @@ export const ToastWrapper = styled.div<Toast>`
   border: 1px solid #f3a104;
 
   div {
-    height: 100%;
+    height: auto;
     display: flex;
-    padding: 0 4px;
+    padding: 4px;
     background-color: #f2e926;
     align-items: center;
 
@@ -190,6 +191,9 @@ export const ToastWrapper = styled.div<Toast>`
   dl {
     display: block;
     padding-left: 12px;
+    padding: 8px 10px;
+    align-self: center;
+    word-break: break-all;
 
     dt {
       font-weight: 700;

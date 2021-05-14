@@ -18,7 +18,7 @@ const ToastWrapper: FC<ToastData> = ({ title, message, type }) => {
       <div>{type ? ToastIcons[type] : <FiAlertTriangle size="24px" />}</div>
       <dl>
         <dt>{title}</dt>
-        <dd>{message}</dd>
+        {message && <dd>{message}</dd>}
         <button type="button" onClick={() => setHide(true)}>
           <FiX size="16px" />
         </button>
