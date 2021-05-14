@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, createContext, useState, useCallback } from 'react';
-import ms from 'ms';
 
 export interface ToastData {
   id: string;
   title: string;
-  message: string;
+  message?: string;
   type?: 'error' | 'success';
 }
 
@@ -15,7 +14,7 @@ interface ToastContextBody {
   deleteToast(id: string): void;
 }
 
-const toastTimeout = ms('5s');
+const toastTimeout = 5000;
 
 export const toastContext = createContext({} as ToastContextBody);
 
@@ -34,7 +33,10 @@ export const ToastProvider: FC = ({ children }) => {
     const toastWithId = { ...toastData, id: '' };
     toastWithId.id = `toast_${Number(new Date())}`;
 
-    setToastList((oldToastList) => [toastWithId, ...oldToastList]);
+    setToastList((oldToastList) => [
+      { ...toastData, id: `toast_${Number(new Date())}` },
+      ...oldToastList,
+    ]);
 
     // Auto-delete toast after X ms seconds
     setTimeout(() => deleteToast(toastWithId.id), toastTimeout);
