@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import { GuestRoute, UserRoute } from './authRoutes';
 import { NotFoundRoute } from './notFoundRoute';
