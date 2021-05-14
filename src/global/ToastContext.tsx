@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, createContext, useState, useCallback } from 'react';
+import ms from 'ms';
 
 export interface ToastData {
   id: string;
@@ -14,7 +15,7 @@ interface ToastContextBody {
   deleteToast(id: string): void;
 }
 
-const toastTimeout = 5000;
+const toastTimeout = ms('5s');
 
 export const toastContext = createContext({} as ToastContextBody);
 
