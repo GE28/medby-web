@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 import React, { FC, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -7,7 +8,12 @@ import * as Yup from 'yup';
 
 import { validate } from 'gerador-validador-cpf';
 
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
 import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
+
+import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
 import InputContainer from '../../components/inputContainer';
@@ -24,7 +30,8 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
-  const { register } = useContext(userContext);
+  const { register, user } = useContext(userContext);
+  const { addToast } = useContext(toastContext);
 
   const history = useHistory();
 
@@ -37,9 +44,25 @@ const RegisterForm: FC = () => {
       password: '',
     },
     onSubmit: (values) => {
-      register({ ...values, name: values.fullName });
+      try {
+        register({ ...values, name: values.fullName });
 
-      history.push('/home');
+        history.push('/home');
+
+        addToast({
+          type: 'success',
+          title: `Bem-vindo novamente, ${user.data.name.split(' ', 1)}`,
+          message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
+            locale: ptBR,
+          }),
+        });
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Falha ao realizar registro',
+          message: 'Confira os dados inseridos e tente novamente',
+        });
+      }
     },
     validationSchema: Yup.object().shape({
       fullName: Yup.string()

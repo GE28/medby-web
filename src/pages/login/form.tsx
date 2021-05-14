@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
+import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
 import InputContainer from '../../components/inputContainer';
@@ -17,16 +18,25 @@ interface FormValues {
 
 const LoginForm: FC = () => {
   const { login } = useContext(userContext);
+  const { addToast } = useContext(toastContext);
 
   const formik = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const { email, password } = values;
 
-      login({ email, password });
+      try {
+        await login({ email, password });
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Falha no login',
+          message: 'Confira os dados inseridos e tente novamente',
+        });
+      }
     },
   });
 

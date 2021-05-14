@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import { GuestRoute, UserRoute } from './authRoutes';
 import { NotFoundRoute } from './notFoundRoute';
 
-import NotFoundPage from '../pages/404';
 import LoginPage from '../pages/login';
 import RegisterPage from '../pages/register';
 import HomePage from '../pages/home';
