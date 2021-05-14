@@ -1,4 +1,5 @@
 import React, { FC, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
@@ -48,7 +49,9 @@ const LoginForm: FC = () => {
       <Button type="submit">ENTRAR</Button>
 
       <p>
-        <a href="/register">Não possui cadastro?</a>
+        <Link to="/register" replace>
+          Não possui cadastro?
+        </Link>
       </p>
     </Form>
   );

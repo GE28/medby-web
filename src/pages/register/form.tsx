@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
@@ -7,13 +8,12 @@ import * as Yup from 'yup';
 import { validate } from 'gerador-validador-cpf';
 
 import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
+import { userContext } from '../../global/UserContext';
 
 import InputContainer from '../../components/inputContainer';
 import Button from '../../components/button';
 
 import { Form } from './styles';
-
-const register = (a: unknown) => a;
 
 interface FormValues {
   fullName: string;
@@ -24,6 +24,10 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
+  const { register } = useContext(userContext);
+
+  const history = useHistory();
+
   const formik = useFormik<FormValues>({
     initialValues: {
       confirm_password: '',
@@ -33,7 +37,9 @@ const RegisterForm: FC = () => {
       password: '',
     },
     onSubmit: (values) => {
-      register(values);
+      register({ ...values, name: values.fullName });
+
+      history.push('/home');
     },
     validationSchema: Yup.object().shape({
       fullName: Yup.string()
@@ -118,7 +124,9 @@ const RegisterForm: FC = () => {
       <Button type="submit">CADASTRAR</Button>
 
       <p>
-        <a href="/">Não possui cadastro?</a>
+        <Link to="/" replace>
+          Já possui conta?
+        </Link>
       </p>
     </Form>
   );
