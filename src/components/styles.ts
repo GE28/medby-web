@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 interface InputContainer {
   error?: boolean;
@@ -8,6 +8,16 @@ interface InputContainer {
 interface Toast {
   type?: 'error' | 'success';
 }
+
+const fullRotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const DefaultHeader = styled.header`
   display: flex;
@@ -90,6 +100,10 @@ export const InputContainer = styled.div<InputContainer>`
     border: 0;
   }
 
+  input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
   ${(props) =>
     props.error &&
     props.isTouched &&
@@ -140,6 +154,10 @@ export const DefaultButton = styled.button`
 
   &:hover {
     background-color: #3b5b1f;
+  }
+
+  svg {
+    animation: ${fullRotate} 2s linear infinite;
   }
 `;
 
@@ -214,23 +232,21 @@ export const ToastWrapper = styled.div<Toast>`
     }
   }
 
-  ${(props) =>
-    (props.type === 'error' &&
-      css`
-        border: 1px solid #de0f20;
+  &[type='error'] {
+    border: 1px solid #de0f20;
 
-        div {
-          background-color: #dd614a;
-        }
-      `) ||
-    (props.type === 'success' &&
-      css`
-        border: 1px solid #5b8c30;
+    div {
+      background-color: #dd614a;
+    }
+  }
 
-        div {
-          background-color: #5ad45a;
-        }
-      `)}
+  &[type='success'] {
+    border: 1px solid #5b8c30;
+
+    div {
+      background-color: #5ad45a;
+    }
+  }
 `;
 
 export const ToastsContainer = styled.dl`

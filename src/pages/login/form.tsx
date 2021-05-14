@@ -1,8 +1,9 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
+import { FiLoader } from 'react-icons/fi';
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
@@ -20,17 +21,21 @@ const LoginForm: FC = () => {
   const { login } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
+  const [loading, setLoading] = useState(false);
+
   const formik = useFormik<FormValues>({
     initialValues: {
       email: '',
       password: '',
     },
     onSubmit: async (values) => {
-      const { email, password } = values;
+      setLoading(true);
 
       try {
-        await login({ email, password });
+        await login(values);
       } catch (err) {
+        setLoading(false);
+
         addToast({
           type: 'error',
           title: 'Falha no login',
@@ -56,7 +61,9 @@ const LoginForm: FC = () => {
         {...formik.getFieldProps('password')}
       />
 
-      <Button type="submit">ENTRAR</Button>
+      <Button type="submit">
+        {loading ? <FiLoader size="24px" /> : 'ENTRAR'}
+      </Button>
 
       <p>
         <Link to="/register" replace>
