@@ -13,6 +13,10 @@ body {
   overflow-x: hidden;
 }
 
+#root {
+  height: 100%;
+}
+
 body {
   background-color: #f9fff5;
   color: #23212c;

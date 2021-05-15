@@ -4,11 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-
-  footer {
-    padding-top: 84px;
-  }
+  min-height: 100%;
 `;
 
 export const MainContent = styled.div`
@@ -26,10 +22,13 @@ export const MainContent = styled.div`
 
 export const Form = styled.form`
   width: 436px;
-  max-width: calc(100% - 112px); //logocontainer.padding-(left+right)
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+
+  @media (max-width: 576px) {
+    max-width: calc(100% - 84px);
+  }
 
   button {
     margin-top: 25px;

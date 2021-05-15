@@ -10,11 +10,11 @@ import { Container, MainContent } from './styles';
 import LoginForm from './form';
 
 const LoginPage: FC = () => (
-  <Container id="main-wrapper">
-    <Header>
-      <LogoContainer />
-    </Header>
+  <Container>
     <MainContent>
+      <Header>
+        <LogoContainer />
+      </Header>
       <h1>Área do cliente</h1>
 
       <LoginForm />
