@@ -11,7 +11,6 @@ export const NotFoundRoute: FC = () => {
     addToast({
       title: 'Página movida ou não encontrada',
       message: 'Você foi direcionado para a tela inicial',
-      type: 'error',
     });
   }, []);
 
