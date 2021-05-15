@@ -142,7 +142,6 @@ export const InputContainer = styled.div<InputContainer>`
 `;
 
 export const DefaultButton = styled.button`
-  border: 0;
   border-radius: 6px;
   height: 42px;
   text-align: center;
