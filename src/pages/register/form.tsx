@@ -1,5 +1,5 @@
 /* eslint-disable import/no-duplicates */
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { useFormik } from 'formik';
@@ -11,7 +11,7 @@ import { validate } from 'gerador-validador-cpf';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
+import { FiAtSign, FiFileText, FiUser, FiKey, FiLoader } from 'react-icons/fi';
 
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
@@ -33,6 +33,8 @@ const RegisterForm: FC = () => {
   const { register, user } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
+  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
   const formik = useFormik<FormValues>({
@@ -44,6 +46,8 @@ const RegisterForm: FC = () => {
       password: '',
     },
     onSubmit: async (values) => {
+      setLoading(true);
+
       try {
         await register({ ...values, name: values.fullName });
 
@@ -57,6 +61,8 @@ const RegisterForm: FC = () => {
           }),
         });
       } catch (err) {
+        setLoading(false);
+
         addToast({
           type: 'error',
           title: 'Falha ao realizar registro',
@@ -144,7 +150,9 @@ const RegisterForm: FC = () => {
         {...formik.getFieldProps('confirm_password')}
       />
 
-      <Button type="submit">CADASTRAR</Button>
+      <Button type="submit">
+        {loading ? <FiLoader size="24px" /> : 'ENTRAR'}
+      </Button>
 
       <p>
         <Link to="/" replace>
