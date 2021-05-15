@@ -205,6 +205,15 @@ export const ToastWrapper = styled.div<Toast>`
     }
   }
 
+  button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    background: transparent;
+    border: 0;
+  }
+
   dl {
     display: block;
     padding-left: 12px;
@@ -219,15 +228,6 @@ export const ToastWrapper = styled.div<Toast>`
     dd {
       font-size: 16px;
       color: #6b6b6b;
-    }
-
-    button {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-
-      background: transparent;
-      border: 0;
     }
   }
 

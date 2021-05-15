@@ -19,10 +19,10 @@ const ToastWrapper: FC<ToastData> = ({ title, message, type }) => {
       <dl>
         <dt>{title}</dt>
         {message && <dd>{message}</dd>}
-        <button type="button" onClick={() => setHide(true)}>
-          <FiX size="16px" />
-        </button>
       </dl>
+      <button type="button" onClick={() => setHide(true)}>
+        <FiX size="16px" />
+      </button>
     </StyledToastWrapper>
   ) : null;
 };
