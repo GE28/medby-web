@@ -5,7 +5,7 @@ import LogoContainer from '../../components/logoContainer';
 import GitHubLink from '../../components/githubLink';
 import Footer from '../../components/footer';
 
-import { Container, MainContent } from './styles';
+import { Container, MainContent } from '../styles';
 
 import LoginForm from './form';
 
