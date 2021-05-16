@@ -1,6 +1,6 @@
 /* eslint-disable import/no-duplicates */
 import React, { FC, useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
@@ -27,12 +27,10 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
-  const { register, user } = useContext(userContext);
+  const { register, login } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
   const [loading, setLoading] = useState(false);
-
-  const history = useHistory();
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -45,16 +43,25 @@ const RegisterForm: FC = () => {
     onSubmit: async (values) => {
       setLoading(true);
 
+      const submitValues = {
+        ...values,
+        cpf: values.cpf.replace(/[^0-9]/g, ''),
+        name: values.fullName,
+      };
+
       try {
-        await register({ ...values, name: values.fullName });
+        await register(submitValues);
+
+        const { data } = await login({
+          email: values.email,
+          password: values.password,
+        });
 
         addToast({
           type: 'success',
-          title: `Bem-vindo, ${user.data.name.split(' ', 1)}`,
-          message: 'Você já pode acessar sua conta por aqui',
+          title: `Bem-vindo, ${data.name.split(' ', 1)}`,
+          message: 'Você já pode acessar sua conta!',
         });
-
-        history.push('/');
       } catch (err) {
         setLoading(false);
 
@@ -75,7 +82,7 @@ const RegisterForm: FC = () => {
         .test(
           'cpf-number',
           'Por favor, informe um CPF válido',
-          (value) => !!value && validate(value),
+          (value) => !!value && validate(value.toString()),
         ),
       email: Yup.string()
         .email('Endereço de e-mail inválido')
@@ -111,6 +118,7 @@ const RegisterForm: FC = () => {
         icon={FiFileText}
         isTouched={formik.touched.cpf}
         error={formik.errors.cpf}
+        helpText="Digite apenas dígitos neste campo"
         {...formik.getFieldProps('cpf')}
       />
 
@@ -150,9 +158,7 @@ const RegisterForm: FC = () => {
       </Button>
 
       <p>
-        <Link to="/" replace>
-          Já possui conta?
-        </Link>
+        <Link to="/">Já possui conta?</Link>
       </p>
     </Form>
   );
