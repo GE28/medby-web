@@ -79,9 +79,7 @@ const LoginForm: FC = () => {
       </Button>
 
       <p>
-        <Link to="/register" replace>
-          Não possui cadastro?
-        </Link>
+        <Link to="/register">Não possui cadastro?</Link>
       </p>
     </Form>
   );
