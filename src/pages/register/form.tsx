@@ -59,7 +59,7 @@ const RegisterForm: FC = () => {
 
         addToast({
           type: 'success',
-          title: `Bem-vindo, ${data.name.split(' ', 1)}`,
+          title: `Bem-vindo ${data.name.split(' ', 1)}`,
           message: 'Você já pode acessar sua conta!',
         });
       } catch (err) {
