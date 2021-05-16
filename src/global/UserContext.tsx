@@ -5,8 +5,6 @@ import React, { FC, createContext, useState, useCallback } from 'react';
 
 import decodeJWT, { JwtPayload } from 'jwt-decode';
 
-import { AxiosResponse } from 'axios';
-
 import axios from '../services/axios';
 
 type UserData = Record<string, any> & {
@@ -35,7 +33,7 @@ interface UserState {
 
 interface UserContext {
   user: UserState;
-  login(data: LoginParams): Promise<AxiosResponse<UserData>>;
+  login(data: LoginParams): Promise<UserState>;
   logout(): void;
   register(data: RegisterParams): Promise<void>;
   isTokenValid(): boolean;
@@ -58,7 +56,7 @@ export const UserProvider: FC = ({ children }) => {
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
-    const response = await axios.post<UserData>('login', { email, password });
+    const response = await axios.post('login', { email, password });
 
     const { user: data, token } = response.data;
 
@@ -67,7 +65,7 @@ export const UserProvider: FC = ({ children }) => {
 
     setUser({ token, data });
 
-    return response;
+    return { token, data };
   }, []);
 
   const logout = useCallback(() => {
@@ -86,8 +84,6 @@ export const UserProvider: FC = ({ children }) => {
       cpf,
       password,
     });
-
-    await login({ email, password });
   }, []);
 
   const isTokenValid = useCallback(() => {
