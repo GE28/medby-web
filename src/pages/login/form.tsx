@@ -40,7 +40,7 @@ const LoginForm: FC = () => {
 
         addToast({
           type: 'success',
-          title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
+          title: `Bem-vindo novamente ${data.name.split(' ', 1)}`,
           message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
             locale: ptBR,
           }),
