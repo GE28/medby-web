@@ -37,11 +37,11 @@ const LoginForm: FC = () => {
       setLoading(true);
 
       try {
-        const response = await login(values);
+        const { data } = await login(values);
 
         addToast({
           type: 'success',
-          title: `Bem-vindo novamente, ${response.data.name.split(' ', 1)}`,
+          title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
           message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
             locale: ptBR,
           }),
