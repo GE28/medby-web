@@ -8,9 +8,6 @@ import * as Yup from 'yup';
 
 import { validate } from 'gerador-validador-cpf';
 
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
-
 import { FiAtSign, FiFileText, FiUser, FiKey, FiLoader } from 'react-icons/fi';
 
 import { toastContext } from '../../global/ToastContext';
@@ -26,7 +23,7 @@ interface FormValues {
   email: string;
   cpf: string;
   password: string;
-  confirm_password: string;
+  confirmPassword: string;
 }
 
 const RegisterForm: FC = () => {
@@ -39,7 +36,7 @@ const RegisterForm: FC = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: {
-      confirm_password: '',
+      confirmPassword: '',
       cpf: '',
       email: '',
       fullName: '',
@@ -51,15 +48,13 @@ const RegisterForm: FC = () => {
       try {
         await register({ ...values, name: values.fullName });
 
-        history.push('/home');
-
         addToast({
           type: 'success',
-          title: `Bem-vindo novamente, ${user.data.name.split(' ', 1)}`,
-          message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
-            locale: ptBR,
-          }),
+          title: `Bem-vindo, ${user.data.name.split(' ', 1)}`,
+          message: 'Você já pode acessar sua conta por aqui',
         });
+
+        history.push('/');
       } catch (err) {
         setLoading(false);
 
@@ -92,7 +87,7 @@ const RegisterForm: FC = () => {
           'Sua senha deve conter ao menos 8 caracteres, uma letra maiúscula e um número',
         )
         .required('É necessário preencher este campo'),
-      confirm_password: Yup.string().oneOf(
+      confirmPassword: Yup.string().oneOf(
         [Yup.ref('password'), null],
         'As senhas não coincidem',
       ),
@@ -145,13 +140,13 @@ const RegisterForm: FC = () => {
         inputId="confirm-password"
         type="password"
         icon={FiKey}
-        isTouched={formik.touched.confirm_password}
-        error={formik.errors.confirm_password}
-        {...formik.getFieldProps('confirm_password')}
+        isTouched={formik.touched.confirmPassword}
+        error={formik.errors.confirmPassword}
+        {...formik.getFieldProps('confirmPassword')}
       />
 
       <Button type="submit">
-        {loading ? <FiLoader size="24px" /> : 'ENTRAR'}
+        {loading ? <FiLoader size="24px" /> : 'CADASTRAR'}
       </Button>
 
       <p>

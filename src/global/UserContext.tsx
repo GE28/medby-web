@@ -80,19 +80,14 @@ export const UserProvider: FC = ({ children }) => {
   const register = useCallback(async (registerParams: RegisterParams) => {
     const { name, email, cpf, password } = registerParams;
 
-    const response = await axios.post('register', {
+    await axios.post('register', {
       name,
       email,
       cpf,
       password,
     });
 
-    const { user: data, token } = response.data;
-
-    localStorage.setItem('@medby/user_token', token);
-    localStorage.setItem('@medby/user_data', JSON.stringify(data));
-
-    setUser({ token, data });
+    await login({ email, password });
   }, []);
 
   const isTokenValid = useCallback(() => {
