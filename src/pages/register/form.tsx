@@ -13,10 +13,9 @@ import { FiAtSign, FiFileText, FiUser, FiKey, FiLoader } from 'react-icons/fi';
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
+import Form from '../../components/form';
 import InputContainer from '../../components/inputContainer';
 import Button from '../../components/button';
-
-import { Form } from './styles';
 
 interface FormValues {
   fullName: string;

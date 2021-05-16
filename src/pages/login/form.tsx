@@ -12,10 +12,9 @@ import { ptBR } from 'date-fns/locale';
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
+import Form from '../../components/form';
 import InputContainer from '../../components/inputContainer';
 import Button from '../../components/button';
-
-import { Form } from './styles';
 
 interface FormValues {
   email: string;
