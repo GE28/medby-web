@@ -1,9 +1,14 @@
+/* eslint-disable import/no-duplicates */
 import React, { FC, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
 import { FiLoader } from 'react-icons/fi';
+
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
@@ -32,7 +37,15 @@ const LoginForm: FC = () => {
       setLoading(true);
 
       try {
-        await login(values);
+        const response = await login(values);
+
+        addToast({
+          type: 'success',
+          title: `Bem-vindo novamente, ${response.data.name.split(' ', 1)}`,
+          message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
+            locale: ptBR,
+          }),
+        });
       } catch (err) {
         setLoading(false);
 

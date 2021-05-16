@@ -1,25 +1,18 @@
-/* eslint-disable import/no-duplicates */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, {
-  FC,
-  createContext,
-  useState,
-  useCallback,
-  useContext,
-} from 'react';
-
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import React, { FC, createContext, useState, useCallback } from 'react';
 
 import decodeJWT, { JwtPayload } from 'jwt-decode';
 
-import { toastContext } from './ToastContext';
+import { AxiosResponse } from 'axios';
 
 import axios from '../services/axios';
 
-type UserData = Record<string, unknown> & {
+type UserData = Record<string, any> & {
   name: string;
+  email: string;
+  cpf: string;
   avatar: string;
 };
 
@@ -42,7 +35,7 @@ interface UserState {
 
 interface UserContext {
   user: UserState;
-  login(data: LoginParams): Promise<void>;
+  login(data: LoginParams): Promise<AxiosResponse<UserData>>;
   logout(): void;
   register(data: RegisterParams): Promise<void>;
   isTokenValid(): boolean;
@@ -62,12 +55,10 @@ export const UserProvider: FC = ({ children }) => {
       : {}) as UserState;
   });
 
-  const { addToast } = useContext(toastContext);
-
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
-    const response = await axios.post('login', { email, password });
+    const response = await axios.post<UserData>('login', { email, password });
 
     const { user: data, token } = response.data;
 
@@ -76,13 +67,7 @@ export const UserProvider: FC = ({ children }) => {
 
     setUser({ token, data });
 
-    addToast({
-      type: 'success',
-      title: `Bem-vindo novamente, ${data.name.split(' ', 1)}`,
-      message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
-        locale: ptBR,
-      }),
-    });
+    return response;
   }, []);
 
   const logout = useCallback(() => {
