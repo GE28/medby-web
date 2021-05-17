@@ -1,9 +1,26 @@
 import React, { FC } from 'react';
 
-import { DefaultHeader } from './styles';
+import { DefaultHeader, LogoContainer } from './styles';
 
-const Header: FC = ({ children }) => (
-  <DefaultHeader id="header">{children}</DefaultHeader>
+import medbyLogo from '../assets/logo.svg';
+import medbyLLogo from '../assets/logo_logged.svg';
+
+interface CustomContainer {
+  logged?: true;
+}
+
+const Header: FC<CustomContainer> = ({ children, logged }) => (
+  <DefaultHeader id="header" logged={logged}>
+    <LogoContainer>
+      {logged ? (
+        <img alt="Medby Logo" src={medbyLogo} />
+      ) : (
+        <img alt="Medby Logo" src={medbyLLogo} />
+      )}
+      <span>MEDBY</span>
+    </LogoContainer>
+    {children}
+  </DefaultHeader>
 );
 
 export default Header;

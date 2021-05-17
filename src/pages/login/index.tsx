@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import Header from '../../components/header';
-import LogoContainer from '../../components/logoContainer';
 import GitHubLink from '../../components/githubLink';
 import Footer from '../../components/footer';
 
@@ -12,9 +11,8 @@ import LoginForm from './form';
 const LoginPage: FC = () => (
   <Container>
     <MainContent>
-      <Header>
-        <LogoContainer />
-      </Header>
+      <Header />
+
       <h1>Área do cliente</h1>
 
       <LoginForm />

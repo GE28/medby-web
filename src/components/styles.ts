@@ -1,5 +1,9 @@
 import styled, { css, keyframes } from 'styled-components';
 
+interface CustomHeader {
+  logged?: boolean;
+}
+
 interface InputContainer {
   error?: boolean;
   isTouched?: boolean;
@@ -19,13 +23,24 @@ const fullRotate = keyframes`
   }
 `;
 
-export const DefaultHeader = styled.header`
+export const DefaultHeader = styled.header<CustomHeader>`
   display: flex;
   height: 120px;
   width: 100%;
   padding: 0 56px;
   align-items: center;
-  background-color: #5b8c30;
+  justify-content: space-between;
+
+  border-bottom: ${(props) => (props.logged ? '3px solid #5b8c30' : '0')};
+  background-color: ${(props) => (props.logged ? '#fcfff9' : '#5b8c30')};
+
+  ${(props) =>
+    props.logged &&
+    css`
+      span {
+        color: #5b8c30;
+      }
+    `};
 
   @media (max-width: 436px) {
     height: 90px;
@@ -46,9 +61,41 @@ export const LogoContainer = styled.div`
   }
 
   span {
+    opacity: 80%;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 40px;
+  }
+`;
+
+export const ProfileWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  column-gap: 9px;
+
+  font-weight: 600;
+
+  img {
+    border: 3px solid #5b8c30;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+  }
+
+  div {
+    text-align: center;
+
+    a {
+      color: #5b8c30;
+      display: flex;
+      place-content: center;
+      column-gap: 4px;
+    }
+
+    h4 {
+      margin-bottom: 4px;
+    }
   }
 `;
 
@@ -120,7 +167,7 @@ export const InputContainer = styled.div<InputContainer>`
       span {
         color: #dd614a;
       }
-    `}
+    `};
 
   ${(props) =>
     !props.error &&
@@ -138,7 +185,7 @@ export const InputContainer = styled.div<InputContainer>`
         display: none;
         visibility: hidden;
       }
-    `}
+    `};
 `;
 
 export const DefaultButton = styled.button`
