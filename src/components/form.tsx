@@ -11,7 +11,7 @@ const Form = styled.form`
   }
 
   button {
-    margin-top: 25px;
+    margin-top: 24px;
   }
 
   a {
