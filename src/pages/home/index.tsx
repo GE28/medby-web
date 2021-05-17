@@ -1,9 +1,26 @@
 import React, { FC } from 'react';
 
-const LoginPage: FC = () => (
-  <div id="main-wrapper">
-    <h1>Olá</h1>
-  </div>
+import GitHubLink from '../../components/githubLink';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
+import Profile from '../../components/profile';
+
+import { Container, MainContent } from '../styles';
+
+const HomePage: FC = () => (
+  <Container>
+    <MainContent>
+      <Header logged>
+        <Profile />
+      </Header>
+
+      <h1>Bem-vindo</h1>
+    </MainContent>
+
+    <Footer>
+      <GitHubLink />
+    </Footer>
+  </Container>
 );
 
-export default LoginPage;
+export default HomePage;
