@@ -13,9 +13,9 @@ const Header: FC<CustomContainer> = ({ children, logged }) => (
   <DefaultHeader id="header" logged={logged}>
     <LogoContainer>
       {logged ? (
-        <img alt="Medby Logo" src={medbyLogo} />
-      ) : (
         <img alt="Medby Logo" src={medbyLLogo} />
+      ) : (
+        <img alt="Medby Logo" src={medbyLogo} />
       )}
       <span>MEDBY</span>
     </LogoContainer>
