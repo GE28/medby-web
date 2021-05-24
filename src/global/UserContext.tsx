@@ -36,7 +36,7 @@ interface UserContext {
   login(data: LoginParams): Promise<UserState>;
   logout(): void;
   register(data: RegisterParams): Promise<void>;
-  isTokenValid(): boolean;
+  tokenValidator(): void;
 }
 
 export const userContext = createContext({} as UserContext);
@@ -86,27 +86,24 @@ export const UserProvider: FC = ({ children }) => {
     });
   }, []);
 
-  const isTokenValid = useCallback(() => {
+  const tokenValidator = useCallback(() => {
     if (!user.token) {
-      return false;
+      return;
     }
 
     try {
       const { exp }: JwtPayload = decodeJWT(user.token);
 
       if (exp && Date.now() >= exp * 1000) {
-        return false;
+        logout();
       }
     } catch (err) {
       logout();
-      return false;
     }
-
-    return true;
   }, [user]);
 
   return (
-    <Provider value={{ user, login, logout, register, isTokenValid }}>
+    <Provider value={{ user, login, logout, register, tokenValidator }}>
       {children}
     </Provider>
   );
