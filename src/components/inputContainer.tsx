@@ -6,7 +6,7 @@ import { InputContainer as StyledInputContainer } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
-  inputId?: string;
+  inputId: string;
   label?: string;
   error?: string | false;
   isTouched?: boolean;
