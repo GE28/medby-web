@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components/macro';
 
 interface CustomHeader {
   logged?: boolean;
@@ -45,7 +45,15 @@ export const DefaultHeader = styled.header<CustomHeader>`
   @media (max-width: 436px) {
     height: 90px;
     padding: 0 42px;
-    justify-content: center;
+    ${(props) => (props.logged ? null : 'justify-content: center')};
+
+    div > span {
+      ${(props) => props.logged && 'display: none; visibility: hidden'};
+    }
+  }
+
+  div > span {
+    opacity: ${(props) => (props.logged ? '80%' : '1')};
   }
 `;
 
@@ -61,7 +69,6 @@ export const LogoContainer = styled.div`
   }
 
   span {
-    opacity: 80%;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 40px;
@@ -76,14 +83,14 @@ export const ProfileWrapper = styled.div`
 
   font-weight: 600;
 
-  img {
+  > img {
     border: 3px solid #5b8c30;
     border-radius: 50%;
     width: 64px;
     height: 64px;
   }
 
-  div {
+  > div {
     text-align: center;
 
     a {
@@ -95,6 +102,24 @@ export const ProfileWrapper = styled.div`
 
     h4 {
       margin-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 630px) {
+    flex-direction: column;
+
+    > div a svg,
+    > div h4 {
+      display: none;
+      visibility: hidden;
+    }
+
+    > img {
+      border-color: #23212c;
+    }
+
+    > div span {
+      color: #23212c;
     }
   }
 `;
@@ -189,13 +214,17 @@ export const InputContainer = styled.div<InputContainer>`
 `;
 
 export const DefaultButton = styled.button`
+  display: flex;
   border-radius: 6px;
   height: 42px;
-  text-align: center;
-  background-color: #5b8c30;
   color: #fcfff9;
   font-size: 18px;
   font-weight: 700;
+
+  background-color: #5b8c30;
+  align-items: center;
+  justify-content: center;
+
   margin-top: 25px;
 
   &:hover {
@@ -304,4 +333,8 @@ export const ToastsContainer = styled.dl`
   width: 400px;
   bottom: 36px;
   right: 36px;
+
+  > div svg {
+    size: 24px;
+  }
 `;
