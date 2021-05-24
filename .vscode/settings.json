@@ -7,5 +7,7 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
   "eslint.alwaysShowStatus": true,
-  "css.customData": ["./.vscode/app.css.json"]
+  "css.customData": [
+    "./.vscode/app.css.json"
+  ]
 }
