@@ -5,11 +5,11 @@ import { DefaultHeader, LogoContainer } from './styles';
 import medbyLogo from '../assets/logo.svg';
 import medbyLLogo from '../assets/logo_logged.svg';
 
-interface CustomContainer {
+interface CustomHeader {
   logged?: true;
 }
 
-const Header: FC<CustomContainer> = ({ children, logged }) => (
+const Header: FC<CustomHeader> = ({ children, logged }) => (
   <DefaultHeader id="header" logged={logged}>
     <LogoContainer>
       {logged ? (
