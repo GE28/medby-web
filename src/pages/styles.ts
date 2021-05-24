@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const Container = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const MainContent = styled.div`
   align-items: center;
   justify-content: center;
 
-  h1 {
+  > h1 {
     padding-top: 58px;
     padding-bottom: 36px;
     text-align: center;

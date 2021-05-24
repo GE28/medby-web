@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 const Form = styled.form`
   width: 436px;
@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 
   p {
-    margin-top: -9px;
+    margin-top: -8px;
     text-align: center;
   }
 `;
