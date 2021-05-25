@@ -6,8 +6,8 @@ import { ToastWrapper as StyledToastWrapper } from './styles';
 import { ToastData } from '../global/ToastContext';
 
 const ToastIcons = {
-  success: <FiCheckCircle size="24px" />,
-  error: <FiXCircle size="24px" />,
+  success: <FiCheckCircle />,
+  error: <FiXCircle />,
 };
 
 const ToastWrapper: FC<ToastData> = ({ title, message, type }) => {
@@ -15,13 +15,13 @@ const ToastWrapper: FC<ToastData> = ({ title, message, type }) => {
 
   return !hide ? (
     <StyledToastWrapper type={type}>
-      <div>{type ? ToastIcons[type] : <FiAlertTriangle size="24px" />}</div>
+      <div>{type ? ToastIcons[type] : <FiAlertTriangle />}</div>
       <dl>
         <dt>{title}</dt>
         {message && <dd>{message}</dd>}
       </dl>
       <button type="button" onClick={() => setHide(true)}>
-        <FiX size="16px" />
+        <FiX />
       </button>
     </StyledToastWrapper>
   ) : null;

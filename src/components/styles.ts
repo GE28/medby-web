@@ -269,6 +269,8 @@ export const ToastWrapper = styled.div<Toast>`
 
   border: 1px solid #f3a104;
 
+  margin: -1px;
+
   div {
     height: auto;
     display: flex;
@@ -277,38 +279,47 @@ export const ToastWrapper = styled.div<Toast>`
     align-items: center;
 
     svg {
+      width: 24px;
+      height: 24px;
       opacity: 50%;
     }
   }
 
   button {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    margin: 1pt;
+    top: 6px;
+    right: 6px;
 
     background: transparent;
     border: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      margin: -1pt;
+    }
   }
 
   dl {
     display: block;
     padding-left: 12px;
-    padding: 8px 10px;
-    align-self: center;
-    word-break: break-all;
+    padding: 6px 10px;
+    word-break: normal;
 
     dt {
       font-weight: 700;
     }
 
     dd {
+      margin-top: 0.05rem;
       font-size: 16px;
       color: #6b6b6b;
     }
   }
 
   &[type='error'] {
-    border: 1px solid #de0f20;
+    border-color: #de0f20;
 
     div {
       background-color: #dd614a;
@@ -316,7 +327,7 @@ export const ToastWrapper = styled.div<Toast>`
   }
 
   &[type='success'] {
-    border: 1px solid #5b8c30;
+    border-color: #5b8c30;
 
     div {
       background-color: #5ad45a;
@@ -334,7 +345,18 @@ export const ToastsContainer = styled.dl`
   bottom: 36px;
   right: 36px;
 
-  > div svg {
-    size: 24px;
+  @media (max-width: calc(400px + 36px * 2)) {
+    max-width: calc(100% - 36px * 2);
+
+    div {
+      font-size: 0.9rem;
+
+      dl {
+        dd {
+          margin-top: 0.1rem;
+          font-size: 0.8rem;
+        }
+      }
+    }
   }
 `;
