@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useMemo } from 'react';
 
 import { toastContext } from '../global/ToastContext';
 
@@ -9,9 +9,10 @@ import { ToastsContainer as StyledToastsContainer } from './styles';
 const ToastsContainer: FC = () => {
   const { toastDataList } = useContext(toastContext);
 
-  const toastContainerContent = toastDataList.map((toast) => (
-    <Toast {...toast} key={toast.id} />
-  ));
+  const toastContainerContent = useMemo(
+    () => toastDataList.map((toast) => <Toast {...toast} key={toast.id} />),
+    [toastDataList],
+  );
 
   return <StyledToastsContainer>{toastContainerContent}</StyledToastsContainer>;
 };
