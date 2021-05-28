@@ -83,11 +83,22 @@ export const ProfileWrapper = styled.div`
 
   font-weight: 600;
 
-  > img {
-    border: 3px solid #5b8c30;
-    border-radius: 50%;
+  > .avatar-container {
+    position: relative;
     width: 64px;
     height: 64px;
+
+    img {
+      border: 3px solid #5b8c30;
+      position: relative;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+    }
   }
 
   > div {
@@ -114,7 +125,7 @@ export const ProfileWrapper = styled.div`
       visibility: hidden;
     }
 
-    > img {
+    > .avatar-container img {
       border-color: #23212c;
     }
 

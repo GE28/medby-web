@@ -25,7 +25,9 @@ const Profile: FC<ProfileWrapper> = ({ name = '', avatarLink }) => {
 
   return (
     <ProfileWrapper>
-      <img src={avatarLink || blankAvatar} alt="" />
+      <div className="avatar-container">
+        <img src={avatarLink || blankAvatar} alt="" />
+      </div>
       <div>
         <h4>{message()}</h4>
         <a href="/">
