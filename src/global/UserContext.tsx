@@ -2,17 +2,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { FC, createContext, useState, useCallback } from 'react';
+import ms from 'ms';
 
 import decodeJWT, { JwtPayload } from 'jwt-decode';
 
 import axios from '../services/axios';
-
-type UserData = Record<string, any> & {
-  name: string;
-  email: string;
-  cpf: string;
-  avatar: string;
-};
+import { UserData } from '../services/axios/responses';
 
 interface LoginParams {
   email: string;
@@ -94,7 +89,7 @@ export const UserProvider: FC = ({ children }) => {
     try {
       const { exp }: JwtPayload = decodeJWT(user.token);
 
-      if (exp && Date.now() >= exp * 1000) {
+      if (exp && Date.now() + ms('1m') >= exp * 1000) {
         logout();
       }
     } catch (err) {
