@@ -16,6 +16,7 @@ export type AppointmentData = [
     doctor_id: string;
     doctor: {
       avatar: string;
+      document: string;
       name: string;
 
       spec_id: string;
@@ -26,7 +27,23 @@ export type AppointmentData = [
       unit_id: string;
       unit: {
         name: string;
+        cep: string;
+        complements: string;
       };
     };
   },
 ];
+
+// get https://viacep.com.br/ws/20740010/json/
+export type ViaCep = Record<string, string> & {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+  ibge: string;
+  gia: string;
+  ddd: string;
+  siafi: string;
+};
