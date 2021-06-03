@@ -32,10 +32,10 @@ export const ToastProvider: FC = ({ children }) => {
 
   const addToast = useCallback((toastData) => {
     const toastWithId = { ...toastData, id: '' };
-    toastWithId.id = `toast_${Number(new Date())}`;
+    toastWithId.id = `toast_${Date.now()}`;
 
     setToastList((oldToastList) => [
-      { ...toastData, id: `toast_${Number(new Date())}` },
+      { ...toastData, id: `toast_${Date.now()}` },
       ...oldToastList,
     ]);
 
