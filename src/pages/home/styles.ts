@@ -57,8 +57,8 @@ export const AppointmentContainer = styled.main`
   .action-button {
     height: unset;
     margin: 0;
-    padding: 4px 18px;
-    line-height: 20px;
+    padding: 0 18px;
+    line-height: 32px;
 
     svg {
       width: 18px;
@@ -96,7 +96,6 @@ export const AppointmentContainer = styled.main`
 
       button {
         font-size: 72%;
-        padding: 4px 8px;
       }
 
       > button svg {
@@ -178,6 +177,10 @@ export const AppointmentWrapper = styled.li`
   max-width: ${maxLiSize}px;
 
   background-color: #96cb67;
+
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  border-width: 1px 1px 2px 2px;
+
   border-radius: 6px;
 
   font-size: 18px;
@@ -210,7 +213,6 @@ export const AppointmentWrapper = styled.li`
     border-radius: 6px;
 
     background-color: #87b75d;
-    box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.2);
 
     span:nth-of-type(1) {
       font-family: 'Rubik', sans-serif;
@@ -247,7 +249,6 @@ export const AppointmentWrapper = styled.li`
     margin: 0 auto;
     font-size: 14px;
     background-color: #87b75d;
-    box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.2);
 
     &:hover {
       background-color: #a5df71;
@@ -255,7 +256,7 @@ export const AppointmentWrapper = styled.li`
 
     &:active {
       background-color: #789b59;
-      box-shadow: none;
+      filter: none;
     }
 
     margin-bottom: 14px;
@@ -265,4 +266,233 @@ export const AppointmentWrapper = styled.li`
     display: flex;
     align-items: center;
   }
+`;
+
+export const AppointmentModal = styled.div`
+  position: relative;
+  display: block;
+  background-color: #f9fff5;
+  text-align: center;
+  width: 75%;
+  padding: 24px 0;
+  border-radius: 16px;
+
+  width: 100%;
+
+  margin: auto;
+
+  .close-button {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    top: 12px;
+    right: 12px;
+
+    background: transparent;
+  }
+
+  .doctor-info {
+    background-color: #54428ebf;
+    padding: 18px 24px;
+
+    .doctor-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 72px;
+      height: 72px;
+
+      img {
+        border: 2px solid #f9fff5;
+        position: absolute;
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+      }
+    }
+
+    .doctor-data {
+      padding-left: 12px;
+
+      span {
+        text-align: start;
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        opacity: 0.75;
+      }
+
+      > span {
+        font-family: 'Rubik', sans-serif;
+        color: #f9fff5;
+        margin-bottom: 3px;
+        opacity: 1;
+      }
+
+      .spec-data {
+        text-align: start;
+      }
+
+      .spec-data span {
+        display: inline-block;
+        margin-right: 24px;
+      }
+
+      .spec-data span :nth-child(even) {
+        color: #f9fff5;
+        margin: 0;
+      }
+    }
+
+    margin-top: -6px;
+  }
+
+  > div:nth-of-type(n + 2):nth-of-type(even) {
+    background-color: #f9fff5;
+  }
+
+  > div:nth-of-type(n + 2) {
+    width: 100%;
+    background-color: #0000000d;
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    padding: 24px;
+
+    span {
+      font-weight: 700;
+      color: #54428e;
+    }
+
+    div {
+      span {
+        display: block;
+        text-align: end;
+        font-weight: 600;
+
+        :nth-of-type(1) {
+          color: #23212c;
+        }
+
+        :nth-of-type(2) {
+          margin-top: 3px;
+          font-family: 'Source Sans Pro', sans-serif;
+          color: #a6a6a6;
+        }
+      }
+    }
+  }
+
+  > span {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    color: #54428e;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+  }
+
+  .cancel-button {
+    margin: 0 auto;
+    margin-top: 24px;
+    padding: 0 18px;
+    line-height: 32px;
+    background-color: #dd614a;
+    filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.2));
+
+    &:hover {
+      background-color: #fb895e;
+    }
+
+    &:active {
+      background-color: #bf3936;
+      filter: none;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      animation: none;
+    }
+  }
+
+  h5 {
+    color: rgba(0, 0, 0, 0.2);
+
+    margin-top: 8px;
+  }
+
+  @media (max-width: ${maxLiSize}px) {
+    .doctor-container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .doctor-data span {
+        text-align: center;
+      }
+
+      .avatar-container {
+        margin-bottom: 8px;
+      }
+
+      .doctor-data .spec-data {
+        text-align: center;
+
+        span {
+          display: block;
+          margin: 0;
+        }
+
+        span:nth-of-type(2) {
+          margin-top: 8px;
+        }
+      }
+    }
+
+    > div:nth-of-type(n + 2) {
+      flex-direction: column;
+      align-items: center;
+
+      div span {
+        text-align: center;
+      }
+
+      > span {
+        margin-bottom: 8px;
+      }
+    }
+  }
+`;
+
+export const ModalContainer = styled.div`
+  position: fixed;
+  z-index: 999;
+
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+
+  padding: 32px 32px;
+  overflow-y: scroll;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.7);
 `;
