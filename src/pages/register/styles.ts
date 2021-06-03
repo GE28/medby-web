@@ -1,15 +1,6 @@
 import styled from 'styled-components/macro';
+import { MainContent as StyledMainContent } from '../styles';
 
-export const MainContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+export const MainContent = styled(StyledMainContent)`
   padding-bottom: 58px;
-
-  h1 {
-    padding-top: 58px;
-    padding-bottom: 36px;
-    text-align: center;
-  }
 `;
