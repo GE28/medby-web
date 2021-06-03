@@ -227,7 +227,8 @@ export const InputContainer = styled.div<InputContainer>`
 export const DefaultButton = styled.button`
   display: flex;
   border-radius: 6px;
-  height: 42px;
+  line-height: 42px;
+
   color: #fcfff9;
   font-size: 18px;
   font-weight: 700;
@@ -243,6 +244,7 @@ export const DefaultButton = styled.button`
   }
 
   svg {
+    margin: 9px 0;
     animation: ${fullRotate} 2s linear infinite;
   }
 `;
@@ -273,6 +275,10 @@ export const ToastWrapper = styled.div<Toast>`
   position: relative;
   display: flex;
 
+  top: -1px;
+  left: -1px;
+  bottom: -1px;
+
   overflow: hidden;
 
   background-color: #fcfff9;
@@ -280,12 +286,12 @@ export const ToastWrapper = styled.div<Toast>`
 
   border: 1px solid #f3a104;
 
-  margin: -1px;
-
   div {
-    height: auto;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    padding: 0 4px;
     display: flex;
-    padding: 4px;
     background-color: #f2e926;
     align-items: center;
 
@@ -308,7 +314,6 @@ export const ToastWrapper = styled.div<Toast>`
     svg {
       width: 18px;
       height: 18px;
-      margin: -1pt;
     }
   }
 
