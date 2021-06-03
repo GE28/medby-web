@@ -64,6 +64,15 @@ const RegisterForm: FC = () => {
       } catch (err) {
         setLoading(false);
 
+        if (!err.response) {
+          addToast({
+            title: 'Falha no login',
+            message: 'O servidor está offline',
+            type: 'error',
+          });
+          return;
+        }
+
         addToast({
           type: 'error',
           title: 'Falha ao realizar registro',
