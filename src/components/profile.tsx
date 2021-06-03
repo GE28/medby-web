@@ -1,10 +1,10 @@
 /* eslint-disable import/no-duplicates */
 import React, { FC, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import { FiUser } from 'react-icons/fi';
 
 import blankAvatar from '../assets/blank-profile.png';
-
 import { ProfileWrapper } from './styles';
 
 interface ProfileWrapper {
@@ -30,10 +30,10 @@ const Profile: FC<ProfileWrapper> = ({ name = '', avatarLink }) => {
       </div>
       <div>
         <h4>{message()}</h4>
-        <a href="/">
+        <Link to="/account">
           <FiUser />
           <span>Minha conta</span>
-        </a>
+        </Link>
       </div>
     </ProfileWrapper>
   );
