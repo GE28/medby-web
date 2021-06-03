@@ -2,8 +2,8 @@ import React, { FC, useContext } from 'react';
 
 import { FiClock, FiCalendar, FiMapPin } from 'react-icons/fi';
 
+import { appointmentContext } from '..';
 import { AppointmentWrapper as StyledAppointmentWrapper } from '../styles';
-import { appointmentContext } from './Context';
 
 import blankAvatar from '../../../assets/blank-profile.png';
 

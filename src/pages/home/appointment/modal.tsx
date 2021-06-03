@@ -9,7 +9,7 @@ import blankAvatar from '../../../assets/blank-profile.png';
 import { clearAxios } from '../../../services/axios';
 import { ViaCep } from '../../../services/axios/responses';
 
-import { appointmentContext } from './Context';
+import { appointmentContext } from '..';
 import { Appointment } from './wrapper';
 import { AppointmentModal as StyledModal, ModalContainer } from '../styles';
 

@@ -1,6 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-duplicates */
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, {
+  FC,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -15,7 +22,6 @@ import { AppointmentData } from '../../services/axios/responses';
 import { avatarsPath } from '../../services/axios/paths';
 
 import { Appointment } from './appointment/wrapper';
-import { AppointmentProvider } from './appointment/Context';
 
 import AppointmentList from './appointment/container';
 import GitHubLink from '../../components/githubLink';
@@ -24,6 +30,15 @@ import Footer from '../../components/footer';
 import Profile from '../../components/profile';
 
 import { Container, MainContent } from '../styles';
+
+interface AppointmentContext {
+  selected?: Appointment;
+  select(appointment: Appointment): void;
+  loadMore(): void;
+}
+
+export const appointmentContext = createContext({} as AppointmentContext);
+const { Provider } = appointmentContext;
 
 const HomePage: FC = () => {
   const { user, logout } = useContext(userContext);
@@ -46,13 +61,21 @@ const HomePage: FC = () => {
     return appointmentsData;
   });
 
+  const [selected, setSelected] = useState({} as Appointment);
+  const [showRest, setShowRest] = useState(false);
+
+  const select = useCallback((appointment: Appointment) => {
+    setSelected(appointment);
+  }, []);
+
   useEffect(() => {
     async function getAppointments() {
-      if (appointments.length > 0) return;
+      if (appointments.length > 0 && !showRest) return;
 
       try {
         const response = await axios.get<AppointmentData>('appointments', {
           headers: { Authorization: `Bearer ${user.token}` },
+          ...(showRest && { params: { showRest } }),
         });
 
         const appointmentsData = response.data.map((serverAppointment) => {
@@ -89,7 +112,18 @@ const HomePage: FC = () => {
           JSON.stringify({ appointmentsData, stored_at: Date.now() }),
         );
 
-        setAppointments(appointmentsData);
+        setShowRest(false);
+
+        setAppointments(
+          showRest
+            ? (oldData) => [
+                ...oldData,
+                ...appointmentsData.filter(
+                  (key, i) => appointmentsData[i]?.id !== oldData[i]?.id,
+                ),
+              ]
+            : appointmentsData,
+        );
       } catch (err) {
         if (!err.response) {
           addToast({
@@ -130,9 +164,18 @@ const HomePage: FC = () => {
           />
         </Header>
 
-        <AppointmentProvider>
+        <Provider
+          value={{
+            selected,
+            select,
+            loadMore: () => {
+              setShowRest(true);
+              setAppointments((old) => [...old]);
+            },
+          }}
+        >
           <AppointmentList>{appointments}</AppointmentList>
-        </AppointmentProvider>
+        </Provider>
       </MainContent>
 
       <Footer>

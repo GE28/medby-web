@@ -1,8 +1,8 @@
-import React, { FC, useMemo, useContext } from 'react';
+import React, { FC, useMemo, useContext, useState } from 'react';
 
 import { FiList } from 'react-icons/fi';
 
-import { appointmentContext } from './Context';
+import { appointmentContext } from '..';
 import { Appointment, AppointmentWrapper } from './wrapper';
 import AppointmentModal from './modal';
 
@@ -23,7 +23,8 @@ const AppointmentContainer: FC<AppointmentContainer> = ({ children }) => {
     [children],
   );
 
-  const { selected } = useContext(appointmentContext);
+  const { selected, loadMore } = useContext(appointmentContext);
+  const [showButton, setShowButton] = useState(true);
 
   return (
     <>
@@ -38,9 +39,15 @@ const AppointmentContainer: FC<AppointmentContainer> = ({ children }) => {
           Marcar uma nova consulta
         </Button>
         <ol>{appointments}</ol>
-        {children && children.length > 10 && (
+        {children && children.length > 9 && showButton && (
           <div className="load-more">
-            <Button className="action-button">
+            <Button
+              className="action-button"
+              onClick={() => {
+                loadMore();
+                setShowButton(false);
+              }}
+            >
               <FiList />
               <span>Exibir todas</span>
             </Button>
