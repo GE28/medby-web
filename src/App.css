@@ -41,6 +41,10 @@ h2 {
   font-size: 21px;
 }
 
+h3 {
+  font-size: 18px;
+}
+
 a {
   text-decoration: solid;
 }
@@ -53,4 +57,9 @@ button {
   cursor: pointer;
   border: 0;
   font: inherit; /* chrome */
+}
+
+input:disabled,
+button:disabled {
+  cursor: not-allowed;
 }
