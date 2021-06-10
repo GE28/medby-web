@@ -52,10 +52,15 @@ export const UserProvider: FC = ({ children }) => {
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
-    const response = await axios.post('login', { email, password });
+    const response = await axios.post<UserState & { user: UserData }>('login', {
+      email,
+      password,
+    });
 
     const { user: data, token } = response.data;
+    delete data.updated_at;
 
+    data.avatar = avatarsPath + data.avatar;
     localStorage.setItem('@medby/user_token', token);
     localStorage.setItem('@medby/user_data', JSON.stringify(data));
 
