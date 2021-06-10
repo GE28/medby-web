@@ -6,6 +6,7 @@ interface CustomHeader {
 
 interface InputContainer {
   error?: boolean;
+  isDisabled: boolean;
   isTouched?: boolean;
 }
 

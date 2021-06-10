@@ -38,7 +38,11 @@ const InputContainer: FC<InputProps> = ({
   );
 
   return (
-    <StyledInputContainer isTouched={isTouched} error={!!error}>
+    <StyledInputContainer
+      isDisabled={!!rest.disabled}
+      isTouched={isTouched}
+      error={!!error}
+    >
       {htmlLabel}
       <div>
         {Icon && <Icon size="18px" />}
