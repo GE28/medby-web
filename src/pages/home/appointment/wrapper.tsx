@@ -5,8 +5,7 @@ import { FiClock, FiCalendar, FiMapPin } from 'react-icons/fi';
 import { appointmentContext } from '..';
 import { AppointmentWrapper as StyledAppointmentWrapper } from '../styles';
 
-import blankAvatar from '../../../assets/blank-profile.png';
-
+import AvatarContainer from '../../../components/avatarContainer';
 import Button from '../../../components/button';
 
 export interface Appointment {
@@ -19,7 +18,7 @@ export interface Appointment {
   price: string;
   doctorSpec: string;
   doctorDocument: string;
-  doctorAvatar?: string;
+  doctorAvatar: string | null;
   doctorName: string;
 }
 
@@ -38,12 +37,11 @@ export const AppointmentWrapper: FC<Appointment> = (props) => {
   return (
     <StyledAppointmentWrapper>
       <div className="doctor-info">
-        <div className="avatar-container">
-          <img
-            src={doctorAvatar || blankAvatar}
-            alt={`Foto de ${doctorName}`}
-          />
-        </div>
+        <AvatarContainer
+          imageSrc={doctorAvatar}
+          size={50}
+          alt={`Foto de ${doctorName}`}
+        />
         <div>
           <span>{doctorName}</span>
           <span>{doctorSpec}</span>

@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 
 import { FiUser } from 'react-icons/fi';
 
-import blankAvatar from '../assets/blank-profile.png';
 import { ProfileWrapper } from './styles';
+
+import AvatarContainer from './avatarContainer';
 
 interface ProfileWrapper {
   name: string;
-  avatarLink?: string;
+  avatarLink: string | null;
 }
 
 const Profile: FC<ProfileWrapper> = ({ name = '', avatarLink }) => {
@@ -26,7 +27,7 @@ const Profile: FC<ProfileWrapper> = ({ name = '', avatarLink }) => {
   return (
     <ProfileWrapper>
       <div className="avatar-container">
-        <img src={avatarLink || blankAvatar} alt="" />
+        <AvatarContainer imageSrc={avatarLink} />
       </div>
       <div>
         <h4>{message()}</h4>

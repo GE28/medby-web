@@ -186,22 +186,8 @@ export const AppointmentWrapper = styled.li`
   font-size: 18px;
 
   > .doctor-info {
-    .avatar-container {
-      position: relative;
-      width: 50px;
-      height: 50px;
-
-      img {
-        border: 2px solid #23212c;
-        position: relative;
-        border-radius: 50%;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: inherit;
-        height: inherit;
-        object-fit: cover;
-      }
+    div img {
+      border: 2px solid #23212c;
     }
 
     display: flex;
@@ -247,7 +233,8 @@ export const AppointmentWrapper = styled.li`
     height: 32px;
     width: 66%;
     margin: 0 auto;
-    font-size: 14px;
+    line-height: 1.5em;
+    font-size: 1em;
     background-color: #87b75d;
 
     &:hover {

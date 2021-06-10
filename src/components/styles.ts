@@ -10,6 +10,10 @@ interface InputContainer {
   isTouched?: boolean;
 }
 
+interface AvatarContainer {
+  size?: number;
+}
+
 interface Toast {
   type?: 'error' | 'success';
 }
@@ -76,6 +80,24 @@ export const LogoContainer = styled.div`
   }
 `;
 
+export const AvatarContainer = styled.div<AvatarContainer>`
+  position: relative;
+  width: ${(props) => `${props.size}px`};
+  height: ${(props) => `${props.size}px`};
+
+  img {
+    border: 3px solid #5b8c30;
+    position: relative;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+  }
+`;
+
 export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
@@ -83,24 +105,6 @@ export const ProfileWrapper = styled.div`
   column-gap: 9px;
 
   font-weight: 600;
-
-  > .avatar-container {
-    position: relative;
-    width: 64px;
-    height: 64px;
-
-    img {
-      border: 3px solid #5b8c30;
-      position: relative;
-      border-radius: 50%;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: inherit;
-      height: inherit;
-      object-fit: cover;
-    }
-  }
 
   > div {
     text-align: center;
