@@ -76,15 +76,48 @@ export const UserProvider: FC = ({ children }) => {
     setUser({} as UserState);
   }, []);
 
-  const register = useCallback(async (registerParams: RegisterParams) => {
-    const { name, email, cpf, password } = registerParams;
+  const updateAvatar = useCallback(async (avatar: File) => {
+    const formData = new FormData();
+    formData.append('avatar', avatar);
 
-    await axios.post('register', {
-      name,
-      email,
-      cpf,
-      password,
+    const response = await axios.post<UserData>('upload', formData, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        'Content-Type': 'multipart/form-data',
+      },
     });
+
+    const { data } = response;
+
+    data.avatar = avatarsPath + data.avatar;
+    localStorage.setItem('@medby/user_data', JSON.stringify(data));
+
+    setUser((oldUser) => ({
+      token: oldUser.token,
+      data: { ...data },
+    }));
+  }, []);
+
+  const updateEmail = useCallback(async (email: string) => {
+    const response = await axios.put<UserData>(
+      'profile',
+      { email },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      },
+    );
+
+    const { data } = response;
+
+    data.avatar = avatarsPath + data.avatar;
+    localStorage.setItem('@medby/user_data', JSON.stringify(data));
+
+    setUser((oldUser) => ({
+      token: oldUser.token,
+      data: { ...data },
+    }));
   }, []);
 
   const tokenValidator = useCallback(() => {
