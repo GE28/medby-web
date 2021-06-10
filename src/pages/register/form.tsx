@@ -10,6 +10,7 @@ import { validate } from 'gerador-validador-cpf';
 
 import { FiAtSign, FiFileText, FiUser, FiKey, FiLoader } from 'react-icons/fi';
 
+import axios from '../../services/axios';
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
