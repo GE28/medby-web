@@ -26,7 +26,7 @@ interface FormValues {
 }
 
 const RegisterForm: FC = () => {
-  const { register, login } = useContext(userContext);
+  const { login } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
   const [loading, setLoading] = useState(false);
@@ -46,10 +46,12 @@ const RegisterForm: FC = () => {
         ...values,
         cpf: values.cpf.replace(/[^0-9]/g, ''),
         name: values.fullName,
+        fullName: undefined,
+        confirmPassword: undefined,
       };
 
       try {
-        await register(submitValues);
+        await axios.post('register', submitValues);
 
         const { data } = await login({
           email: values.email,

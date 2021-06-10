@@ -30,7 +30,8 @@ interface UserContext {
   user: UserState;
   login(data: LoginParams): Promise<UserState>;
   logout(): void;
-  register(data: RegisterParams): Promise<void>;
+  updateAvatar(avatar: File): void;
+  updateEmail(email: string): void;
   tokenValidator(): void;
 }
 
@@ -98,7 +99,16 @@ export const UserProvider: FC = ({ children }) => {
   }, [user]);
 
   return (
-    <Provider value={{ user, login, logout, register, tokenValidator }}>
+    <Provider
+      value={{
+        user,
+        login,
+        logout,
+        updateAvatar,
+        updateEmail,
+        tokenValidator,
+      }}
+    >
       {children}
     </Provider>
   );
