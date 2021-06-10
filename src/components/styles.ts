@@ -150,8 +150,7 @@ export const InputContainer = styled.div<InputContainer>`
     background-color: #fcfff9;
     border-radius: 6px;
     border: 1px solid #a6a6a6;
-    height: 36px;
-    padding: 6px 36px 6px 8px;
+    padding: 0 36px 0 8px;
     gap: 12px;
   }
 
@@ -178,18 +177,20 @@ export const InputContainer = styled.div<InputContainer>`
     font-size: 16px;
     flex-grow: 1;
     outline: 0;
+    line-height: 36px;
     color: #23212c;
     background-color: transparent;
     border: 0;
   }
 
+  // prevent browser default background when autofilled
   input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;
   }
 
-  ${(props) =>
-    props.error &&
-    props.isTouched &&
+  ${({ error, isTouched }) =>
+    error &&
+    isTouched &&
     css`
       div {
         border: 1px solid #dd614a;
@@ -205,9 +206,9 @@ export const InputContainer = styled.div<InputContainer>`
       }
     `};
 
-  ${(props) =>
-    !props.error &&
-    props.isTouched &&
+  ${({ error, isTouched }) =>
+    !error &&
+    isTouched &&
     css`
       div {
         border: 1px solid #5b8c30;
@@ -220,6 +221,23 @@ export const InputContainer = styled.div<InputContainer>`
       span {
         display: none;
         visibility: hidden;
+      }
+    `};
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      div {
+        cursor: not-allowed;
+        background-color: #a6a6a6;
+      }
+
+      div svg {
+        color: #fcfff9;
+      }
+
+      input {
+        color: #fcfff9;
       }
     `};
 `;
@@ -241,6 +259,11 @@ export const DefaultButton = styled.button`
 
   &:hover {
     background-color: #3b5b1f;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    background-color: #a6a6a6;
   }
 
   svg {
