@@ -7,17 +7,12 @@ import ms from 'ms';
 import decodeJWT, { JwtPayload } from 'jwt-decode';
 
 import axios from '../services/axios';
+import { avatarsPath } from '../services/axios/paths';
+
 import { UserData } from '../services/axios/responses';
 
 interface LoginParams {
   email: string;
-  password: string;
-}
-
-interface RegisterParams {
-  name: string;
-  email: string;
-  cpf: string;
   password: string;
 }
 
