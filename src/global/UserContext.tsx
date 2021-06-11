@@ -44,6 +44,22 @@ export const UserProvider: FC = ({ children }) => {
       : {}) as UserState;
   });
 
+  const storageUserData = ({
+    token,
+    data,
+  }: {
+    data?: UserData;
+    token?: string;
+  }) => {
+    if (token) localStorage.setItem('@medby/user_token', token);
+    if (data) localStorage.setItem('@medby/user_data', JSON.stringify(data));
+
+    setUser((oldUser) => ({
+      token: token || oldUser.token,
+      data: data || oldUser.data,
+    }));
+  };
+
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
@@ -56,10 +72,7 @@ export const UserProvider: FC = ({ children }) => {
     delete data.updated_at;
 
     data.avatar = avatarsPath + data.avatar;
-    localStorage.setItem('@medby/user_token', token);
-    localStorage.setItem('@medby/user_data', JSON.stringify(data));
-
-    setUser({ token, data });
+    storageUserData({ data, token });
 
     return { token, data };
   }, []);
@@ -85,12 +98,7 @@ export const UserProvider: FC = ({ children }) => {
     const { data } = response;
 
     data.avatar = avatarsPath + data.avatar;
-    localStorage.setItem('@medby/user_data', JSON.stringify(data));
-
-    setUser((oldUser) => ({
-      token: oldUser.token,
-      data: { ...data },
-    }));
+    storageUserData({ data });
   }, []);
 
   const updateEmail = useCallback(async (email: string) => {
@@ -107,12 +115,7 @@ export const UserProvider: FC = ({ children }) => {
     const { data } = response;
 
     data.avatar = avatarsPath + data.avatar;
-    localStorage.setItem('@medby/user_data', JSON.stringify(data));
-
-    setUser((oldUser) => ({
-      token: oldUser.token,
-      data: { ...data },
-    }));
+    storageUserData({ data });
   }, []);
 
   const tokenValidator = useCallback(() => {

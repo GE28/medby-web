@@ -21,6 +21,7 @@ interface FormValues {
 
 const formattedCPF = (cpf: string) => {
   const groups = cpf.match(/.{1,3}/g);
+
   groups?.splice(1, 0, '.');
   groups?.splice(3, 0, '.');
   groups?.splice(5, 0, '-');
