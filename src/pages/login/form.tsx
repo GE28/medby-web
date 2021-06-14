@@ -6,11 +6,8 @@ import { useFormik } from 'formik';
 
 import { FiLoader } from 'react-icons/fi';
 
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
-
-import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
+import { toastContext } from '../../global/ToastContext';
 
 import Form from '../../components/form';
 import InputContainer from '../../components/inputContainer';
@@ -36,15 +33,7 @@ const LoginForm: FC = () => {
       setLoading(true);
 
       try {
-        const { data } = await login(values);
-
-        addToast({
-          type: 'success',
-          title: `Bem-vindo novamente ${data.name.split(' ', 1)}`,
-          message: format(new Date(), "'Hoje é dia 'P', são 'p' ('z')'", {
-            locale: ptBR,
-          }),
-        });
+        await login(values);
       } catch (err) {
         setLoading(false);
 
