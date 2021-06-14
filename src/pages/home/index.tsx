@@ -158,10 +158,7 @@ const HomePage: FC = () => {
     <Container>
       <MainContent>
         <Header logged>
-          <Profile
-            avatarLink={user.data.avatar}
-            name={user.data.name.split(' ')[0]}
-          />
+          <Profile />
         </Header>
 
         <Provider

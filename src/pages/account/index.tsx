@@ -1,6 +1,4 @@
-import React, { FC, useContext } from 'react';
-
-import { userContext } from '../../global/UserContext';
+import React, { FC } from 'react';
 
 import AvatarForm from './avatarForm';
 import EmailForm from './emailForm';
@@ -15,16 +13,11 @@ import { Container } from '../styles';
 import { MainContent } from './styles';
 
 const AccountPage: FC = () => {
-  const { user } = useContext(userContext);
-
   return (
     <Container>
       <MainContent>
         <Header logged>
-          <Profile
-            avatarLink={user.data.avatar}
-            name={user.data.name.split(' ')[0]}
-          />
+          <Profile />
         </Header>
 
         <AvatarForm />
