@@ -21,7 +21,7 @@ interface UserState {
   token: string;
 }
 
-interface UserContext {
+interface UserContextBody {
   user: UserState;
   login(data: LoginParams): Promise<UserState>;
   logout(): void;
@@ -30,7 +30,7 @@ interface UserContext {
   tokenValidator(): void;
 }
 
-export const userContext = createContext({} as UserContext);
+export const userContext = createContext({} as UserContextBody);
 
 const { Provider } = userContext;
 

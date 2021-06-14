@@ -15,11 +15,10 @@ interface ToastContextBody {
   deleteToast(id: string): void;
 }
 
-const toastTimeout = ms('5s');
-
 export const toastContext = createContext({} as ToastContextBody);
-
 const { Provider } = toastContext;
+
+const toastTimeout = ms('5s');
 
 export const ToastProvider: FC = ({ children }) => {
   const [toastDataList, setToastList] = useState([] as ToastData[]);
@@ -31,8 +30,8 @@ export const ToastProvider: FC = ({ children }) => {
   }, []);
 
   const addToast = useCallback((toastData) => {
-    const toastWithId = { ...toastData, id: '' };
-    toastWithId.id = `toast_${Date.now()}`;
+    const identifiedToast = { ...toastData, id: '' };
+    identifiedToast.id = `toast_${Date.now()}`;
 
     setToastList((oldToastList) => [
       { ...toastData, id: `toast_${Date.now()}` },
@@ -40,7 +39,7 @@ export const ToastProvider: FC = ({ children }) => {
     ]);
 
     // Auto-delete toast after X ms seconds
-    setTimeout(() => deleteToast(toastWithId.id), toastTimeout);
+    setTimeout(() => deleteToast(identifiedToast.id), toastTimeout);
   }, []);
 
   return (
