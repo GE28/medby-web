@@ -8,6 +8,7 @@ import LoginPage from '../pages/login';
 import RegisterPage from '../pages/register';
 import HomePage from '../pages/home';
 import AccountPage from '../pages/account';
+import AppointPage from '../pages/appoint';
 
 const Routes: FC = () => (
   <Switch>
@@ -15,6 +16,7 @@ const Routes: FC = () => (
     <GuestRoute path="/register" component={RegisterPage} />
     <UserRoute path="/home" component={HomePage} />
     <UserRoute path="/account" component={AccountPage} />
+    <UserRoute path="/appoint" component={AppointPage} />
     <NotFoundRoute />
   </Switch>
 );
