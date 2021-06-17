@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 
 import { validate } from 'gerador-validador-cpf';
 
-import { FiAtSign, FiFileText, FiUser, FiKey, FiLoader } from 'react-icons/fi';
+import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
 
 import axios from '../../services/axios';
 
@@ -165,8 +165,8 @@ const RegisterForm: FC = () => {
         {...formik.getFieldProps('confirmPassword')}
       />
 
-      <Button type="submit">
-        {loading ? <FiLoader size="24px" /> : 'CADASTRAR'}
+      <Button type="submit" loading={loading}>
+        ENTRAR
       </Button>
 
       <p>

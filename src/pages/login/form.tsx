@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
-import { FiLoader } from 'react-icons/fi';
-
 import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
 
@@ -71,8 +69,8 @@ const LoginForm: FC = () => {
         {...formik.getFieldProps('password')}
       />
 
-      <Button type="submit">
-        {loading ? <FiLoader size="24px" /> : 'ENTRAR'}
+      <Button type="submit" loading={loading}>
+        ENTRAR
       </Button>
 
       <p>
