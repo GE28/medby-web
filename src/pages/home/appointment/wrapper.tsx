@@ -26,12 +26,12 @@ export const AppointmentWrapper: FC<Appointment> = (props) => {
   const { select } = useContext(appointmentContext);
 
   const {
-    unit = 'Unidade mais próxima',
-    day = '99/99/9999',
-    time = '99h99m',
-    doctorSpec = 'Médico',
+    unit = 'Unit Name Identifier',
+    day = 'dd/mm/yyyy',
+    time = '05h30m',
+    doctorSpec = 'Dermatologist',
     doctorAvatar,
-    doctorName = 'Fulano de tal',
+    doctorName = 'Not a John Doe',
   } = props;
 
   return (
