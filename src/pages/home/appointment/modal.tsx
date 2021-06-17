@@ -73,7 +73,11 @@ const AppointmentModal: FC<Appointment> = (props) => {
           <div className="doctor-info">
             <div className="doctor-container">
               <div className="avatar-container">
-                <img src={doctorAvatar || blankAvatar} alt="Doutor" />
+                <img
+                  src={doctorAvatar || blankAvatar}
+                  title={`Foto de ${doctorName}`}
+                  alt={doctorName}
+                />
               </div>
 
               <div className="doctor-data">

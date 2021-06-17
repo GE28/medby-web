@@ -29,7 +29,10 @@ const Profile: FC = () => {
   return (
     <ProfileWrapper>
       <div className="avatar-container">
-        <AvatarContainer imageSrc={avatar} />
+        <AvatarContainer
+          imageSrc={avatar}
+          title='Você pode alterar sua foto em "Minha conta"'
+        />
       </div>
       <div>
         <h4>{greetUser()}</h4>
