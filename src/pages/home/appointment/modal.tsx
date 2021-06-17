@@ -14,27 +14,28 @@ import { Appointment } from './wrapper';
 import { AppointmentModal as StyledModal, ModalContainer } from '../styles';
 
 const AppointmentModal: FC<Appointment> = (props) => {
-  const { cep: appointmentCep } = props;
-  const [cepData, setCepData] = useState({} as ViaCep);
+  const { cep: currentCep } = props;
+  const [cepsData, setCepsData] = useState({} as ViaCep);
 
   useEffect(() => {
     const ceps = localStorage.getItem('@medby/ceps') || '{}';
-    const parsedCeps = JSON.parse(ceps) as { [key: string]: ViaCep };
+    const storedCeps = JSON.parse(ceps) as { [key: string]: ViaCep };
 
-    if (!parsedCeps[appointmentCep]) {
-      const getData = async () => {
+    if (!storedCeps[currentCep]) {
+      const getCurrentCepData = async () => {
         const cepResponse = await clearAxios.get<ViaCep>(
-          `https://viacep.com.br/ws/${appointmentCep}/json`,
+          `https://viacep.com.br/ws/${currentCep}/json`,
         );
 
-        parsedCeps[appointmentCep] = cepResponse.data;
-        localStorage.setItem(`@medby/ceps`, JSON.stringify(parsedCeps));
+        storedCeps[currentCep] = cepResponse.data;
+        localStorage.setItem(`@medby/ceps`, JSON.stringify(storedCeps));
       };
-      getData();
+
+      getCurrentCepData();
     }
 
-    setCepData(parsedCeps[appointmentCep]);
-  }, [appointmentCep]);
+    setCepsData(storedCeps[currentCep]);
+  }, [currentCep]);
 
   const currency = useCallback((value = '') => {
     const [moneyValue, cents] = value.split('.');
@@ -58,7 +59,7 @@ const AppointmentModal: FC<Appointment> = (props) => {
 
   return (
     <ModalContainer>
-      {cepData?.cep ? (
+      {cepsData?.cep ? (
         <StyledModal>
           <button
             type="button"
@@ -90,10 +91,10 @@ const AppointmentModal: FC<Appointment> = (props) => {
 
             <div>
               <span>
-                {`${cepData.logradouro}, ${complements} - ${cepData.bairro} ` +
-                  `(${cepData.localidade}-${cepData.uf})`}
+                {`${cepsData.logradouro}, ${complements} - ${cepsData.bairro}` +
+                  `(${cepsData.localidade}-${cepsData.uf})`}
               </span>
-              <span>{`(CEP: ${cepData.cep})`}</span>
+              <span>{`(CEP: ${cepsData.cep})`}</span>
             </div>
           </div>
           <div className="time-info">
