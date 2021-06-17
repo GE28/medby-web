@@ -6,6 +6,7 @@ import { appointmentContext } from '..';
 import { Appointment, AppointmentWrapper } from './wrapper';
 import AppointmentModal from './modal';
 
+import LoaderSVG from '../../../assets/loader';
 import { AppointmentsContainer as StyledContainer } from '../styles';
 
 import Button from '../../../components/button';
@@ -14,7 +15,10 @@ interface AppointmentContainer {
   children?: Appointment[];
 }
 
-const AppointmentContainer: FC<AppointmentContainer> = ({ children }) => {
+const AppointmentsContainer: FC<AppointmentContainer> = ({ children }) => {
+  const { selected, loadMore } = useContext(appointmentContext);
+  const [showButton, setShowButton] = useState(true);
+
   const appointments = useMemo(
     () =>
       children?.map((appointment) => (
@@ -23,22 +27,37 @@ const AppointmentContainer: FC<AppointmentContainer> = ({ children }) => {
     [children],
   );
 
-  const { selected, loadMore } = useContext(appointmentContext);
-  const [showButton, setShowButton] = useState(true);
+  const appointmentLabel = useMemo(() => {
+    if (!children?.length)
+      return (
+        <h1 id="label" className="loading">
+          Carregando <LoaderSVG />
+        </h1>
+      );
+
+    if (children.length === 0)
+      return <h1 id="label">Você não possui consultas marcadas</h1>;
+
+    return <h1 id="label">Consultas marcadas</h1>;
+  }, [children]);
+
+  const appointmentModal = useMemo(() => {
+    return selected?.id && <AppointmentModal {...selected} />;
+  }, [selected]);
 
   return (
     <>
-      {selected?.id && <AppointmentModal {...selected} />}
+      {appointmentModal}
+
       <StyledContainer>
-        <h1 id="label">
-          {children?.length
-            ? 'Consultas marcadas'
-            : 'Você não possui consultas marcadas'}
-        </h1>
+        {appointmentLabel}
+
         <Button id="appoint-button" className="action-button">
           Marcar uma nova consulta
         </Button>
+
         <ol>{appointments}</ol>
+
         {children && children.length > 9 && showButton && (
           <div className="load-more">
             <Button
@@ -58,4 +77,4 @@ const AppointmentContainer: FC<AppointmentContainer> = ({ children }) => {
   );
 };
 
-export default AppointmentContainer;
+export default AppointmentsContainer;

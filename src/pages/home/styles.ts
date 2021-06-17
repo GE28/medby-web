@@ -124,6 +124,18 @@ export const AppointmentsContainer = styled.main`
     color: #23212c;
   }
 
+  .loading {
+    position: relative;
+
+    svg {
+      margin: 0;
+      position: absolute;
+      top: 0;
+      right: -15%;
+      transform: translate(0, -50%);
+    }
+  }
+
   svg {
     width: 24px;
     stroke-width: 2px;
