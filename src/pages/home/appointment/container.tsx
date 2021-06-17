@@ -6,7 +6,7 @@ import { appointmentContext } from '..';
 import { Appointment, AppointmentWrapper } from './wrapper';
 import AppointmentModal from './modal';
 
-import { AppointmentContainer as StyledContainer } from '../styles';
+import { AppointmentsContainer as StyledContainer } from '../styles';
 
 import Button from '../../../components/button';
 

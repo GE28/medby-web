@@ -6,7 +6,7 @@ const gapLiSize = 12;
 const width = 0.8;
 const windowWidth = width ** -1;
 
-export const AppointmentContainer = styled.main`
+export const AppointmentsContainer = styled.main`
   display: grid;
   width: ${width * 100}%;
   margin-top: 58px;

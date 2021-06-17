@@ -18,12 +18,12 @@ import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
 
 import axios from '../../services/axios';
-import { AppointmentData } from '../../services/axios/responses';
+import { AppointmentDataResponse } from '../../services/axios/responses';
 import { avatarsPath } from '../../services/axios/paths';
 
 import { Appointment } from './appointment/wrapper';
 
-import AppointmentList from './appointment/container';
+import AppointmentsContainer from './appointment/container';
 import GitHubLink from '../../components/githubLink';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -73,10 +73,13 @@ const HomePage: FC = () => {
       if (appointments.length > 0 && !showRest) return;
 
       try {
-        const response = await axios.get<AppointmentData>('appointments', {
-          headers: { Authorization: `Bearer ${user.token}` },
-          ...(showRest && { params: { showRest } }),
-        });
+        const response = await axios.get<AppointmentDataResponse>(
+          'appointments',
+          {
+            headers: { Authorization: `Bearer ${user.token}` },
+            ...(showRest && { params: { showRest } }),
+          },
+        );
 
         const appointmentsData = response.data.map((serverAppointment) => {
           const {
@@ -171,7 +174,7 @@ const HomePage: FC = () => {
             },
           }}
         >
-          <AppointmentList>{appointments}</AppointmentList>
+          <AppointmentsContainer>{appointments}</AppointmentsContainer>
         </Provider>
       </MainContent>
 

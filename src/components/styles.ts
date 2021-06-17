@@ -18,7 +18,7 @@ interface Toast {
   type?: 'error' | 'success';
 }
 
-const fullRotate = keyframes`
+const fullRotateAnimation = keyframes`
   from {
     transform: rotate(0deg);
   }
@@ -273,7 +273,7 @@ export const DefaultButton = styled.button`
 
   svg {
     margin: 9px 0;
-    animation: ${fullRotate} 2s linear infinite;
+    animation: ${fullRotateAnimation} 2s linear infinite;
   }
 `;
 

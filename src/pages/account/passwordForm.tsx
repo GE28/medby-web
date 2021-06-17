@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { FiLoader } from 'react-icons/fi';
 
 import axios from '../../services/axios';
-import { UserData } from '../../services/axios/responses';
+import { UserDataResponse } from '../../services/axios/responses';
 
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
@@ -42,7 +42,7 @@ const AccountForm: FC = () => {
       const { password: oldPassword, newPassword: password } = values;
 
       try {
-        await axios.put<UserData>(
+        await axios.put<UserDataResponse>(
           'profile',
           { oldPassword, password },
           {

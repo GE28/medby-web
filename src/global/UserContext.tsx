@@ -9,7 +9,7 @@ import decodeJWT, { JwtPayload } from 'jwt-decode';
 import axios from '../services/axios';
 import { avatarsPath } from '../services/axios/paths';
 
-import { UserData } from '../services/axios/responses';
+import { UserDataResponse } from '../services/axios/responses';
 
 interface LoginParams {
   email: string;
@@ -17,7 +17,7 @@ interface LoginParams {
 }
 
 interface UserState {
-  data: UserData;
+  data: UserDataResponse;
   token: string;
 }
 
@@ -48,7 +48,7 @@ export const UserProvider: FC = ({ children }) => {
     token,
     data,
   }: {
-    data?: UserData;
+    data?: UserDataResponse;
     token?: string;
   }) => {
     if (token) localStorage.setItem('@medby/user_token', token);
@@ -63,10 +63,13 @@ export const UserProvider: FC = ({ children }) => {
   const login = useCallback(async (loginParams: LoginParams) => {
     const { email, password } = loginParams;
 
-    const response = await axios.post<UserState & { user: UserData }>('login', {
-      email,
-      password,
-    });
+    const response = await axios.post<UserState & { user: UserDataResponse }>(
+      'login',
+      {
+        email,
+        password,
+      },
+    );
 
     const { user: data, token } = response.data;
     delete data.updated_at;
@@ -88,7 +91,7 @@ export const UserProvider: FC = ({ children }) => {
     const formData = new FormData();
     formData.append('avatar', avatar);
 
-    const response = await axios.post<UserData>('upload', formData, {
+    const response = await axios.post<UserDataResponse>('upload', formData, {
       headers: {
         Authorization: `Bearer ${user.token}`,
         'Content-Type': 'multipart/form-data',
@@ -102,7 +105,7 @@ export const UserProvider: FC = ({ children }) => {
   }, []);
 
   const updateEmail = useCallback(async (email: string) => {
-    const response = await axios.put<UserData>(
+    const response = await axios.put<UserDataResponse>(
       'profile',
       { email },
       {

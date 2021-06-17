@@ -8,14 +8,14 @@ import { ToastProvider } from './global/ToastContext';
 
 import Routes from './routes';
 
-import ToastContainer from './components/toastContainer';
+import ToastsContainer from './components/toastContainer';
 
 const App: React.FC = () => (
   <BrowserRouter>
     <ToastProvider>
       <UserProvider>
         <Routes />
-        <ToastContainer />
+        <ToastsContainer />
       </UserProvider>
     </ToastProvider>
   </BrowserRouter>

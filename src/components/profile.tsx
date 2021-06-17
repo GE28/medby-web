@@ -12,7 +12,9 @@ import AvatarContainer from './avatarContainer';
 
 const Profile: FC = () => {
   const { user } = useContext(userContext);
-  const { avatar, name } = user.data;
+  const { avatar } = user.data;
+
+  const name = user.data.name.split(' ', 1);
 
   const greetUser = useCallback(() => {
     const now = new Date();

@@ -1,5 +1,5 @@
 // post /login
-export interface UserData extends Record<string, string | null> {
+export interface UserDataResponse extends Record<string, string | null> {
   name: string;
   email: string;
   cpf: string;
@@ -7,7 +7,7 @@ export interface UserData extends Record<string, string | null> {
 }
 
 // get /appointments
-export type AppointmentData = [
+export type AppointmentDataResponse = [
   Record<string, string> & {
     id: string;
     time: string;
