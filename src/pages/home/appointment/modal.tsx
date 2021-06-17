@@ -67,14 +67,17 @@ const AppointmentModal: FC<Appointment> = (props) => {
           >
             <FiX />
           </button>
+
           <span>Você será atendido (a) por:</span>
           <div className="doctor-info">
             <div className="doctor-container">
               <div className="avatar-container">
                 <img src={doctorAvatar || blankAvatar} alt="Doutor" />
               </div>
+
               <div className="doctor-data">
                 <span>{doctorName}</span>
+
                 <div className="spec-data">
                   <span>{doctorSpec}</span>
                   <span>{doctorDocument}</span>
@@ -84,6 +87,7 @@ const AppointmentModal: FC<Appointment> = (props) => {
           </div>
           <div className="unit-info">
             <span>Local de atendimento:</span>
+
             <div>
               <span>
                 {`${cepData.logradouro}, ${complements} - ${cepData.bairro} ` +

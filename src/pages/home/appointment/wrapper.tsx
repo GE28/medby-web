@@ -42,6 +42,7 @@ export const AppointmentWrapper: FC<Appointment> = (props) => {
           size={50}
           alt={`Foto de ${doctorName}`}
         />
+
         <div>
           <span>{doctorName}</span>
           <span>{doctorSpec}</span>
@@ -52,10 +53,12 @@ export const AppointmentWrapper: FC<Appointment> = (props) => {
           <FiClock />
           {time}
         </span>
+
         <span className="day">
           <FiCalendar />
           {day}
         </span>
+
         <span className="unit">
           <FiMapPin />
           {unit}
