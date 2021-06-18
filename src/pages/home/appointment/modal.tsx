@@ -29,13 +29,15 @@ const AppointmentModal: FC<Appointment> = (props) => {
 
         storedCeps[currentCep] = cepResponse.data;
         localStorage.setItem(`@medby/ceps`, JSON.stringify(storedCeps));
+
+        setCepsData(storedCeps[currentCep]);
       };
 
       getCurrentCepData();
+    } else {
+      setCepsData(storedCeps[currentCep]);
     }
-
-    setCepsData(storedCeps[currentCep]);
-  }, [currentCep]);
+  }, [currentCep, cepsData]);
 
   const currency = useCallback((value = '') => {
     const [moneyValue, cents] = value.split('.');
@@ -57,74 +59,73 @@ const AppointmentModal: FC<Appointment> = (props) => {
     doctorName,
   } = props;
 
-  return (
+  return cepsData?.cep ? (
     <ModalContainer>
-      {cepsData?.cep ? (
-        <StyledModal>
-          <button
-            type="button"
-            className="close-button"
-            onClick={() => select({} as Appointment)}
-          >
-            <FiX />
-          </button>
+      <StyledModal>
+        <button
+          type="button"
+          className="close-button"
+          onClick={() => select({} as Appointment)}
+        >
+          <FiX />
+        </button>
 
-          <span>Você será atendido (a) por:</span>
-          <div className="doctor-info">
-            <div className="doctor-container">
-              <div className="avatar-container">
-                <img
-                  src={doctorAvatar || blankAvatar}
-                  title={`Foto de ${doctorName}`}
-                  alt={doctorName}
-                />
-              </div>
+        <span>Você será atendido (a) por:</span>
+        <div className="doctor-info">
+          <div className="doctor-container">
+            <div className="avatar-container">
+              <img
+                src={doctorAvatar || blankAvatar}
+                title={`Foto de ${doctorName}`}
+                alt={doctorName}
+              />
+            </div>
 
-              <div className="doctor-data">
-                <span>{doctorName}</span>
+            <div className="doctor-data">
+              <span>{doctorName}</span>
 
-                <div className="spec-data">
-                  <span>{doctorSpec}</span>
-                  <span>{doctorDocument}</span>
-                </div>
+              <div className="spec-data">
+                <span>{doctorSpec}</span>
+                <span>{doctorDocument}</span>
               </div>
             </div>
           </div>
-          <div className="unit-info">
-            <span>Local de atendimento:</span>
+        </div>
+        <div className="unit-info">
+          <span>Local de atendimento:</span>
 
-            <div>
-              <span>
-                {`${cepsData.logradouro}, ${complements} - ${cepsData.bairro}` +
-                  `(${cepsData.localidade}-${cepsData.uf})`}
-              </span>
-              <span>{`(CEP: ${cepsData.cep})`}</span>
-            </div>
+          <div>
+            <span>
+              {`${cepsData.logradouro}, ${complements} - ${cepsData.bairro} ` +
+                `(${cepsData.localidade}-${cepsData.uf})`}
+            </span>
+            <span>{`(CEP: ${cepsData.cep})`}</span>
           </div>
-          <div className="time-info">
-            <span>Hora marcada:</span>
-            <div>
-              <span>{`${time} (${day})`}</span>
-              <span>Horário de Brasília</span>
-            </div>
+        </div>
+        <div className="time-info">
+          <span>Hora marcada:</span>
+          <div>
+            <span>{`${time} (${day})`}</span>
+            <span>Horário de Brasília</span>
           </div>
-          <div className="specialty-info">
-            <span>Valor da consulta:</span>
-            <div>
-              <span>{currency(price)}</span>
-              <span>(Pagamento na unidade)</span>
-            </div>
+        </div>
+        <div className="specialty-info">
+          <span>Valor da consulta:</span>
+          <div>
+            <span>{currency(price)}</span>
+            <span>(Pagamento na unidade)</span>
           </div>
+        </div>
 
-          <Button className="cancel-button">
-            <FiXCircle />
-            Cancelar consulta
-          </Button>
-          <h5>{`ID: ${id}`}</h5>
-        </StyledModal>
-      ) : null}
+        <Button className="cancel-button">
+          <FiXCircle />
+          Cancelar consulta
+        </Button>
+
+        <h5>{`ID: ${id}`}</h5>
+      </StyledModal>
     </ModalContainer>
-  );
+  ) : null;
 };
 
 export default AppointmentModal;
