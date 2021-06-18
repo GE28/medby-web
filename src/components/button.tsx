@@ -1,6 +1,6 @@
 import React, { FC, ButtonHTMLAttributes } from 'react';
 
-import { FiLoader } from 'react-icons/fi';
+import Loader from '../assets/loader';
 
 import { DefaultButton } from './styles';
 
@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = ({ children, loading = false, ...rest }) => {
   return (
     <DefaultButton type="button" {...rest}>
-      {loading ? <FiLoader size="24px" /> : children}
+      {loading ? <Loader size="24px" /> : children}
     </DefaultButton>
   );
 };

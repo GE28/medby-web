@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 
 interface CustomHeader {
   logged?: boolean;
@@ -17,16 +17,6 @@ interface AvatarContainer {
 interface Toast {
   type?: 'error' | 'success';
 }
-
-const fullRotateAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
 
 export const DefaultHeader = styled.header<CustomHeader>`
   display: flex;
@@ -273,7 +263,6 @@ export const DefaultButton = styled.button`
 
   svg {
     margin: 9px 0;
-    animation: ${fullRotateAnimation} 2s linear infinite;
   }
 `;
 

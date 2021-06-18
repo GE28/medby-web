@@ -11,12 +11,13 @@ const fullRotateAnimation = keyframes`
 `;
 
 export const SVGLoaderContainer = styled.div`
-  display: inline-block;
+  display: inline-flex;
 
   align-items: center;
   justify-content: center;
 
   svg {
+    flex-grow: 1;
     animation: ${fullRotateAnimation} 2s linear infinite;
   }
 `;
