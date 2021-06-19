@@ -128,8 +128,9 @@ export const AppointmentsContainer = styled.main`
     position: relative;
 
     svg {
-      margin: 0;
+      display: inline-block;
       position: absolute;
+      margin: 0;
       top: 0;
       right: -15%;
       transform: translate(0, -50%);

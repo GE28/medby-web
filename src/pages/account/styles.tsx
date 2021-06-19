@@ -76,6 +76,8 @@ export const PasswordForm = styled(Form)`
 `;
 
 export const AvatarFakeForm = styled.div`
+  position: relative;
+
   display: inline-block;
   width: 80%;
 
@@ -108,7 +110,7 @@ export const AvatarFakeForm = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
 
     color: #54428e;
     font-weight: 700;
@@ -146,6 +148,32 @@ export const AvatarFakeForm = styled.div`
 
     button {
       width: 100%;
+    }
+  }
+
+  .go-back-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    background-color: transparent;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    font-family: 'Rubik', sans-serif;
+    color: #54428e;
+
+    svg {
+      stroke-width: 4px;
+    }
+
+    @media (max-width: 576px) {
+      position: static;
+      margin-bottom: 36px;
     }
   }
 `;

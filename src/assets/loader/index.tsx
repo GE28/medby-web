@@ -5,7 +5,7 @@ import { FiLoader } from 'react-icons/fi';
 
 import SVGLoaderContainer from './styles';
 
-const LoaderSVG: FC<IconBaseProps> = ({ size = '18px', ...props }) => {
+const LoaderSVG: FC<IconBaseProps> = ({ size = '24px', ...props }) => {
   return (
     <SVGLoaderContainer>
       <FiLoader size={size} {...props} />

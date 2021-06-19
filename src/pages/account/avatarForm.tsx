@@ -1,7 +1,9 @@
 /* eslint-disable import/no-duplicates */
 import React, { FC, useCallback, useContext } from 'react';
 
-import { FiUser, FiCamera } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+
+import { FiUser, FiCamera, FiArrowLeft } from 'react-icons/fi';
 
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
@@ -19,6 +21,8 @@ const mb = (value: number) => {
 
 // not really a form
 const AvatarForm: FC = () => {
+  const history = useHistory();
+
   const { user, updateAvatar } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
@@ -78,6 +82,14 @@ const AvatarForm: FC = () => {
 
   return (
     <AvatarFakeForm className="avatar-form">
+      <button
+        type="button"
+        onClick={() => history.goBack()}
+        className="go-back-button"
+      >
+        <FiArrowLeft /> Voltar
+      </button>
+
       <div className="user-container">
         <div className="avatar-container">
           <AvatarContainer imageSrc={user.data.avatar} size={96} />
@@ -92,6 +104,7 @@ const AvatarForm: FC = () => {
             />
           </label>
         </div>
+
         <InputContainer
           label="Nome completo"
           inputId="fullName"
