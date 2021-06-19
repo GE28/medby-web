@@ -37,7 +37,7 @@ const AppointmentModal: FC<Appointment> = (props) => {
     } else {
       setCepsData(storedCeps[currentCep]);
     }
-  }, [currentCep, cepsData]);
+  }, [currentCep]);
 
   const currency = useCallback((value = '') => {
     const [moneyValue, cents] = value.split('.');
