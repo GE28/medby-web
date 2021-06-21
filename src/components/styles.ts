@@ -18,6 +18,13 @@ interface Toast {
   type?: 'error' | 'success';
 }
 
+const iconLinkCSS = `
+  display: inline-flex;
+  align-items: center;
+  place-content: center;
+  column-gap: 4px;
+`;
+
 export const DefaultHeader = styled.header<CustomHeader>`
   display: flex;
   height: 120px;
@@ -89,6 +96,7 @@ export const AvatarContainer = styled.div<AvatarContainer>`
 `;
 
 export const ProfileWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -101,14 +109,57 @@ export const ProfileWrapper = styled.div`
 
     a {
       color: #5b8c30;
-      display: flex;
-      place-content: center;
-      column-gap: 4px;
+      ${iconLinkCSS}
     }
 
     h4 {
       margin-bottom: 4px;
     }
+  }
+
+  .menu {
+    background-color: #f9fff5;
+    position: absolute;
+    z-index: 999;
+    bottom: -48px;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+
+    span {
+      margin-right: 8px;
+    }
+
+    button {
+      color: #54428e;
+      background-color: transparent;
+      ${iconLinkCSS}
+    }
+  }
+
+  .menu span {
+    color: #000;
+  }
+
+  .menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #f9fff5;
+
+    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.1));
   }
 
   @media (max-width: 630px) {
