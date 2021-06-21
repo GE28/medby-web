@@ -157,12 +157,11 @@ export const AvatarFakeForm = styled.div`
     right: 0;
 
     display: flex;
-    background-color: transparent;
-
     align-items: center;
     justify-content: center;
+    gap: 4px;
 
-    gap: 8px;
+    background-color: transparent;
 
     font-family: 'Rubik', sans-serif;
     color: #54428e;
