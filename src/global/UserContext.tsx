@@ -25,8 +25,8 @@ interface UserContextBody {
   user: UserState;
   login(data: LoginParams): Promise<UserState>;
   logout(): void;
-  updateAvatar(avatar: File): void;
-  updateEmail(email: string): void;
+  updateAvatar(avatar: File): Promise<void>;
+  updateEmail(email: string): Promise<void>;
   tokenValidator(): void;
 }
 
