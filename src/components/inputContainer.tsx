@@ -1,11 +1,11 @@
-import React, { FC, InputHTMLAttributes, useMemo } from 'react';
+import React, { FC, ComponentType, InputHTMLAttributes, useMemo } from 'react';
 
 import { IconBaseProps } from 'react-icons';
 
 import { InputContainer as StyledInputContainer } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  icon?: React.ComponentType<IconBaseProps>;
+  icon?: ComponentType<IconBaseProps>;
   inputId: string;
   label?: string;
   error?: string | false;
