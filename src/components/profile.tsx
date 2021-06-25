@@ -33,7 +33,7 @@ const Profile: FC = () => {
     if (timer?.current) clearTimeout(timer.current);
 
     const showAfter = 500;
-    const hideAfter = 1000;
+    const hideAfter = 200;
 
     timer.current = setTimeout(
       () => setMenuDisplay(state),
