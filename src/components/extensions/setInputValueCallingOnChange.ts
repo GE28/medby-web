@@ -17,7 +17,7 @@ const getPrototypeValueDescriptorSetter = (element: any) => {
   return getOwnValueDescriptorSetter(prototype);
 };
 
-export const setInputValueCallingOnChange = (
+const setInputValueCallingOnChange = (
   inputRef: RefObject<HTMLInputElement>,
   value: HTMLInputElement['value'],
 ): void => {
@@ -39,3 +39,5 @@ export const setInputValueCallingOnChange = (
 
   inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
 };
+
+export default setInputValueCallingOnChange;

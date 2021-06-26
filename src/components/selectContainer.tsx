@@ -10,7 +10,7 @@ import React, {
 
 import { FiChevronDown } from 'react-icons/fi';
 
-import { setInputValueCallingOnChange } from './extensions/selectContainerMethods';
+import setInputValueCallingOnChange from './extensions/setInputValueCallingOnChange';
 
 import { SelectContainer as StyledSelectContainer } from './styles';
 
@@ -58,6 +58,7 @@ const SelectContainer: FC<SelectProps> = ({
           }}
           onClick={() => {
             setInputValueCallingOnChange(inputRef, option.value);
+            setMenuDisplay(false);
           }}
         >
           {option.label}
