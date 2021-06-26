@@ -1,6 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, FormHTMLAttributes } from 'react';
 import { Form as StyledForm } from './styles';
 
-const Form: FC = ({ children }) => <StyledForm>{children}</StyledForm>;
+type FormProps = FormHTMLAttributes<HTMLFormElement>;
+
+const Form: FC<FormProps> = ({ children, ...rest }) => (
+  <StyledForm {...rest}>{children}</StyledForm>
+);
 
 export default Form;
