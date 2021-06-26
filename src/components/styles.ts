@@ -18,13 +18,6 @@ interface Toast {
   type?: 'error' | 'success';
 }
 
-const iconLinkCSS = `
-  display: inline-flex;
-  align-items: center;
-  place-content: center;
-  column-gap: 4px;
-`;
-
 export const DefaultHeader = styled.header<CustomHeader>`
   display: flex;
   height: 120px;
@@ -93,6 +86,13 @@ export const AvatarContainer = styled.div<AvatarContainer>`
     height: inherit;
     object-fit: cover;
   }
+`;
+
+const iconLinkCSS = `
+  display: inline-flex;
+  align-items: center;
+  place-content: center;
+  column-gap: 4px;
 `;
 
 export const ProfileWrapper = styled.div`
@@ -287,6 +287,8 @@ export const InputContainer = styled.div<InputContainer>`
       }
     `};
 `;
+
+export const SelectContainer = styled.div``;
 
 export const DefaultButton = styled.button`
   display: flex;
