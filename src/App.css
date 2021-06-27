@@ -64,3 +64,8 @@ input:disabled,
 button:disabled {
   cursor: not-allowed;
 }
+
+input {
+  font-family: 'Source Sans Pro', sans-serif;
+  /* normalize.css sets it to Arial by default */
+}
