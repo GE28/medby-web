@@ -14,20 +14,26 @@ import setInputValueCallingOnChange from './extensions/setInputValueCallingOnCha
 
 import { SelectContainer as StyledSelectContainer } from './styles';
 
+type inputValue = HTMLInputElement['value'];
+
 interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
-  options: { label: string; value: HTMLInputElement['value'] }[];
+  options: { label: string; value: inputValue }[];
+  defaultLabel?: string;
   label: string;
 }
 
 const SelectContainer: FC<SelectProps> = ({
   options,
   label,
+  defaultLabel = '',
   value: defaultValue,
   name,
   ...rest
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputForValueRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const [inputForLabelValue, setInputForLabelValue] = useState('');
 
   const [menuDisplay, setMenuDisplay] = useState(false);
   useEffect(() => {
@@ -46,6 +52,12 @@ const SelectContainer: FC<SelectProps> = ({
     };
   }, []);
 
+  const setOption = (value: inputValue, labelValue: string) => {
+    setInputForLabelValue(labelValue);
+    setInputValueCallingOnChange(inputForValueRef, value);
+    setMenuDisplay(false);
+  };
+
   const optionsContent = useMemo(
     () =>
       options.map((option, i) => (
@@ -54,11 +66,10 @@ const SelectContainer: FC<SelectProps> = ({
           key={option.value}
           tabIndex={0 - i}
           onKeyDown={() => {
-            setInputValueCallingOnChange(inputRef, option.value);
+            setOption(option.value, option.label);
           }}
           onClick={() => {
-            setInputValueCallingOnChange(inputRef, option.value);
-            setMenuDisplay(false);
+            setOption(option.value, option.label);
           }}
         >
           {option.label}
@@ -77,12 +88,14 @@ const SelectContainer: FC<SelectProps> = ({
         onClick={() => setMenuDisplay(true)}
       >
         <FiChevronDown />
+        <input value={inputForLabelValue || defaultLabel} readOnly />
         <input
-          ref={inputRef}
+          ref={inputForValueRef}
           id={name}
           name={name}
-          value={inputRef?.current?.value || defaultValue}
+          value={inputForValueRef?.current?.value || defaultValue}
           readOnly
+          hidden
           {...rest}
         />
       </div>
