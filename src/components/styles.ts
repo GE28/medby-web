@@ -19,6 +19,8 @@ interface Toast {
 }
 
 export const DefaultHeader = styled.header<CustomHeader>`
+  user-select: none;
+
   display: flex;
   height: 120px;
   width: 100%;
@@ -288,7 +290,78 @@ export const InputContainer = styled.div<InputContainer>`
     `};
 `;
 
-export const SelectContainer = styled.div``;
+export const SelectContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-weight: 600;
+  }
+
+  div {
+    border: 1px solid #a6a6a6;
+    border-radius: 6px;
+
+    background-color: #fcfff9;
+    font-size: 16px;
+
+    &:hover {
+      box-shadow: 0 0 0 3px #5b8c3020;
+    }
+  }
+
+  div.select-input {
+    display: flex;
+    align-items: center;
+
+    padding: 0 8px;
+
+    &:active {
+      border: 1px solid #5b8c30;
+      transition: 0.05s;
+    }
+
+    input {
+      width: 100%;
+      font-size: 16px;
+      line-height: 36px;
+      border: 0;
+      outline: 0;
+    }
+  }
+
+  div.select-menu {
+    border-radius: 6px 0 0 6px;
+    border: 1px solid #5b8c30;
+    box-shadow: 0 0 0 3px #5b8c3020;
+
+    width: 100%;
+    position: absolute;
+    top: calc(100% + 8px);
+    z-index: 999;
+
+    overflow-y: auto;
+    max-height: 480px;
+
+    span {
+      display: block;
+      padding: 1em;
+      font-size: 1em;
+    }
+
+    span:hover {
+      background-color: #5ad45a;
+    }
+  }
+
+  svg {
+    margin-right: 12px;
+  }
+
+  color: #23212c;
+`;
 
 export const DefaultButton = styled.button`
   display: flex;
@@ -320,6 +393,9 @@ export const DefaultButton = styled.button`
 `;
 
 export const Footer = styled.footer`
+  user-select: none;
+  margin-top: 36px;
+
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-end;
@@ -336,7 +412,7 @@ export const Form = styled.form`
     max-width: calc(100% - 84px);
   }
 
-  button {
+  > button {
     margin-top: 24px;
   }
 
