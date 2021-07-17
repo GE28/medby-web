@@ -59,6 +59,7 @@ const LoginForm: FC = () => {
         label="E-mail"
         inputId="email"
         type="email"
+        autoComplete="email"
         {...formik.getFieldProps('email')}
       />
 
@@ -66,6 +67,7 @@ const LoginForm: FC = () => {
         label="Senha"
         inputId="password"
         type="password"
+        autoComplete="current-password"
         {...formik.getFieldProps('password')}
       />
 

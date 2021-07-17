@@ -112,6 +112,7 @@ const AccountForm: FC = () => {
         type="password"
         isTouched={formik.touched.password}
         error={formik.errors.password}
+        autoComplete="current-password"
         {...formik.getFieldProps('password')}
       />
 
@@ -122,6 +123,7 @@ const AccountForm: FC = () => {
         isTouched={formik.touched.newPassword}
         error={formik.errors.newPassword}
         helpText="A senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número"
+        autoComplete="new-password"
         {...formik.getFieldProps('newPassword')}
       />
 
@@ -131,6 +133,7 @@ const AccountForm: FC = () => {
         type="password"
         isTouched={formik.touched.confirmPassword}
         error={formik.errors.confirmPassword}
+        autoComplete="new-password"
         {...formik.getFieldProps('confirmPassword')}
       />
 

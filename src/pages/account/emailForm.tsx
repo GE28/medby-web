@@ -85,6 +85,7 @@ const RegisterForm: FC = () => {
         inputId="cpf"
         defaultValue={formattedCPF(user.data.cpf)}
         icon={FiFileText}
+        autoComplete="cpf"
         disabled
       />
 
@@ -95,6 +96,7 @@ const RegisterForm: FC = () => {
         icon={FiAtSign}
         isTouched={formik.touched.email}
         error={formik.errors.email}
+        autoComplete="email"
         {...formik.getFieldProps('email')}
       />
 

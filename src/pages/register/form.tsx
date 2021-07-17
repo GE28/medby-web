@@ -120,6 +120,7 @@ const RegisterForm: FC = () => {
         icon={FiUser}
         isTouched={formik.touched.fullName}
         error={formik.errors.fullName}
+        autoComplete="name"
         {...formik.getFieldProps('fullName')}
       />
 
@@ -130,6 +131,7 @@ const RegisterForm: FC = () => {
         isTouched={formik.touched.cpf}
         error={formik.errors.cpf}
         helpText="Digite apenas dígitos neste campo"
+        autoComplete="cpf"
         {...formik.getFieldProps('cpf')}
       />
 
@@ -140,6 +142,7 @@ const RegisterForm: FC = () => {
         icon={FiAtSign}
         isTouched={formik.touched.email}
         error={formik.errors.email}
+        autoComplete="email"
         {...formik.getFieldProps('email')}
       />
 
@@ -151,6 +154,7 @@ const RegisterForm: FC = () => {
         isTouched={formik.touched.password}
         error={formik.errors.password}
         helpText="Sua senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número"
+        autoComplete="new-password"
         {...formik.getFieldProps('password')}
       />
 
@@ -161,6 +165,7 @@ const RegisterForm: FC = () => {
         icon={FiKey}
         isTouched={formik.touched.confirmPassword}
         error={formik.errors.confirmPassword}
+        autoComplete="new-password"
         {...formik.getFieldProps('confirmPassword')}
       />
 
