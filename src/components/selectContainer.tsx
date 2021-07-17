@@ -14,10 +14,8 @@ import setInputValueCallingOnChange from './extensions/setInputValueCallingOnCha
 
 import { SelectContainer as StyledSelectContainer } from './styles';
 
-type inputValue = HTMLInputElement['value'];
-
 interface SelectProps extends InputHTMLAttributes<HTMLInputElement> {
-  options: { label: string; value: inputValue }[];
+  options: { label: string; value: string }[];
   defaultLabel?: string;
   label: string;
 }
@@ -52,7 +50,7 @@ const SelectContainer: FC<SelectProps> = ({
     };
   }, []);
 
-  const setOption = (value: inputValue, labelValue: string) => {
+  const setOption = (value: string, labelValue: string) => {
     setInputForLabelValue(labelValue);
     setInputValueCallingOnChange(inputForValueRef, value);
     setMenuDisplay(false);
