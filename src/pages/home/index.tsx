@@ -18,7 +18,7 @@ import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
 
 import axios from '../../services/axios';
-import { AppointmentDataResponse } from '../../services/axios/responses';
+import { AppointmentsDataResponse } from '../../services/axios/responses';
 import { avatarsPath } from '../../services/axios/paths';
 
 import { Appointment } from './appointment/wrapper';
@@ -73,7 +73,7 @@ const HomePage: FC = () => {
       if (appointments.length > 0 && !showRest) return;
 
       try {
-        const response = await axios.get<AppointmentDataResponse>(
+        const response = await axios.get<AppointmentsDataResponse>(
           'appointments',
           {
             headers: { Authorization: `Bearer ${user.token}` },

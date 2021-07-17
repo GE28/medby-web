@@ -7,7 +7,7 @@ export interface UserDataResponse extends Record<string, string | null> {
 }
 
 // get /appointments
-export type AppointmentDataResponse = [
+export type AppointmentsDataResponse = [
   Record<string, string> & {
     id: string;
     time: string;
