@@ -110,6 +110,7 @@ const AvatarForm: FC = () => {
           inputId="fullName"
           icon={FiUser}
           defaultValue={user.data.name}
+          autoComplete="name"
           disabled
         />
       </div>
