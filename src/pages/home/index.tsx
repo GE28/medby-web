@@ -37,6 +37,11 @@ interface AppointmentContext {
   loadMore(): void;
 }
 
+interface StoredAppointmentConfig {
+  appointmentsData: Appointment[];
+  stored_at: number;
+}
+
 export const appointmentContext = createContext({} as AppointmentContext);
 const { Provider } = appointmentContext;
 
@@ -48,10 +53,9 @@ const HomePage: FC = () => {
     const data = localStorage.getItem('@medby/appointments');
     if (!data) return [] as Appointment[];
 
-    const { appointmentsData, stored_at } = JSON.parse(data) as {
-      appointmentsData: Appointment[];
-      stored_at: number;
-    };
+    const { appointmentsData, stored_at } = JSON.parse(
+      data,
+    ) as StoredAppointmentConfig;
 
     if (Date.now() > stored_at + ms('10m')) {
       localStorage.removeItem('@medby/appointments');
@@ -103,10 +107,10 @@ const HomePage: FC = () => {
             price: final_price,
             time: format(new Date(time), "HH'h'mm'm'"),
             unit: `${unit}`,
-            doctorSpec,
-            doctorDocument: document,
             doctorAvatar: avatarsPath + avatar,
+            doctorDocument: document,
             doctorName: `${doctorName}`,
+            doctorSpec,
           } as Appointment;
         });
 
