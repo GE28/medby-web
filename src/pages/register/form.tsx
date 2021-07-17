@@ -3,7 +3,6 @@ import React, { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
-
 import * as Yup from 'yup';
 
 import { validate } from 'gerador-validador-cpf';
