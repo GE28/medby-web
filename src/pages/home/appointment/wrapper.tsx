@@ -22,7 +22,7 @@ export interface Appointment {
   doctorName: string;
 }
 
-export const AppointmentWrapper: FC<Appointment> = (props) => {
+const AppointmentWrapper: FC<Appointment> = (props) => {
   const { select } = useContext(appointmentContext);
 
   const {
@@ -70,3 +70,5 @@ export const AppointmentWrapper: FC<Appointment> = (props) => {
     </StyledAppointmentWrapper>
   );
 };
+
+export default AppointmentWrapper;

@@ -3,7 +3,8 @@ import React, { FC, useMemo, useContext, useState } from 'react';
 import { FiList } from 'react-icons/fi';
 
 import { appointmentContext } from '..';
-import { Appointment, AppointmentWrapper } from './wrapper';
+import AppointmentWrapper, { Appointment } from './wrapper';
+
 import AppointmentModal from './modal';
 
 import LoaderSVG from '../../../assets/loader';
