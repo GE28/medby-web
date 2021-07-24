@@ -39,7 +39,7 @@ interface Day {
 type CalendarObject = Day[][];
 type DivHTMLProps = HTMLAttributes<HTMLDivElement>;
 
-const defaultLocale = ptBR;
+const locale = ptBR;
 
 const Calendar: FC<CalendarComponent> = ({
   firstSelectedDate,
@@ -158,7 +158,7 @@ const Calendar: FC<CalendarComponent> = ({
     return newCalendar;
   }, [currentDate]);
 
-  const printCalendarDays = useMemo(() => {
+  const printedCalendarDays = useMemo(() => {
     const rotatedCalendarMatriz = calendarMatriz[0].map((_week, weekNumber) =>
       calendarMatriz.map(
         (_day, weekDay) => calendarMatriz[weekDay][weekNumber],
@@ -167,7 +167,7 @@ const Calendar: FC<CalendarComponent> = ({
 
     const weekdayLabel = (weekday: number) =>
       format(setDay(new Date(), weekday), 'E', {
-        locale: defaultLocale,
+        locale,
       }).substring(0, 3);
 
     const isFromOtherMonth = (day: Day) => {
@@ -253,7 +253,7 @@ const Calendar: FC<CalendarComponent> = ({
             <FiChevronLeft />
           </button>
           <span className="month-year">
-            {format(currentDate, 'MMMM, RRRR', { locale: defaultLocale })}
+            {format(currentDate, 'MMMM, RRRR', { locale })}
           </span>
           <button
             type="button"
@@ -264,7 +264,7 @@ const Calendar: FC<CalendarComponent> = ({
           </button>
         </div>
 
-        <div className="days-container">{printCalendarDays}</div>
+        <div className="days-container">{printedCalendarDays}</div>
       </div>
     </StyledCalendar>
   );
