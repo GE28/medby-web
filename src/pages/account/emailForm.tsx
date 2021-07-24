@@ -30,7 +30,7 @@ const formattedCPF = (cpf: string) => {
   return groups?.join('');
 };
 
-const RegisterForm: FC = () => {
+const EmailForm: FC = () => {
   const { user, updateEmail } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
@@ -101,4 +101,4 @@ const RegisterForm: FC = () => {
   );
 };
 
-export default RegisterForm;
+export default EmailForm;

@@ -14,7 +14,7 @@ import { UserDataResponse } from '../../services/axios/responses';
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
-import { PasswordForm } from './styles';
+import { PasswordForm as StyledPasswordForm } from './styles';
 
 import InputContainer from '../../components/inputContainer';
 import Button from '../../components/button';
@@ -25,7 +25,7 @@ interface FormValues {
   confirmPassword: string;
 }
 
-const AccountForm: FC = () => {
+const PasswordForm: FC = () => {
   const { user } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
@@ -57,15 +57,6 @@ const AccountForm: FC = () => {
         });
       } catch (err) {
         setLoading(false);
-
-        if (!err.response) {
-          addToast({
-            title: 'Falha ao alterar a senha',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
 
         if (err.response.data.fields?.oldPassword) {
           addToast({
@@ -105,7 +96,10 @@ const AccountForm: FC = () => {
   });
 
   return (
-    <PasswordForm onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+    <StyledPasswordForm
+      onSubmit={formik.handleSubmit}
+      onReset={formik.handleReset}
+    >
       <h1>Alterar senha</h1>
       <h3>Para alterar a senha atual, é necesário informá-la</h3>
 
@@ -143,8 +137,8 @@ const AccountForm: FC = () => {
       <Button type="submit" disabled={!(formik.isValid && formik.dirty)}>
         {loading ? <FiLoader size="24px" /> : 'ALTERAR SENHA'}
       </Button>
-    </PasswordForm>
+    </StyledPasswordForm>
   );
 };
 
-export default AccountForm;
+export default PasswordForm;
