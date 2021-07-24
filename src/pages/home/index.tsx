@@ -42,7 +42,7 @@ interface AppointmentContext {
   loadMore(): void;
 }
 
-interface StoredAppointmentConfig {
+interface StoredAppointments {
   appointmentsData: Appointment[];
   stored_at: number;
 }
@@ -60,7 +60,7 @@ const HomePage: FC = () => {
 
     const { appointmentsData, stored_at } = JSON.parse(
       data,
-    ) as StoredAppointmentConfig;
+    ) as StoredAppointments;
 
     if (Date.now() > stored_at + ms('10m')) {
       localStorage.removeItem('@medby/appointments');
