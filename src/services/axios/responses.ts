@@ -53,7 +53,7 @@ export type SpecsDataResponse = [
   },
 ];
 
-type AvailableTime = Record<string, string> & {
+export type AvailableTime = Record<string, string> & {
   _id: string;
   doctor_id: string;
   date: string;
