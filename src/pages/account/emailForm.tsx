@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 
 import { FiAtSign, FiFileText, FiLoader } from 'react-icons/fi';
 
+import { sendToastIfNoResponse } from '../../services/axios/errorHandlers';
+
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
@@ -55,20 +57,12 @@ const RegisterForm: FC = () => {
       } catch (err) {
         setLoading(false);
 
-        if (!err.response) {
-          addToast({
-            title: 'Falha no login',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
-
-        addToast({
-          type: 'error',
-          title: 'Falha ao realizar registro',
-          message: 'Confira os dados inseridos e tente novamente',
-        });
+        const offlineUpdateToast = {
+          title: 'Falha ao atualizar e-mail',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+        sendToastIfNoResponse(err, addToast, offlineUpdateToast);
       }
     },
     validationSchema: Yup.object().shape({

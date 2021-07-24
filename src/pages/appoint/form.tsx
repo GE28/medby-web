@@ -12,6 +12,11 @@ import ms from 'ms';
 import { addSeconds } from 'date-fns/esm';
 import axios from '../../services/axios';
 import {
+  sendToastIfNoResponse,
+  logoutIfErrorStatus,
+} from '../../services/axios/errorHandlers';
+
+import {
   SpecsDataResponse,
   UnitsDataResponse,
   AvailableTimesDataResponse,
@@ -110,7 +115,13 @@ const AppointForm: FC = () => {
         const allowedDate = addDays(renderTimeDate, maxAllowedDaysInFuture);
         setMaxAllowedDate(allowedDate);
       } catch (err) {
-        console.log('Connection error');
+        const offlineConfigToast = {
+          title: 'Falha ao carregar especialidades',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+
+        sendToastIfNoResponse(err, addToast, offlineConfigToast);
       }
     }
 
@@ -152,29 +163,14 @@ const AppointForm: FC = () => {
 
         setSpecOptions(options);
       } catch (err) {
-        if (!err.response) {
-          addToast({
-            title: 'Falha ao carregar consultas',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
+        const offlineSpecToast = {
+          title: 'Falha ao carregar especialidades',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
 
-        switch (err.response.status) {
-          case 401:
-            logout();
-            return;
-          case 403:
-            logout();
-            return;
-          default:
-            addToast({
-              title: 'Falha ao carregar consultas',
-              message: err.response.message,
-              type: 'error',
-            });
-        }
+        logoutIfErrorStatus(err, logout);
+        sendToastIfNoResponse(err, addToast, offlineSpecToast);
       }
     }
 
@@ -217,34 +213,19 @@ const AppointForm: FC = () => {
 
         setUnitOptions(options);
       } catch (err) {
-        if (!err.response) {
-          addToast({
-            title: 'Falha ao carregar consultas',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
+        const offlineUnitToast = {
+          title: 'Falha ao carregar unidades',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
 
-        switch (err.response.status) {
-          case 401:
-            logout();
-            return;
-          case 403:
-            logout();
-            return;
-          default:
-            addToast({
-              title: 'Falha ao carregar consultas',
-              message: err.response.message,
-              type: 'error',
-            });
-        }
+        sendToastIfNoResponse(err, addToast, offlineUnitToast);
       }
     }
 
     getUnitList();
-    unitOptions.unshift({ label: '(Todas)', value: '' });
+  }, []);
+  unitOptions.unshift({ label: '(Todas)', value: '' });
   }, []);
 
   const formik = useFormik<FormValues>({
@@ -279,15 +260,15 @@ const AppointForm: FC = () => {
           },
         );
 
-        console.log(response);
+        setAvailableTimes(response.data.data);
       } catch (err) {
-        if (!err.response) {
-          addToast({
-            title: 'Falha no login',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-        }
+        const offlineATtoast = {
+          title: 'Falha ao carregar horários',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+
+        sendToastIfNoResponse(err, addToast, offlineATtoast);
       }
     },
     validationSchema: Yup.object().shape({

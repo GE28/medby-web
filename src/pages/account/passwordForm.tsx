@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import { FiLoader } from 'react-icons/fi';
 
 import axios from '../../services/axios';
+import { sendToastIfNoResponse } from '../../services/axios/errorHandlers';
+
 import { UserDataResponse } from '../../services/axios/responses';
 
 import { toastContext } from '../../global/ToastContext';
@@ -74,11 +76,12 @@ const AccountForm: FC = () => {
           return;
         }
 
-        addToast({
+        const offlinePassToast = {
           title: 'Falha ao realizar registro',
-          message: 'Confira os dados inseridos e tente novamente',
-          type: 'error',
-        });
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+        sendToastIfNoResponse(err, addToast, offlinePassToast);
       }
 
       setLoading(false);

@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 import { FiUser, FiCamera, FiArrowLeft } from 'react-icons/fi';
 
+import { sendToastIfNoResponse } from '../../services/axios/errorHandlers';
+
 import { toastContext } from '../../global/ToastContext';
 import { userContext } from '../../global/UserContext';
 
@@ -58,19 +60,12 @@ const AvatarForm: FC = () => {
     try {
       await updateAvatar(file);
     } catch (err) {
-      if (!err.response) {
-        addToast({
-          title: 'Falha ao enviar imagem',
-          message: 'O servidor está offline',
-          type: 'error',
-        });
-      }
-
-      addToast({
-        title: 'Falha ao atualizar avatar',
-        message: 'Confira a imagem e tente novamente',
-        type: 'error',
-      });
+      const offlineAvatarToast = {
+        title: 'Falha ao enviar imagem',
+        message: 'O servidor está offline',
+        type: 'error' as const,
+      };
+      sendToastIfNoResponse(err, addToast, offlineAvatarToast);
     }
 
     addToast({

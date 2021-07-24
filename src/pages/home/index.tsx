@@ -18,6 +18,11 @@ import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
 
 import axios from '../../services/axios';
+import {
+  sendToastIfNoResponse,
+  logoutIfErrorStatus,
+} from '../../services/axios/errorHandlers';
+
 import { AppointmentsDataResponse } from '../../services/axios/responses';
 import { avatarsPath } from '../../services/axios/paths';
 
@@ -132,29 +137,14 @@ const HomePage: FC = () => {
             : appointmentsData,
         );
       } catch (err) {
-        if (!err.response) {
-          addToast({
-            title: 'Falha ao carregar consultas',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
+        const offlineAppointmentsToast = {
+          title: 'Falha ao carregar consultas',
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
 
-        switch (err.response.status) {
-          case 401:
-            logout();
-            return;
-          case 403:
-            logout();
-            return;
-          default:
-            addToast({
-              title: 'Falha ao carregar consultas',
-              message: err.response.message,
-              type: 'error',
-            });
-        }
+        logoutIfErrorStatus(err, logout);
+        sendToastIfNoResponse(err, addToast, offlineAppointmentsToast);
       }
     }
 

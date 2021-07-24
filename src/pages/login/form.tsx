@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 
+import { sendToastIfNoResponse } from '../../services/axios/errorHandlers';
+
 import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
 
@@ -35,20 +37,12 @@ const LoginForm: FC = () => {
       } catch (err) {
         setLoading(false);
 
-        if (!err.response) {
-          addToast({
-            title: 'Falha no login',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
-
-        addToast({
-          type: 'error',
+        const offlineLoginToast = {
           title: 'Falha no login',
-          message: 'Confira os dados inseridos e tente novamente',
-        });
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+        sendToastIfNoResponse(err, addToast, offlineLoginToast);
       }
     },
   });

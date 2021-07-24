@@ -10,6 +10,7 @@ import { validate } from 'gerador-validador-cpf';
 import { FiAtSign, FiFileText, FiUser, FiKey } from 'react-icons/fi';
 
 import axios from '../../services/axios';
+import { sendToastIfNoResponse } from '../../services/axios/errorHandlers';
 
 import { userContext } from '../../global/UserContext';
 import { toastContext } from '../../global/ToastContext';
@@ -67,20 +68,12 @@ const RegisterForm: FC = () => {
       } catch (err) {
         setLoading(false);
 
-        if (!err.response) {
-          addToast({
-            title: 'Falha no login',
-            message: 'O servidor está offline',
-            type: 'error',
-          });
-          return;
-        }
-
-        addToast({
-          type: 'error',
+        const offlineRegisterToast = {
           title: 'Falha ao realizar registro',
-          message: 'Confira os dados inseridos e tente novamente',
-        });
+          message: 'O servidor está offline',
+          type: 'error' as const,
+        };
+        sendToastIfNoResponse(err, addToast, offlineRegisterToast);
       }
     },
     validationSchema: Yup.object().shape({
