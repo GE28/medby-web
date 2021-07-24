@@ -5,11 +5,10 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { addDays, format, parse } from 'date-fns';
+import { addDays, addSeconds, format, parse } from 'date-fns';
 
 import ms from 'ms';
 
-import { addSeconds } from 'date-fns/esm';
 import axios from '../../services/axios';
 import {
   sendToastIfNoResponse,
@@ -226,7 +225,6 @@ const AppointForm: FC = () => {
     getUnitList();
   }, []);
   unitOptions.unshift({ label: '(Todas)', value: '' });
-  }, []);
 
   const formik = useFormik<FormValues>({
     initialValues: {
