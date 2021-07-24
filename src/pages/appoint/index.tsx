@@ -18,15 +18,15 @@ import AppointForm from './form';
 interface AvailableTimesContext {
   availableTimes: AvailableTime[];
   setAvailableTimes(aTList: AvailableTime[]): void;
-  id: string;
-  selectId(id: string): void;
+  select(id: string): void;
+  selectedId: string;
 }
 
 export const aTContext = createContext({} as AvailableTimesContext);
 const { Provider } = aTContext;
 
 const AppointPage: FC = () => {
-  const [id, selectId] = useState('');
+  const [selectedId, select] = useState('');
   const [availableTimes, setTimes] = useState([] as AvailableTime[]);
 
   const setAvailableTimes = useCallback((aT: AvailableTime[]) => {
@@ -40,7 +40,9 @@ const AppointPage: FC = () => {
           <Profile />
         </Header>
 
-        <Provider value={{ id, selectId, availableTimes, setAvailableTimes }}>
+        <Provider
+          value={{ selectedId, select, availableTimes, setAvailableTimes }}
+        >
           <ATContainer />
           <AppointForm />
         </Provider>
