@@ -201,7 +201,6 @@ const AppointForm: FC = () => {
 
         const options = response.data.map((unit) => {
           const { id, name } = unit;
-
           return { label: name, value: id } as SelectOption;
         });
 
