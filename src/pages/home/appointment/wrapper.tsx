@@ -2,25 +2,13 @@ import React, { FC, useContext } from 'react';
 
 import { FiClock, FiCalendar, FiMapPin } from 'react-icons/fi';
 
+import Appointment from '../../../types/Appointment';
+
 import { appointmentContext } from '..';
 import { AppointmentWrapper as StyledAppointmentWrapper } from '../styles';
 
 import AvatarContainer from '../../../components/avatarContainer';
 import Button from '../../../components/button';
-
-export interface Appointment {
-  id: string;
-  cep: string;
-  complements: string;
-  unit: string;
-  day: string;
-  time: string;
-  price: string;
-  doctorSpec: string;
-  doctorDocument: string;
-  doctorAvatar: string | null;
-  doctorName: string;
-}
 
 const AppointmentWrapper: FC<Appointment> = (props) => {
   const { select } = useContext(appointmentContext);

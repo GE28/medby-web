@@ -26,7 +26,7 @@ import {
 import { AppointmentsDataResponse } from '../../services/axios/responses';
 import { avatarsPath } from '../../services/axios/paths';
 
-import { Appointment } from './appointment/wrapper';
+import Appointment from '../../types/Appointment';
 
 import AppointmentsContainer from './appointment/container';
 import GitHubLink from '../../components/githubLink';
@@ -96,7 +96,7 @@ const HomePage: FC = () => {
             time,
             final_price,
             doctor: {
-              avatar,
+              avatar = '',
               document,
               name: doctorName,
               specialty: { display_name: doctorSpec },
@@ -106,16 +106,16 @@ const HomePage: FC = () => {
 
           return {
             id,
-            cep,
-            complements,
             day: format(new Date(time), 'P', { locale: ptBR }),
-            price: final_price,
             time: format(new Date(time), "HH'h'mm'm'"),
             unit: `${unit}`,
-            doctorAvatar: avatarsPath + avatar,
+            complements,
+            cep,
+            price: final_price,
             doctorDocument: document,
             doctorName: `${doctorName}`,
             doctorSpec,
+            doctorAvatar: avatar && avatarsPath + avatar,
           } as Appointment;
         });
 
