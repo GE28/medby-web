@@ -6,6 +6,8 @@ import githubLogo from '../assets/github.svg';
 
 const GitHubLink: FC = () => (
   <GithubContainer
+    target="_blank"
+    rel="noreferrer noopener"
     href="https://github.com/GE28"
     title="Clique para acessar o perfil do criador no GitHub :)"
   >
