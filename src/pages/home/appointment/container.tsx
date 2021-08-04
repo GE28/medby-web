@@ -1,23 +1,26 @@
-import React, { FC, useMemo, useContext, useState } from 'react';
+import React, { FC, useMemo, useCallback, useContext, useState } from 'react';
 
-import { FiList } from 'react-icons/fi';
+import { FiXCircle, FiList } from 'react-icons/fi';
+
+import Appointment from '../../../types/Appointment';
 
 import { appointmentContext } from '..';
-import AppointmentWrapper, { Appointment } from './wrapper';
-
-import AppointmentModal from './modal';
+import AppointmentWrapper from './wrapper';
 
 import LoaderSVG from '../../../assets/loader';
 import { AppointmentsContainer as StyledContainer } from '../styles';
 
 import Button from '../../../components/button';
+import AppointmentModal from '../../../components/appointmentModal';
 
 interface AppointmentContainer {
   children?: Appointment[];
 }
 
 const AppointmentsContainer: FC<AppointmentContainer> = ({ children }) => {
-  const { selected, loadMore } = useContext(appointmentContext);
+  const { select, selected, loadMore } = useContext(appointmentContext);
+  const eraseSelected = useCallback(() => select({} as Appointment), [select]);
+
   const [showButton, setShowButton] = useState(true);
 
   const appointments = useMemo(
@@ -42,9 +45,27 @@ const AppointmentsContainer: FC<AppointmentContainer> = ({ children }) => {
     return <h1 id="label">Consultas marcadas</h1>;
   }, [children]);
 
+  const actionButton = useMemo(
+    () => (
+      <Button className="action-button cancel">
+        <FiXCircle />
+        Cancelar consulta
+      </Button>
+    ),
+    [],
+  );
+
   const appointmentModal = useMemo(() => {
-    return selected?.id && <AppointmentModal {...selected} />;
-  }, [selected]);
+    return (
+      selected?.id && (
+        <AppointmentModal
+          {...selected}
+          eraseSelected={eraseSelected}
+          actionButton={actionButton}
+        />
+      )
+    );
+  }, [actionButton, eraseSelected, selected]);
 
   return (
     <>

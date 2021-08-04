@@ -1,19 +1,28 @@
-import React, { FC, useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
-import { FiXCircle, FiX } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 
-import Button from '../../../components/button';
+import blankAvatar from '../assets/blank-profile.png';
 
-import blankAvatar from '../../../assets/blank-profile.png';
+import { DefaultModal, ModalContainer } from './styles';
 
-import { clearAxios } from '../../../services/axios';
-import { ViaCep } from '../../../services/axios/responses';
+import { clearAxios } from '../services/axios';
+import { ViaCep } from '../services/axios/responses';
 
-import { appointmentContext } from '..';
-import { Appointment } from './wrapper';
-import { AppointmentModal as StyledModal, ModalContainer } from '../styles';
+import Appointment from '../types/Appointment';
 
-const AppointmentModal: FC<Appointment> = (props) => {
+interface Modal extends Appointment {
+  eraseSelected: MouseEventHandler<HTMLButtonElement>;
+  actionButton: JSX.Element;
+}
+
+const AppointmentModal: FC<Modal> = (props) => {
   const { cep: currentCep } = props;
   const [cepsData, setCepsData] = useState({} as ViaCep);
 
@@ -45,8 +54,6 @@ const AppointmentModal: FC<Appointment> = (props) => {
     return `R$ ${moneyValue},${cents}`;
   }, []);
 
-  const { select } = useContext(appointmentContext);
-
   const {
     id,
     complements,
@@ -59,14 +66,12 @@ const AppointmentModal: FC<Appointment> = (props) => {
     doctorName,
   } = props;
 
-  return cepsData?.cep ? (
-    <ModalContainer>
-      <StyledModal>
-        <button
-          type="button"
-          className="close-button"
-          onClick={() => select({} as Appointment)}
-        >
+  const { eraseSelected, actionButton } = props;
+
+  return (
+    <DefaultModal>
+      <ModalContainer>
+        <button type="button" className="close-button" onClick={eraseSelected}>
           <FiX />
         </button>
 
@@ -117,15 +122,11 @@ const AppointmentModal: FC<Appointment> = (props) => {
           </div>
         </div>
 
-        <Button className="cancel-button">
-          <FiXCircle />
-          Cancelar consulta
-        </Button>
-
+        {actionButton}
         <h5>{`ID: ${id}`}</h5>
-      </StyledModal>
-    </ModalContainer>
-  ) : null;
+      </ModalContainer>
+    </DefaultModal>
+  );
 };
 
 export default AppointmentModal;
