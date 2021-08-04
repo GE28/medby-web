@@ -10,7 +10,7 @@ import Footer from '../../components/footer';
 import Profile from '../../components/profile';
 
 import { Container } from '../styles';
-import { MainContent } from './styles';
+import { MainContent, Wrapper } from './styles';
 
 import ATContainer from './availableTimes/container';
 import AppointForm from './form';
@@ -26,7 +26,7 @@ export const aTContext = createContext({} as AvailableTimesContext);
 const { Provider } = aTContext;
 
 const AppointPage: FC = () => {
-  const [selectedId, select] = useState('');
+  const [selectedId, select] = useState('' as string);
   const [availableTimes, setTimes] = useState([] as AvailableTime[]);
 
   const setAvailableTimes = useCallback((aT: AvailableTime[]) => {
@@ -41,10 +41,17 @@ const AppointPage: FC = () => {
         </Header>
 
         <Provider
-          value={{ selectedId, select, availableTimes, setAvailableTimes }}
+          value={{
+            selectedId,
+            select,
+            availableTimes,
+            setAvailableTimes,
+          }}
         >
-          <ATContainer />
-          <AppointForm />
+          <Wrapper>
+            <AppointForm />
+            <ATContainer />
+          </Wrapper>
         </Provider>
       </MainContent>
 

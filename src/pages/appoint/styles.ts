@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 import { Form as StyledForm, DefaultHeader } from '../../components/styles';
-import {
-  AppointmentModal as StyledModal,
-  ModalContainer as StyledContainer,
-} from '../home/styles';
 
 import { MainContent as StyledMainContent } from '../styles';
 
 export const Form = styled(StyledForm)`
+  display: inline-flex !important;
+
   button {
     margin-top: 0;
   }
@@ -238,7 +236,103 @@ export const Calendar = styled.div`
   }
 `;
 
-export const AvailableTimesContainer = styled.div``;
-export const AvailableTimeWrapper = styled.div``;
-export const AppointmentModal = styled(StyledModal);
-export const ModalContainer = styled(StyledContainer);
+export const AvailableTimesContainer = styled.div`
+  div:nth-of-type(2n) {
+    border-color: #23212c;
+
+    .where-when {
+      color: #23212c;
+    }
+
+    > div button {
+      background-color: #54428e;
+
+      &:hover {
+        background-color: #23212c;
+      }
+    }
+  }
+`;
+
+export const ATWrapper = styled.div`
+  padding: 8px;
+  border: 1px solid #5b8c30;
+  border-radius: 6px;
+  font-weight: 600;
+
+  svg {
+    flex-shrink: 0;
+    stroke-width: 2.3px;
+    margin: 0;
+    padding: 0;
+    margin-right: 4px;
+  }
+
+  .where-when {
+    text-align: center;
+    white-space: nowrap;
+    color: #5b8c30;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+  }
+
+  .appointment-date {
+    display: flex;
+    place-items: center;
+  }
+
+  .pickapable-times {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+    gap: 8px;
+
+    button {
+      appearance: none;
+
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: space-between;
+
+      line-height: 165%;
+      border-radius: 6px;
+      padding: 6px;
+      background-color: #a8d65c;
+
+      color: #fcfff9;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #3b5b1f;
+      }
+    }
+  }
+
+  margin-bottom: 8px;
+`;
+
+export const Wrapper = styled.div`
+  width: calc(100% - 100vw / 6);
+
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+
+  ${AvailableTimesContainer} {
+    flex-basis: 100%;
+  }
+
+  @media (max-width: 630px) {
+    ${Form} {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    flex-direction: column;
+  }
+`;

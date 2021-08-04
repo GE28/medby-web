@@ -1,50 +1,56 @@
 import React, { FC, useContext } from 'react';
 
-import { FiClock } from 'react-icons/fi';
-import AvailableTime, { aTContext } from '..';
+import { FiCalendar, FiClock } from 'react-icons/fi';
 
-import { AvailableTimeWrapper as StyledAvailableTimeWrapper } from '../styles';
+import { aTContext } from '..';
+import { AvailableTime } from '../../../services/axios/responses';
 
-import AvatarContainer from '../../../components/avatarContainer';
-import Button from '../../../components/button';
+import { ATWrapper as StyledATwrapper } from '../styles';
 
-export interface AvailableTime {
-  doctorAvatar: string;
-  doctorName: string;
+export interface RefTime {
   id: string;
-  time: string;
+  label: string;
 }
 
-const AvailableTimeWrapper: FC<AvailableTime> = (props) => {
+export interface TimesContainer {
+  date: AvailableTime['date'];
+  unit_id: AvailableTime['unit_id'];
+  times: RefTime[];
+}
+
+const ATWrapper: FC<TimesContainer> = (props) => {
   const { select } = useContext(aTContext);
 
   const {
-    time = '05h30m',
-    doctorAvatar,
-    doctorName = 'Not a John Doe',
+    date = '2009-09-18T19:00:08Z',
+    unit_id = '1a1717aa-a171-1717-aaa1-1aaa1717aa1a',
+    times = [
+      {
+        label: '08h30m',
+        id: '1a1717aa-a171-1717-aaa1-1aaa1717aa1a',
+      },
+    ],
   } = props;
 
+  const pickapableTimes = [
+    times.map((t) => (
+      <button type="button" key={t.id} onClick={() => select(t.id)}>
+        <FiClock /> {t.label}
+      </button>
+    )),
+  ];
+
   return (
-    <StyledAvailableTimeWrapper>
-      <div className="doctor-info">
-        <AvatarContainer
-          imageSrc={doctorAvatar}
-          size={50}
-          alt={`Foto de ${doctorName}`}
-        />
-        <span>{doctorName}</span>
-      </div>
-      <div className="appointment-info">
-        <span className="time">
-          <FiClock />
-          {time}
-        </span>
-      </div>
-      <Button className="more-info-button" onClick={() => select(props)}>
-        Mais informações
-      </Button>
-    </StyledAvailableTimeWrapper>
+    <StyledATwrapper>
+      <header className="where-when" key={date + unit_id}>
+        <span>UNIDADE SANTA CRUZ</span>
+        <div className="appointment-date">
+          <FiCalendar /> {date}
+        </div>
+      </header>
+      <div className="pickapable-times">{pickapableTimes}</div>
+    </StyledATwrapper>
   );
 };
 
-export default AvailableTimeWrapper;
+export default ATWrapper;
