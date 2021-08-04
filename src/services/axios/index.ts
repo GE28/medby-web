@@ -4,9 +4,6 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  validateStatus: (status: number) => {
-    return status < 400 || status > 500;
-  },
 });
 
 export const baseURL = 'http://localhost:3333/';
