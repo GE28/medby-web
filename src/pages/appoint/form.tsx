@@ -193,7 +193,7 @@ const AppointForm: FC = () => {
   useEffect(() => {
     async function getUnitList() {
       try {
-        if (unitOptions.length > 0) return;
+        if (unitOptions.length) return;
 
         const response = await axios.get<UnitsDataResponse>('units', {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -203,6 +203,8 @@ const AppointForm: FC = () => {
           const { id, name } = unit;
           return { label: name, value: id } as SelectOption;
         });
+
+        options.unshift({ label: '(Todas)', value: '' });
 
         localStorage.setItem(
           '@medby/unit-option-list',
@@ -223,7 +225,6 @@ const AppointForm: FC = () => {
 
     getUnitList();
   }, []);
-  unitOptions.unshift({ label: '(Todas)', value: '' });
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -320,7 +321,7 @@ const AppointForm: FC = () => {
 
       <PeriodSelectorContainer>
         <h4>Pesquisar por horários disponíveis </h4>
-        <div className="wrapper">
+        <div className="date-input-container-wrapper">
           <div className="date-input-container">
             <h4>De: </h4>
             <div className="day">
