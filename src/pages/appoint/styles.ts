@@ -5,7 +5,8 @@ import { Form as StyledForm, DefaultHeader } from '../../components/styles';
 import { MainContent as StyledMainContent } from '../styles';
 
 export const Form = styled(StyledForm)`
-  display: inline-flex !important;
+  min-width: 436px;
+  width: 50%;
 
   button {
     margin-top: 0;
@@ -39,16 +40,18 @@ export const MainContent = styled(StyledMainContent)`
 `;
 
 export const PeriodSelectorContainer = styled.div`
-  h4 {
-    margin-bottom: 6px;
+  > h4 {
+    margin-bottom: 8px;
   }
 
-  > .wrapper {
-    text-align: center;
-
+  > .date-input-container-wrapper {
     display: flex;
     justify-content: space-evenly;
+
     padding: 12px;
+    text-align: center;
+
+    column-gap: 8px;
 
     border-radius: 6px;
     border: 1px solid #a6a6a6;
@@ -61,6 +64,12 @@ export const PeriodSelectorContainer = styled.div`
     width: 45%;
     font-weight: 700;
 
+    display: flex !important;
+    flex-grow: 1;
+    align-items: center;
+    column-gap: 8px;
+    width: 100%;
+
     input {
       font-weight: 600;
       max-width: 100%;
@@ -72,6 +81,18 @@ export const PeriodSelectorContainer = styled.div`
       line-height: 36px;
 
       padding-left: 12px;
+    }
+
+    div {
+      flex-grow: 1;
+    }
+
+    h4 {
+      width: 36px;
+    }
+
+    input {
+      width: 100%;
     }
   }
 
@@ -240,10 +261,6 @@ export const AvailableTimesContainer = styled.div`
   div:nth-of-type(2n) {
     border-color: #23212c;
 
-    .where-when {
-      color: #23212c;
-    }
-
     > div button {
       background-color: #54428e;
 
@@ -271,7 +288,7 @@ export const ATWrapper = styled.div`
   .where-when {
     text-align: center;
     white-space: nowrap;
-    color: #5b8c30;
+    color: #23212c;
 
     display: flex;
     flex-wrap: wrap;
@@ -320,6 +337,7 @@ export const Wrapper = styled.div`
   width: calc(100% - 100vw / 6);
 
   display: flex;
+  justify-items: center;
   justify-content: center;
   gap: 36px;
 
@@ -327,10 +345,16 @@ export const Wrapper = styled.div`
     flex-basis: 100%;
   }
 
-  @media (max-width: 630px) {
+  @media (max-width: 680px) {
     ${Form} {
       width: 100%;
       max-width: 100%;
+
+      .date-input-container-wrapper {
+        flex-direction: column;
+        gap: 0;
+        row-gap: 8px;
+      }
     }
 
     flex-direction: column;
