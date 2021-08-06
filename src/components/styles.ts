@@ -789,6 +789,7 @@ export const DefaultModal = styled.div`
   z-index: 999;
 
   top: 0;
+  left: 0;
   bottom: 0;
   width: 100%;
   position: fixed;
