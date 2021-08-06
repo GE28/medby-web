@@ -169,7 +169,10 @@ const ATContainer: FC = () => {
   return (
     <>
       {appointmentModal}
-      <StyledContainer>{printedAvailableDaysAndTimes}</StyledContainer>
+
+      {availableTimes.length && (
+        <StyledContainer>{printedAvailableDaysAndTimes}</StyledContainer>
+      )}
     </>
   );
 };
