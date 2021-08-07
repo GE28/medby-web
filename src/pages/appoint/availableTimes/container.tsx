@@ -170,7 +170,7 @@ const ATContainer: FC = () => {
     <>
       {appointmentModal}
 
-      {availableTimes.length && (
+      {availableTimes.length > 0 && (
         <StyledContainer>{printedAvailableDaysAndTimes}</StyledContainer>
       )}
     </>
