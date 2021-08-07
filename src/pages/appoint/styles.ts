@@ -347,6 +347,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: 680px) {
     ${Form} {
+      min-width: unset;
       width: 100%;
       max-width: 100%;
 
