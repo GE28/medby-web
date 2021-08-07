@@ -158,25 +158,25 @@ export const AppointmentsContainer = styled.main`
     // total-width (* 1.25 [main-max-size]⁻¹) <8/10⁻¹ = 10/8>
     @media (min-width: ${(minLiSize * 2 + gapLiSize) * windowWidth}px) {
       // gap * (li-quantity-in-1st-line - 1) / li-quantity-in-1st-line = thisPx
-      > li:nth-of-type(n + 2) {
+      > li {
         max-width: calc(50% - 6px);
       }
     }
 
     @media (min-width: ${(minLiSize * 3 + gapLiSize * 2) * windowWidth}px) {
-      > li:nth-of-type(n + 2) {
+      > li {
         max-width: calc((100% / 3) - 8px);
       }
     }
 
     @media (min-width: ${(minLiSize * 4 + gapLiSize * 3) * windowWidth}px) {
-      > li:nth-of-type(n + 2) {
+      > li {
         max-width: calc(25% - 9px);
       }
     }
 
     @media (min-width: ${(minLiSize * 5 + gapLiSize * 4) * windowWidth}px) {
-      > li:nth-of-type(n + 2) {
+      > li {
         max-width: calc(20% - 9.6px);
       }
     }
