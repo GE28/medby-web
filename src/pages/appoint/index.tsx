@@ -13,6 +13,7 @@ import { Container } from '../styles';
 import { MainContent, Wrapper } from './styles';
 
 import ATContainer from './availableTimes/container';
+import ATModal from './availableTimes/modal';
 import AppointForm from './form';
 
 interface AvailableTimesContext {
@@ -48,6 +49,7 @@ const AppointPage: FC = () => {
             setAvailableTimes,
           }}
         >
+          <ATModal />
           <Wrapper>
             <AppointForm />
             <ATContainer />
