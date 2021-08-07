@@ -105,7 +105,7 @@ const AppointForm: FC = () => {
           params: { config_only: 1 },
         });
 
-        const { maxAllowedDaysInFuture } = response.data.config;
+        const { maxAllowedDaysInFuture } = response.data.metadata;
         localStorage.setItem(
           '@medby/max-allowed-days',
           maxAllowedDaysInFuture.toString(),
@@ -144,7 +144,7 @@ const AppointForm: FC = () => {
   useEffect(() => {
     async function getSpecList() {
       try {
-        if (specOptions.length > 0) return;
+        if (specOptions.length) return;
 
         const response = await axios.get<SpecsDataResponse>('specialties', {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -293,7 +293,7 @@ const AppointForm: FC = () => {
     }),
   });
 
-  const error = Object.values(formik.errors).find((e) => e && e.length > 0);
+  const error = Object.values(formik.errors).find((e) => e && e.length);
 
   return (
     <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
@@ -305,9 +305,7 @@ const AppointForm: FC = () => {
         options={specOptions}
         label="Especialidade para atendimento: "
         defaultLabel={
-          specOptions.length > 0
-            ? '(Selecione uma especialidade)'
-            : 'Carregando…'
+          specOptions.length ? '(Selecione uma especialidade)' : 'Carregando…'
         }
         {...formik.getFieldProps('spec')}
       />
@@ -315,7 +313,7 @@ const AppointForm: FC = () => {
       <SelectContainer
         options={unitOptions}
         label="Unidade para atendimento: "
-        defaultLabel={unitOptions.length > 0 ? '(Todas)' : 'Carregando…'}
+        defaultLabel={unitOptions.length ? '(Todas)' : 'Carregando…'}
         {...formik.getFieldProps('unit')}
       />
 

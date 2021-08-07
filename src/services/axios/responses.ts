@@ -56,8 +56,9 @@ export type AvailableTime = Record<string, string> & {
 // get /appointments/available?config_only
 export type AvailableTimesDataResponse = {
   data: AvailableTime[];
-  config: {
+  metadata: {
     maxAllowedDaysInFuture: number;
+    count: number;
   };
 };
 
