@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ComponentType, FC, useContext, useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
@@ -40,10 +39,7 @@ export const GuestRoute: FC<AuthRoute> = ({
 
 export const UserRoute: FC<AuthRoute> = ({ component: Component, ...rest }) => {
   const { tokenValidator } = useContext(userContext);
-
-  useEffect(() => {
-    tokenValidator();
-  }, []);
+  useEffect(tokenValidator, [tokenValidator]);
 
   return <GuestRoute {...rest} component={Component} guest={false} />;
 };

@@ -71,7 +71,7 @@ const Profile: FC = () => {
           onBlur={() => setMenuVisibility(false)}
         >
           <span>Não é você?</span>
-          <button type="button" onClick={() => logout()}>
+          <button type="button" onClick={logout}>
             <FiLogOut /> Sair
           </button>
         </div>

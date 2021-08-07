@@ -77,11 +77,7 @@ const AvatarForm: FC = () => {
 
   return (
     <AvatarFakeForm className="avatar-form">
-      <button
-        type="button"
-        onClick={() => history.goBack()}
-        className="go-back-button"
-      >
+      <button type="button" onClick={history.goBack} className="go-back-button">
         <FiArrowLeft /> Voltar
       </button>
 
