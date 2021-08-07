@@ -29,6 +29,8 @@ import { avatarsPath } from '../../services/axios/paths';
 import Appointment from '../../types/Appointment';
 
 import AppointmentsContainer from './appointment/container';
+import CancelModal from './appointment/modal';
+
 import GitHubLink from '../../components/githubLink';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -168,6 +170,7 @@ const HomePage: FC = () => {
             },
           }}
         >
+          <CancelModal />
           <AppointmentsContainer>{appointments}</AppointmentsContainer>
         </Provider>
       </MainContent>

@@ -10,7 +10,7 @@ import { AppointmentWrapper as StyledAppointmentWrapper } from '../styles';
 import AvatarContainer from '../../../components/avatarContainer';
 import Button from '../../../components/button';
 
-const AppointmentWrapper: FC<Appointment> = (props) => {
+const CancelModal: FC<Appointment> = (props) => {
   const { select } = useContext(appointmentContext);
 
   const {
@@ -59,4 +59,4 @@ const AppointmentWrapper: FC<Appointment> = (props) => {
   );
 };
 
-export default AppointmentWrapper;
+export default CancelModal;

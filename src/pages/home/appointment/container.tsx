@@ -7,7 +7,7 @@ import Appointment from '../../../types/Appointment';
 import { appointmentContext } from '..';
 import AppointmentWrapper from './wrapper';
 
-import LoaderSVG from '../../../assets/loader';
+import Loader from '../../../assets/loader';
 import { AppointmentsContainer as StyledContainer } from '../styles';
 
 import Button from '../../../components/button';
@@ -35,7 +35,7 @@ const AppointmentsContainer: FC<AppointmentContainer> = ({ children }) => {
     if (!children?.length)
       return (
         <h1 id="label" className="loading">
-          Carregando <LoaderSVG />
+          Carregando <Loader />
         </h1>
       );
 
