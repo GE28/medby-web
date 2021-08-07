@@ -782,6 +782,16 @@ export const ModalContainer = styled.div`
       }
     }
   }
+
+  .confirm-alert {
+    position: absolute;
+    color: #f3a104;
+    font-size: 0.8em;
+
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15%;
+  }
 `;
 
 export const DefaultModal = styled.div`
