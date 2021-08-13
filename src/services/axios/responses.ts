@@ -6,7 +6,7 @@ export interface UserDataResponse extends Record<string, string | null> {
   avatar: string | null;
 }
 
-export type AppointmentData = {
+export type AppointmentDataResponse = {
   id: string;
   time: string;
   final_price: string;
@@ -32,7 +32,7 @@ export type AppointmentData = {
 };
 
 // get /appointments
-export type AppointmentsDataResponse = AppointmentData[];
+export type AppointmentsDataResponse = AppointmentDataResponse[];
 
 // get /appointments
 export type UnitsDataResponse = [
@@ -45,7 +45,7 @@ export type UnitsDataResponse = [
 ];
 
 // get /appointments/available
-export type AvailableTime = Record<string, string> & {
+export type AvailableTimeResponse = Record<string, string> & {
   _id: string;
   doctor_id: string;
   date: string;
@@ -55,7 +55,7 @@ export type AvailableTime = Record<string, string> & {
 
 // get /appointments/available?config_only
 export type AvailableTimesDataResponse = {
-  data: AvailableTime[];
+  data: AvailableTimeResponse[];
   metadata: {
     maxAllowedDaysInFuture: number;
     count: number;
@@ -63,7 +63,7 @@ export type AvailableTimesDataResponse = {
 };
 
 // get /appointments/available/<id>
-export type AppointmentPreviewResponse = Omit<AppointmentData, 'id'> & {
+export type AppointmentPreviewResponse = Omit<AppointmentDataResponse, 'id'> & {
   aT_id: string;
   aT_date: string;
 };

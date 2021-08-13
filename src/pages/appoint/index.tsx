@@ -2,7 +2,7 @@
 /* eslint-disable import/no-duplicates */
 import React, { FC, createContext, useState, useCallback } from 'react';
 
-import { AvailableTime } from '../../services/axios/responses';
+import { AvailableTimeResponse as AvailableTime } from '../../services/axios/responses';
 
 import GitHubLink from '../../components/githubLink';
 import Header from '../../components/header';

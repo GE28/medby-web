@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react';
 import { FiCalendar, FiClock } from 'react-icons/fi';
 
 import { aTContext } from '..';
-import { AvailableTime } from '../../../services/axios/responses';
+import { AvailableTimeResponse as AvailableTime } from '../../../services/axios/responses';
 
 import { ATWrapper as StyledATwrapper } from '../styles';
 
