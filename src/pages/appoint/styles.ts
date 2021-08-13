@@ -258,6 +258,8 @@ export const Calendar = styled.div`
 `;
 
 export const AvailableTimesContainer = styled.div`
+  text-align: center;
+
   div:nth-of-type(2n) {
     border-color: #23212c;
 
@@ -267,6 +269,50 @@ export const AvailableTimesContainer = styled.div`
       &:hover {
         background-color: #23212c;
       }
+    }
+  }
+
+  .page-selectors {
+    display: flex;
+    gap: 4px;
+
+    * {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 32px;
+      line-height: 32px;
+      height: 32px;
+    }
+
+    button {
+      border-radius: 6px;
+      border: 1px solid #54428e;
+      color: #54428e;
+
+      text-align: center;
+
+      svg {
+        display: inline-block;
+        width: 64%;
+        height: 64%;
+      }
+
+      &:hover {
+        color: white;
+        background-color: #54428e;
+      }
+
+      &:active {
+        transform: scale(0.85, 0.85);
+        border-color: #23212c;
+      }
+    }
+
+    button.current {
+      color: white;
+      background-color: #54428e;
     }
   }
 `;
