@@ -1,7 +1,16 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-duplicates */
-import React, { FC, useMemo, useContext } from 'react';
+import React, {
+  FC,
+  useMemo,
+  useContext,
+  ButtonHTMLAttributes,
+  useCallback,
+} from 'react';
+
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -28,16 +37,16 @@ const sortTimesByLabel = (left: RefTime, right: RefTime) => {
 };
 
 const ATContainer: FC = () => {
-  const { availableTimes } = useContext(aTContext);
+  const { availableTimes, aTCount, search, page } = useContext(aTContext);
 
-  const availableTimesData = useMemo<TimesContainer[]>(() => {
-    const availableDays = availableTimes.map((aT) => ({
+  const availableTimesData = useMemo(() => {
+    const availableDays = availableTimes?.map((aT) => ({
       ...aT,
       date: formatLocalDateISO(aT.date),
       time: formatLocalTime(aT.date),
     }));
 
-    return availableDays.map(({ date, unit_id }, _i, beingMapped) => {
+    return availableDays?.map(({ date, unit_id }, _i, beingMapped) => {
       const currentTimeContainer: TimesContainer = {
         date,
         unit_id,
@@ -63,21 +72,82 @@ const ATContainer: FC = () => {
     });
   }, [availableTimes]);
 
-  const printedAvailableDaysAndTimes = useMemo(
-    () => [
-      availableTimesData.map((aTData) => (
+  const printedAvailableDaysAndTimes = useMemo(() => {
+    return [
+      availableTimesData?.map((aTData) => (
         <ATWrapper key={aTData.date + aTData.unit_id} {...aTData} />
       )),
-    ],
-    [availableTimesData],
+    ];
+  }, [availableTimesData]);
+
+  type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+  const pageButton = useCallback(
+    (length: number, index: number, ...props: ButtonProps[]) => (
+      <button
+        onClick={() => search(index)}
+        key={length}
+        type="button"
+        {...props}
+      >
+        {index}
+      </button>
+    ),
+    [search],
   );
 
+  const pageSelectors = useMemo(() => {
+    const a: JSX.Element[] = [];
+
+    for (let i = 1; i < aTCount / 10 + 1; i += 1) {
+      if (i === page) {
+        a.push(
+          pageButton(a.length, i, {
+            className: 'selected',
+            title: 'Página atual',
+          }),
+        );
+      } else {
+        a.push(pageButton(a.length, i, { title: `Página ${i}` }));
+      }
+    }
+
+    return (
+      <div className="page-selectors">
+        {page > 1 && (
+          <button
+            className="previous-page"
+            type="button"
+            title="Página anterior"
+          >
+            <FiChevronLeft />
+          </button>
+        )}
+        {a}
+        {aTCount / 10 > page && (
+          <button className="next-page" type="button" title="Próxima página">
+            <FiChevronRight />
+          </button>
+        )}
+      </div>
+    );
+  }, [aTCount, page, pageButton]);
+
+  if (!availableTimes) {
+    return null;
+  }
+  if (availableTimes?.length > 0) {
+    return (
+      <StyledContainer id="available-times-container">
+        {printedAvailableDaysAndTimes}
+        {pageSelectors}
+      </StyledContainer>
+    );
+  }
   return (
-    <>
-      {availableTimes.length > 0 && (
-        <StyledContainer>{printedAvailableDaysAndTimes}</StyledContainer>
-      )}
-    </>
+    <StyledContainer id="available-times-container">
+      Não há consultas disponíveis dentro dos critérios selecionados
+    </StyledContainer>
   );
 };
 

@@ -74,13 +74,17 @@ const getNextDayWithNoTimePart = (date: Date) => {
   return getDateWithNoTimePart(nextDayDate);
 };
 
+const scrollToResults = () => {
+  document.getElementById('available-times-container')?.scrollIntoView();
+};
+
 const AppointForm: FC = () => {
   const renderTimeDate = new Date();
 
   const { user, logout } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
-  const { setAvailableTimes } = useContext(aTContext);
+  const { search } = useContext(aTContext);
 
   const [maxAllowedDate, setMaxAllowedDate] = useState(() => {
     const maxAllowedDays = localStorage.getItem('@medby/max-allowed-days');
@@ -244,30 +248,16 @@ const AppointForm: FC = () => {
       const min_date = parseLocalDate(formattedMinDate);
       const max_date = parseLocalDateToLastMinute(formattedMaxDate);
 
-      try {
-        const response = await axios.get<AvailableTimesDataResponse>(
-          'appointments/available',
-          {
-            headers: { Authorization: `Bearer ${user.token}` },
-            params: {
-              ...(spec && { spec_id: spec }),
-              ...(unit && { unit_id: unit }),
-              min_date,
-              max_date,
-            },
-          },
-        );
+      const headers = { Authorization: `Bearer ${user.token}` };
+      const query = {
+        ...(spec && { spec_id: spec }),
+        ...(unit && { unit_id: unit }),
+        min_date,
+        max_date,
+      };
 
-        setAvailableTimes(response.data.data);
-      } catch (err) {
-        const offlineATtoast = {
-          title: 'Falha ao carregar horários',
-          message: 'O servidor está offline',
-          type: 'error' as const,
-        };
-
-        sendToastIfNoResponse(err, addToast, offlineATtoast);
-      }
+      search(1, headers, query);
+      scrollToResults();
     },
     validationSchema: Yup.object().shape({
       spec: Yup.string()
