@@ -83,7 +83,7 @@ const ATContainer: FC = () => {
   type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
   const pageButton = useCallback(
-    (length: number, index: number, ...rest: ButtonProps[]) => (
+    (length: number, index: number, rest: ButtonProps) => (
       <button
         onClick={() => search(index)}
         key={length}
