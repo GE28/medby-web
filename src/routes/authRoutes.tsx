@@ -21,7 +21,7 @@ export const GuestRoute: FC<AuthRoute> = ({
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={() => {
         const [redirect, component] = [
           <Redirect to={{ pathname }} />,
           <Component {...rest} />,
