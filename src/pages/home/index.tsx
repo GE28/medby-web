@@ -88,7 +88,7 @@ const HomePage: FC = () => {
           'appointments',
           {
             headers: { Authorization: `Bearer ${user.token}` },
-            ...(showRest && { params: { showRest } }),
+            ...(showRest && { params: { show_rest: 1 } }),
           },
         );
 
@@ -121,19 +121,19 @@ const HomePage: FC = () => {
           } as Appointment;
         });
 
-        localStorage.setItem(
-          '@medby/appointments',
-          JSON.stringify({ appointmentsData, stored_at: Date.now() }),
-        );
+        if (!showRest)
+          localStorage.setItem(
+            '@medby/appointments',
+            JSON.stringify({ appointmentsData, stored_at: Date.now() }),
+          );
 
         setShowRest(false);
-
         setAppointments(
           showRest
             ? (oldData) => [
                 ...oldData,
                 ...appointmentsData.filter(
-                  (key, i) => appointmentsData[i]?.id !== oldData[i]?.id,
+                  (key, i) => key?.id !== oldData[i]?.id,
                 ),
               ]
             : appointmentsData,
