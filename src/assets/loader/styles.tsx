@@ -10,7 +10,7 @@ const fullRotateAnimation = keyframes`
   }
 `;
 
-export const SVGLoaderContainer = styled.div`
+const SVGLoaderContainer = styled.div`
   display: inline-flex;
 
   align-items: center;
@@ -18,7 +18,7 @@ export const SVGLoaderContainer = styled.div`
 
   svg {
     flex-grow: 1;
-    animation: ${fullRotateAnimation} 2s linear infinite;
+    animation: ${fullRotateAnimation} 1s linear infinite;
   }
 `;
 

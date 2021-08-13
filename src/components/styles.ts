@@ -707,7 +707,6 @@ export const ModalContainer = styled.div`
       width: 18px;
       height: 18px;
       margin-right: 10px;
-      animation: none;
     }
 
     &.cancel {
@@ -732,6 +731,10 @@ export const ModalContainer = styled.div`
       &:active {
         background-color: #5b8c30;
       }
+    }
+
+    &.alert {
+      background-color: #f3a104;
     }
   }
 
@@ -790,7 +793,7 @@ export const ModalContainer = styled.div`
 
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15%;
+    bottom: 14%;
   }
 `;
 
