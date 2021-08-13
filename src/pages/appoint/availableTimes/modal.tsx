@@ -10,7 +10,7 @@ import React, {
   useEffect,
 } from 'react';
 
-import { FiCheckCircle } from 'react-icons/fi';
+import { FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -27,8 +27,6 @@ import { avatarsPath } from '../../../services/axios/paths';
 
 import Button from '../../../components/button';
 import AppointmentModal from '../../../components/appointmentModal';
-
-import Loader from '../../../assets/loader';
 
 const ATModal: FC = () => {
   const { user } = useContext(userContext);
@@ -144,7 +142,9 @@ const ATModal: FC = () => {
           </span>
         )}
         <Button
-          className="action-button appoint"
+          className={`action-button  ${
+            waitingConfirmation ? 'alert' : 'appoint'
+          }`}
           onClick={() => {
             if (waitingConfirmation) {
               appoint();
@@ -154,7 +154,7 @@ const ATModal: FC = () => {
             }
           }}
         >
-          {loading ? <Loader /> : <FiCheckCircle />}
+          {loading ? <FiAlertCircle /> : <FiCheckCircle />}
           Confirmar consulta
         </Button>
       </>
