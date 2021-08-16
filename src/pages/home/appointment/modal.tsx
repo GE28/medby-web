@@ -1,4 +1,12 @@
-import React, { FC, useMemo, useCallback, useContext, useState } from 'react';
+import React, {
+  FC,
+  useMemo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 
 import { useHistory } from 'react-router-dom';
 
@@ -24,20 +32,21 @@ const ViewModal: FC<AppointmentContainer> = () => {
   const { user } = useContext(userContext);
   const { addToast } = useContext(toastContext);
 
-  const { push } = useHistory();
+  const { go } = useHistory();
 
   const [waitingConfirmation, setWaitingConfirmation] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
-  const waitConfirmation = () => {
-    setLoading(true);
-    setWaitingConfirmation(true);
+  useEffect(() => {
+    if (waitingConfirmation)
+      timer.current = setTimeout(() => setWaitingConfirmation(false), 1500);
 
-    setTimeout(() => {
-      setLoading(false);
-      setWaitingConfirmation(false);
-    }, 1500);
-  };
+    return () => {
+      if (timer?.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [waitingConfirmation]);
 
   const { select, selected } = useContext(appointmentContext);
   const eraseSelected = useCallback(() => select({} as Appointment), [select]);
@@ -54,6 +63,9 @@ const ViewModal: FC<AppointmentContainer> = () => {
             headers: { Authorization: `Bearer ${user.token}` },
           },
         );
+
+        localStorage.removeItem('@medby/appointments');
+        go(0);
 
         addToast({
           title: 'Consulta desmarcada com sucesso',
@@ -72,10 +84,7 @@ const ViewModal: FC<AppointmentContainer> = () => {
     }
 
     cancelAppointment();
-
-    localStorage.removeItem('@medby/appointments');
-    push('/');
-  }, [addToast, user.token, selected?.id, push]);
+  }, [addToast, user.token, selected?.id, go]);
 
   const actionButton = useMemo(
     () => (
@@ -94,16 +103,16 @@ const ViewModal: FC<AppointmentContainer> = () => {
               cancel();
               eraseSelected();
             } else {
-              waitConfirmation();
+              setWaitingConfirmation(true);
             }
           }}
         >
-          {loading ? <FiAlertCircle /> : <FiXCircle />}
+          {waitingConfirmation ? <FiAlertCircle /> : <FiXCircle />}
           Cancelar consulta
         </Button>
       </>
     ),
-    [cancel, eraseSelected, waitingConfirmation, loading],
+    [cancel, eraseSelected, waitingConfirmation],
   );
 
   const appointmentModal = useMemo(() => {

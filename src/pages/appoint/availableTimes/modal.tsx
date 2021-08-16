@@ -8,7 +8,10 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useRef,
 } from 'react';
+
+import { useHistory } from 'react-router-dom';
 
 import { FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 
@@ -33,18 +36,21 @@ const ATModal: FC = () => {
   const { addToast } = useContext(toastContext);
   const { select, selectedId } = useContext(aTContext);
 
+  const { go } = useHistory();
+
   const [waitingConfirmation, setWaitingConfirmation] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
-  const waitConfirmation = () => {
-    setLoading(true);
-    setWaitingConfirmation(true);
+  useEffect(() => {
+    if (waitingConfirmation)
+      timer.current = setTimeout(() => setWaitingConfirmation(false), 1500);
 
-    setTimeout(() => {
-      setLoading(false);
-      setWaitingConfirmation(false);
-    }, 1500);
-  };
+    return () => {
+      if (timer?.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [waitingConfirmation]);
 
   const [appointmentPreview, setAppointmentPreview] = useState(
     {} as Appointment,
@@ -99,6 +105,10 @@ const ATModal: FC = () => {
 
   const appoint = useCallback(() => {
     async function bookAppointment() {
+      if (!appoint) {
+        return;
+      }
+
       try {
         await axios.post<AppointmentPreviewResponse>(
           `appointments`,
@@ -111,6 +121,7 @@ const ATModal: FC = () => {
         );
 
         localStorage.removeItem('@medby/appointments');
+        go(0);
 
         addToast({
           title: 'Consulta marcada com sucesso',
@@ -131,7 +142,7 @@ const ATModal: FC = () => {
     }
 
     bookAppointment();
-  }, [appointmentPreview, addToast, user.token]);
+  }, [appointmentPreview, addToast, user.token, go]);
 
   const actionButton = useMemo(
     () => (
@@ -150,16 +161,16 @@ const ATModal: FC = () => {
               appoint();
               eraseSelected();
             } else {
-              waitConfirmation();
+              setWaitingConfirmation(true);
             }
           }}
         >
-          {loading ? <FiAlertCircle /> : <FiCheckCircle />}
+          {waitingConfirmation ? <FiAlertCircle /> : <FiCheckCircle />}
           Confirmar consulta
         </Button>
       </>
     ),
-    [appoint, eraseSelected, waitingConfirmation, loading],
+    [appoint, eraseSelected, waitingConfirmation],
   );
 
   const appointmentModal = useMemo(() => {
