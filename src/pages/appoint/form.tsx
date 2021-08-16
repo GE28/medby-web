@@ -2,6 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useContext, useEffect, useState } from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -80,6 +82,8 @@ const scrollToResults = () => {
 
 const AppointForm: FC = () => {
   const renderTimeDate = new Date();
+
+  const { goBack } = useHistory();
 
   const { user, logout } = useContext(userContext);
   const { addToast } = useContext(toastContext);
@@ -287,7 +291,7 @@ const AppointForm: FC = () => {
 
   return (
     <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
-      <Button id="go-back-button" type="button">
+      <Button id="go-back-button" type="button" onClick={goBack}>
         Voltar
       </Button>
 
