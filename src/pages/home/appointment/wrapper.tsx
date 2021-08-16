@@ -11,9 +11,8 @@ import AvatarContainer from '../../../components/avatarContainer';
 import Button from '../../../components/button';
 
 const CancelModal: FC<Appointment> = (props) => {
-  const { select } = useContext(appointmentContext);
-
   const {
+    id,
     unit = 'Unit Name Identifier',
     day = 'dd/mm/yyyy',
     time = '05h30m',
@@ -22,7 +21,9 @@ const CancelModal: FC<Appointment> = (props) => {
     doctorName = 'Not a John Doe',
   } = props;
 
-  return (
+  const { select } = useContext(appointmentContext);
+
+  return id ? (
     <StyledAppointmentWrapper>
       <div className="doctor-info">
         <AvatarContainer
@@ -56,7 +57,7 @@ const CancelModal: FC<Appointment> = (props) => {
         Mais informações
       </Button>
     </StyledAppointmentWrapper>
-  );
+  ) : null;
 };
 
 export default CancelModal;

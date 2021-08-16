@@ -23,7 +23,7 @@ const mb = (value: number) => {
 
 // not really a form
 const AvatarForm: FC = () => {
-  const history = useHistory();
+  const { goBack } = useHistory();
 
   const { user, updateAvatar } = useContext(userContext);
   const { addToast } = useContext(toastContext);
@@ -77,7 +77,7 @@ const AvatarForm: FC = () => {
 
   return (
     <AvatarFakeForm className="avatar-form">
-      <button type="button" onClick={history.goBack} className="go-back-button">
+      <button type="button" onClick={goBack} className="go-back-button">
         <FiArrowLeft /> Voltar
       </button>
 

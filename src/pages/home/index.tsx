@@ -81,7 +81,7 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     async function getAppointments() {
-      if (appointments.length > 0 && !showRest) return;
+      if (appointments?.length > 0 && !showRest) return;
 
       try {
         const response = await axios.get<AppointmentsDataResponse>(
@@ -91,6 +91,12 @@ const HomePage: FC = () => {
             ...(showRest && { params: { show_rest: 1 } }),
           },
         );
+
+        if (response.data.length === 0) {
+          const appointmentsData = [{ id: '' }] as Appointment[];
+          setAppointments(appointmentsData);
+          return;
+        }
 
         const appointmentsData = response.data.map((serverAppointment) => {
           const {
