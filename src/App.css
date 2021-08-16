@@ -1,5 +1,38 @@
 @import-normalize;
 
+:root {
+  /* Application colors */
+  --color-main: #5b8c30;
+  --color-complementary: #54428e;
+  --color-border: #a6a6a6;
+  --color-text: #23212c;
+  --color-fake-white: #fcfff9;
+  --color-danger: #dd614a;
+  --color-warning: #f2e926;
+  --color-success: #5ad45a;
+  --color-bg: #f9fff5;
+
+  /* Aplication colors variations */
+  --color-complementary-75: #54428ebf;
+  --color-warning-strong: #f3a104;
+
+  --color-danger-lighter: #fb895e;
+  --color-danger-strong: #de0f20;
+  --color-danger-darker: #bf3936;
+  --color-danger-13: #dd614a20;
+
+  --color-main-darker: #3b5b1f;
+  --color-main-13: #5b8c3020;
+
+  --color-black-10: #0000001a;
+  --color-black-20: #00000033;
+  --color-black-70: #000000b3;
+
+  /* Calendar */
+  --color-calendar-top: #a8d65c;
+  --color-calendar-bottom: #87b75d;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,8 +51,8 @@ body {
 }
 
 body {
-  background-color: #f9fff5;
-  color: #23212c;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
   font-family: 'Source Sans Pro', sans-serif;

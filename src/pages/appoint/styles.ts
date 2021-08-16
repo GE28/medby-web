@@ -14,7 +14,7 @@ export const Form = styled(StyledForm)`
 
   > span {
     text-align: center;
-    color: #dd614a;
+    color: var(--color-danger);
     font-size: 75%;
     font-weight: 600;
     font-family: 'Rubik', sans-serif;
@@ -29,7 +29,7 @@ export const Form = styled(StyledForm)`
 
     font-family: 'Rubik', sans-serif;
     font-weight: 700;
-    background-color: #23212c;
+    background-color: var(--color-text);
   }
 `;
 
@@ -54,9 +54,9 @@ export const PeriodSelectorContainer = styled.div`
     column-gap: 8px;
 
     border-radius: 6px;
-    border: 1px solid #a6a6a6;
+    border: 1px solid var(--color-border);
 
-    background-color: #fcfff9;
+    background-color: var(--color-fake-white);
   }
 
   .date-input-container {
@@ -74,7 +74,7 @@ export const PeriodSelectorContainer = styled.div`
       font-weight: 600;
       max-width: 100%;
       border-radius: 6px;
-      border: 1px solid #a6a6a6;
+      border: 1px solid var(--color-border);
       text-align: start;
 
       font-size: 16px;
@@ -106,168 +106,17 @@ export const PeriodSelectorContainer = styled.div`
   }
 `;
 
-const centered = `
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const roundedSquare = `
-  ${centered};
-    
-  width: 27px;
-  height: 27px;
-  border-radius: 6px;
-
-  position: relative;
-
-  &:hover::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    content: '';
-    width: 100%;
-    height: 100%;
-
-    border-radius: inherit;
-    background-color: #54428e14;
-  }
-
-  &:active {
-    outline: 1px dotted #54428e;
-  }
-`;
-
-export const Calendar = styled.div`
-  user-select: none;
-
-  font-family: 'Rubik', sans-serif;
-  font-weight: 600;
-
-  ${centered};
-  flex-direction: column;
-  background: linear-gradient(180deg, #a8d65c 2%, #87b75d 98%);
-
-  text-align: center;
-
-  border-radius: 6px;
-  padding: 18px;
-  width: 100%;
-
-  .wrapper {
-    text-align: center;
-    width: 100%;
-  }
-
-  div.month-selector {
-    ${centered};
-    justify-content: space-between;
-
-    margin-bottom: 12px;
-
-    text-transform: capitalize;
-    font-weight: 700;
-
-    button {
-      ${roundedSquare};
-      background-color: #00000026;
-    }
-  }
-
-  .days-column {
-    display: inline-block;
-    margin-right: 8px;
-
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-
-    :last-child {
-      margin-bottom: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  .day-label {
-    display: block;
-    font-size: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
-
-    margin-bottom: 6px;
-  }
-
-  .day {
-    cursor: not-allowed;
-
-    position: relative;
-
-    ${roundedSquare};
-    margin-bottom: 8px;
-
-    font-size: 12px;
-    background-color: #ffffff32;
-
-    :nth-last-of-type(1) {
-      margin-bottom: 0;
-    }
-  }
-
-  .available {
-    background-color: #ffffff96;
-  }
-
-  .other-month-day {
-    background-color: transparent;
-
-    &:hover::before {
-      background-color: transparent;
-    }
-  }
-
-  .today {
-    border-radius: 50%;
-  }
-
-  .selected {
-    color: #fcfff9;
-
-    background-color: #54428e;
-    box-shadow: 0px 3px 2px #0c57c9bf;
-
-    &.other-month-day {
-      background-color: transparent;
-      border: 1px solid #54428e;
-      color: #54428e;
-    }
-  }
-
-  .between-selecteds {
-    color: #fcfff9;
-    background-color: #6a54b0;
-
-    &.other-month-day {
-      background-color: transparent;
-      border: 1px solid #54428e;
-      color: #54428e;
-    }
-  }
-`;
-
 export const AvailableTimesContainer = styled.div`
   text-align: center;
 
   div:nth-of-type(2n) {
-    border-color: #23212c;
+    border-color: var(--color-text);
 
     > div button {
-      background-color: #54428e;
+      background-color: var(--color-complementary);
 
       &:hover {
-        background-color: #23212c;
+        background-color: var(--color-text);
       }
     }
   }
@@ -288,8 +137,8 @@ export const AvailableTimesContainer = styled.div`
 
     button {
       border-radius: 6px;
-      border: 1px solid #54428e;
-      color: #54428e;
+      border: 1px solid var(--color-complementary);
+      color: var(--color-complementary);
 
       text-align: center;
 
@@ -301,25 +150,25 @@ export const AvailableTimesContainer = styled.div`
 
       &:hover {
         color: white;
-        background-color: #54428e;
+        background-color: var(--color-complementary);
       }
 
       &:active {
         transform: scale(0.85, 0.85);
-        border-color: #23212c;
+        border-color: var(--color-text);
       }
     }
 
     button.current {
       color: white;
-      background-color: #54428e;
+      background-color: var(--color-complementary);
     }
   }
 `;
 
 export const ATWrapper = styled.div`
   padding: 8px;
-  border: 1px solid #5b8c30;
+  border: 1px solid var(--color-main);
   border-radius: 6px;
   font-weight: 600;
 
@@ -334,7 +183,7 @@ export const ATWrapper = styled.div`
   .where-when {
     text-align: center;
     white-space: nowrap;
-    color: #23212c;
+    color: var(--color-text);
 
     display: flex;
     flex-wrap: wrap;
@@ -365,13 +214,13 @@ export const ATWrapper = styled.div`
       line-height: 165%;
       border-radius: 6px;
       padding: 6px;
-      background-color: #a8d65c;
+      background-color: var(--color-calendar-top);
 
-      color: #fcfff9;
+      color: var(--color-fake-white);
       font-weight: 700;
 
       &:hover {
-        background-color: #3b5b1f;
+        background-color: var(--color-main-darker);
       }
     }
   }

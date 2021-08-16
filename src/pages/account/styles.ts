@@ -71,7 +71,7 @@ export const PasswordForm = styled(Form)`
 
   h3 {
     margin-bottom: 24px;
-    color: #a6a6a6;
+    color: var(--color-border);
   }
 `;
 
@@ -112,7 +112,7 @@ export const AvatarFakeForm = styled.div`
     justify-content: center;
     gap: 8px;
 
-    color: #54428e;
+    color: var(--color-complementary);
     font-weight: 700;
 
     svg {
@@ -164,7 +164,7 @@ export const AvatarFakeForm = styled.div`
     background-color: transparent;
 
     font-family: 'Rubik', sans-serif;
-    color: #54428e;
+    color: var(--color-complementary);
 
     svg {
       stroke-width: 4px;

@@ -12,7 +12,7 @@ export const AppointmentsContainer = styled.main`
   margin-top: 58px;
   margin-bottom: 36px;
   font-weight: 700;
-  color: #fcfff9;
+  color: var(--color-fake-white);
 
   grid-template:
     'label button'
@@ -26,7 +26,7 @@ export const AppointmentsContainer = styled.main`
     > button {
       display: inline-flex;
       font-size: 14px;
-      background-color: #87b75d;
+      background-color: var(--color-calendar-bottom);
 
       &:hover {
         background-color: #a5df71;
@@ -44,7 +44,7 @@ export const AppointmentsContainer = styled.main`
     > button svg {
       height: 18px;
       width: 18px;
-      color: #fcfff9;
+      color: var(--color-fake-white);
       animation: none;
     }
   }
@@ -73,7 +73,7 @@ export const AppointmentsContainer = styled.main`
     font-size: 18px;
     font-family: 'Rubik', sans-serif;
     font-weight: 700;
-    background-color: #23212c;
+    background-color: var(--color-text);
     grid-area: button;
   }
 
@@ -121,7 +121,7 @@ export const AppointmentsContainer = styled.main`
 
   h1 {
     align-self: center;
-    color: #23212c;
+    color: var(--color-text);
   }
 
   .loading {
@@ -140,7 +140,7 @@ export const AppointmentsContainer = styled.main`
   svg {
     width: 24px;
     stroke-width: 2px;
-    color: #23212c;
+    color: var(--color-text);
     margin-right: 10px;
   }
 
@@ -200,7 +200,7 @@ export const AppointmentWrapper = styled.li`
 
   > .doctor-info {
     div img {
-      border: 2px solid #23212c;
+      border: 2px solid var(--color-text);
     }
 
     display: flex;
@@ -211,11 +211,11 @@ export const AppointmentWrapper = styled.li`
 
     border-radius: 6px;
 
-    background-color: #87b75d;
+    background-color: var(--color-calendar-bottom);
 
     span:nth-of-type(1) {
       font-family: 'Rubik', sans-serif;
-      color: #23212c;
+      color: var(--color-text);
       margin-bottom: 4px;
     }
   }
@@ -248,7 +248,7 @@ export const AppointmentWrapper = styled.li`
     margin: 0 auto;
     line-height: 1.5em;
     font-size: 1em;
-    background-color: #87b75d;
+    background-color: var(--color-calendar-bottom);
 
     &:hover {
       background-color: #a5df71;

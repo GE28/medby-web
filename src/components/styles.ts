@@ -28,14 +28,16 @@ export const DefaultHeader = styled.header<CustomHeader>`
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: ${(props) => (props.logged ? '3px solid #5b8c30' : '0')};
-  background-color: ${(props) => (props.logged ? '#fcfff9' : '#5b8c30')};
+  border-bottom: ${(props) =>
+    props.logged ? '3px solid var(--color-main)' : '0'};
+  background-color: ${(props) =>
+    props.logged ? 'var(--color-fake-white)' : 'var(--color-main)'};
 
   ${(props) =>
     props.logged &&
     css`
       span {
-        color: #5b8c30;
+        color: var(--color-main);
       }
     `};
 
@@ -58,7 +60,7 @@ export const LogoContainer = styled.div`
   display: flex;
   height: 100%;
   gap: 16px;
-  color: #fcfff9;
+  color: var(--color-fake-white);
   align-items: center;
 
   img {
@@ -80,7 +82,7 @@ export const AvatarContainer = styled.div<AvatarContainer>`
   height: ${(props) => `${props.size}px`};
 
   img {
-    border: 3px solid #5b8c30;
+    border: 3px solid var(--color-main);
     position: relative;
     border-radius: 50%;
     left: 50%;
@@ -113,7 +115,7 @@ export const ProfileWrapper = styled.div`
     text-align: center;
 
     a {
-      color: #5b8c30;
+      color: var(--color-main);
       ${iconLinkCSS}
     }
 
@@ -123,7 +125,7 @@ export const ProfileWrapper = styled.div`
   }
 
   .menu {
-    background-color: #f9fff5;
+    background-color: var(--color-bg);
     position: absolute;
     z-index: 999;
     bottom: -48px;
@@ -133,7 +135,7 @@ export const ProfileWrapper = styled.div`
     justify-content: center;
 
     border-radius: 8px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 1px var(--color-black-10);
     padding: 12px;
 
     span {
@@ -141,14 +143,15 @@ export const ProfileWrapper = styled.div`
     }
 
     button {
-      color: #54428e;
+      color: var(--color-complementary);
       background-color: transparent;
       ${iconLinkCSS}
     }
   }
 
   .menu span {
-    color: #000;
+    color: var(--color-text);
+    opacity: 1;
   }
 
   .menu::before {
@@ -162,9 +165,9 @@ export const ProfileWrapper = styled.div`
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid #f9fff5;
+    border-bottom: 8px solid var(--color-bg);
 
-    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 -1px 0 var(--color-black-10));
   }
 
   @media (max-width: 630px) {
@@ -177,11 +180,11 @@ export const ProfileWrapper = styled.div`
     }
 
     > .avatar-container img {
-      border-color: #23212c;
+      border-color: var(--color-text);
     }
 
     > div span {
-      color: #23212c;
+      color: var(--color-text);
     }
   }
 `;
@@ -198,21 +201,21 @@ export const InputContainer = styled.div<InputContainer>`
   div {
     display: flex;
     align-items: center;
-    background-color: #fcfff9;
+    background-color: var(--color-fake-white);
     border-radius: 6px;
-    border: 1px solid #a6a6a6;
+    border: 1px solid var(--color-border);
     padding: 0 36px 0 8px;
     gap: 12px;
   }
 
   div:focus-within {
-    border: 1px solid #5b8c30;
-    box-shadow: 0 0 0 3px #5b8c3020;
+    border: 1px solid var(--color-main);
+    box-shadow: 0 0 0 3px var(--color-main-13);
     transition: 0.05s;
   }
 
   div:hover {
-    box-shadow: 0 0 0 3px #5b8c3020;
+    box-shadow: 0 0 0 3px var(--color-main-13);
   }
 
   span {
@@ -221,7 +224,7 @@ export const InputContainer = styled.div<InputContainer>`
 
   div svg {
     flex-shrink: 0;
-    color: #a6a6a6;
+    color: var(--color-border);
   }
 
   input {
@@ -229,7 +232,7 @@ export const InputContainer = styled.div<InputContainer>`
     flex-grow: 1;
     outline: 0;
     line-height: 36px;
-    color: #23212c;
+    color: var(--color-text);
     background-color: transparent;
     border: 0;
   }
@@ -244,16 +247,16 @@ export const InputContainer = styled.div<InputContainer>`
     isTouched &&
     css`
       div {
-        border: 1px solid #dd614a;
-        box-shadow: 0 0 0 3px #dd614a20;
+        border: 1px solid var(--color-danger);
+        box-shadow: 0 0 0 3px var(--color-danger-13);
       }
 
       div svg {
-        color: #dd614a;
+        color: var(--color-danger);
       }
 
       span {
-        color: #dd614a;
+        color: var(--color-danger);
       }
     `};
 
@@ -262,11 +265,11 @@ export const InputContainer = styled.div<InputContainer>`
     isTouched &&
     css`
       div {
-        border: 1px solid #5b8c30;
+        border: 1px solid var(--color-main);
       }
 
       div svg {
-        color: #5b8c30;
+        color: var(--color-main);
       }
 
       span {
@@ -280,15 +283,15 @@ export const InputContainer = styled.div<InputContainer>`
     css`
       div {
         cursor: not-allowed;
-        background-color: #a6a6a6;
+        background-color: var(--color-border);
       }
 
       div svg {
-        color: #fcfff9;
+        color: var(--color-fake-white);
       }
 
       input {
-        color: #fcfff9;
+        color: var(--color-fake-white);
       }
     `};
 `;
@@ -304,14 +307,14 @@ export const SelectContainer = styled.div`
   }
 
   div {
-    border: 1px solid #a6a6a6;
+    border: 1px solid var(--color-border);
     border-radius: 6px;
 
-    background-color: #fcfff9;
+    background-color: var(--color-fake-white);
     font-size: 16px;
 
     &:hover {
-      box-shadow: 0 0 0 3px #5b8c3020;
+      box-shadow: 0 0 0 3px var(--color-main-13);
     }
   }
 
@@ -322,7 +325,7 @@ export const SelectContainer = styled.div`
     padding: 0 8px;
 
     &:active {
-      border: 1px solid #5b8c30;
+      border: 1px solid var(--color-main);
       transition: 0.05s;
     }
 
@@ -337,8 +340,8 @@ export const SelectContainer = styled.div`
 
   div.select-menu {
     border-radius: 6px 0 0 6px;
-    border: 1px solid #5b8c30;
-    box-shadow: 0 0 0 3px #5b8c3020;
+    border: 1px solid var(--color-main);
+    box-shadow: 0 0 0 3px var(--color-main-13);
 
     width: 100%;
     position: absolute;
@@ -355,7 +358,7 @@ export const SelectContainer = styled.div`
     }
 
     span:hover {
-      background-color: #5ad45a;
+      background-color: var(--color-success);
     }
   }
 
@@ -363,7 +366,7 @@ export const SelectContainer = styled.div`
     margin-right: 12px;
   }
 
-  color: #23212c;
+  color: var(--color-text);
 `;
 
 export const DefaultButton = styled.button`
@@ -371,23 +374,23 @@ export const DefaultButton = styled.button`
   border-radius: 6px;
   line-height: 42px;
 
-  color: #fcfff9;
+  color: var(--color-fake-white);
   font-size: 18px;
   font-weight: 700;
 
-  background-color: #5b8c30;
+  background-color: var(--color-main);
   align-items: center;
   justify-content: center;
 
   margin-top: 25px;
 
   &:hover {
-    background-color: #3b5b1f;
+    background-color: var(--color-main-darker);
   }
 
   :disabled {
     cursor: not-allowed;
-    background-color: #a6a6a6;
+    background-color: var(--color-border);
   }
 
   svg {
@@ -420,7 +423,7 @@ export const Form = styled.form`
   }
 
   a {
-    color: #54428e;
+    color: var(--color-complementary);
     font-size: 14px;
     font-weight: 600;
   }
@@ -434,14 +437,14 @@ export const Form = styled.form`
 export const GithubContainer = styled.a`
   display: flex;
   align-items: center;
-  color: #5b8c30;
+  color: var(--color-main);
   font-size: 21px;
   font-family: 'Montserrat', sans-serif;
   gap: 12px;
 
   img {
     order: 1;
-    fill: #5b8c30;
+    fill: var(--color-main);
     width: 36px;
   }
 `;
@@ -456,10 +459,10 @@ export const ToastWrapper = styled.div<Toast>`
 
   overflow: hidden;
 
-  background-color: #fcfff9;
+  background-color: var(--color-fake-white);
   border-radius: 8px;
 
-  border: 1px solid #f3a104;
+  border: 1px solid var(--color-warning-strong);
 
   div {
     position: relative;
@@ -467,7 +470,7 @@ export const ToastWrapper = styled.div<Toast>`
     bottom: 0;
     padding: 0 4px;
     display: flex;
-    background-color: #f2e926;
+    background-color: var(--color-warning);
     align-items: center;
 
     svg {
@@ -505,23 +508,23 @@ export const ToastWrapper = styled.div<Toast>`
     dd {
       margin-top: 0.05rem;
       font-size: 16px;
-      color: #6b6b6b;
+      color: dimgray;
     }
   }
 
   &[type='error'] {
-    border-color: #de0f20;
+    border-color: var(--color-danger-strong);
 
     div {
-      background-color: #dd614a;
+      background-color: var(--color-danger);
     }
   }
 
   &[type='success'] {
-    border-color: #5b8c30;
+    border-color: var(--color-main);
 
     div {
-      background-color: #5ad45a;
+      background-color: var(--color-success);
     }
   }
 `;
@@ -555,7 +558,7 @@ export const ToastsContainer = styled.dl`
 export const ModalContainer = styled.div`
   position: relative;
   display: block;
-  background-color: #f9fff5;
+  background-color: var(--color-bg);
   text-align: center;
   width: 75%;
   padding: 24px 0;
@@ -579,7 +582,7 @@ export const ModalContainer = styled.div`
   }
 
   .doctor-info {
-    background-color: #54428ebf;
+    background-color: var(--color-complementary-75);
     padding: 18px 24px;
 
     .doctor-container {
@@ -593,7 +596,7 @@ export const ModalContainer = styled.div`
       height: 72px;
 
       img {
-        border: 2px solid #f9fff5;
+        border: 2px solid var(--color-bg);
         position: absolute;
         border-radius: 50%;
         left: 50%;
@@ -618,7 +621,7 @@ export const ModalContainer = styled.div`
 
       > span {
         font-family: 'Rubik', sans-serif;
-        color: #f9fff5;
+        color: var(--color-bg);
         margin-bottom: 3px;
         opacity: 1;
       }
@@ -633,7 +636,7 @@ export const ModalContainer = styled.div`
       }
 
       .spec-data span :nth-child(even) {
-        color: #f9fff5;
+        color: var(--color-bg);
         margin: 0;
       }
     }
@@ -642,7 +645,7 @@ export const ModalContainer = styled.div`
   }
 
   > div:nth-of-type(n + 2):nth-of-type(even) {
-    background-color: #f9fff5;
+    background-color: var(--color-bg);
   }
 
   > div:nth-of-type(n + 2) {
@@ -655,7 +658,7 @@ export const ModalContainer = styled.div`
 
     span {
       font-weight: 700;
-      color: #54428e;
+      color: var(--color-complementary);
     }
 
     div {
@@ -665,13 +668,13 @@ export const ModalContainer = styled.div`
         font-weight: 600;
 
         :nth-of-type(1) {
-          color: #23212c;
+          color: var(--color-text);
         }
 
         :nth-of-type(2) {
           margin-top: 3px;
           font-family: 'Source Sans Pro', sans-serif;
-          color: #a6a6a6;
+          color: var(--color-border);
         }
       }
     }
@@ -681,7 +684,7 @@ export const ModalContainer = styled.div`
     display: block;
     text-align: center;
     font-weight: 700;
-    color: #54428e;
+    color: var(--color-complementary);
     font-family: 'Rubik', sans-serif;
     font-weight: 600;
 
@@ -693,14 +696,14 @@ export const ModalContainer = styled.div`
     margin-top: 24px;
     padding: 0 18px;
     line-height: 32px;
-    filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0px 4px 0px var(--color-black-20));
 
     &:hover {
-      background-color: #fb895e;
+      background-color: var(--color-danger-lighter);
     }
 
     &:active {
-      background-color: #bf3936;
+      background-color: var(--color-danger-darker);
       filter: none;
     }
 
@@ -711,36 +714,36 @@ export const ModalContainer = styled.div`
     }
 
     &.cancel {
-      background-color: #dd614a;
+      background-color: var(--color-danger);
 
       &:hover {
-        background-color: #fb895e;
+        background-color: var(--color-danger-lighter);
       }
 
       &:active {
-        background-color: #bf3936;
+        background-color: var(--color-danger-darker);
       }
     }
 
     &.appoint {
-      background-color: #5ad45a;
+      background-color: var(--color-success);
 
       &:hover {
-        background-color: #5ad45a;
+        background-color: var(--color-success);
       }
 
       &:active {
-        background-color: #5b8c30;
+        background-color: var(--color-main);
       }
     }
 
     &.alert {
-      background-color: #f3a104;
+      background-color: var(--color-warning-strong);
     }
   }
 
   h5 {
-    color: rgba(0, 0, 0, 0.2);
+    color: var(--color-black-20);
 
     margin-top: 8px;
   }
@@ -789,7 +792,7 @@ export const ModalContainer = styled.div`
 
   .confirm-alert {
     position: absolute;
-    color: #f3a104;
+    color: var(--color-warning-strong);
     font-size: 0.8em;
 
     left: 50%;
@@ -815,5 +818,5 @@ export const DefaultModal = styled.div`
   align-items: center;
   justify-content: center;
 
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--color-black-70));
 `;

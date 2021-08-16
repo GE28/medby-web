@@ -6,7 +6,7 @@ export default styled(Link)`
   ${DefaultButton.withComponent('a')} {
   }
 
-  color: #ffffef;
+  color: var(--color-white);
   text-align: center;
   border-radius: 6px;
 `;
