@@ -74,6 +74,25 @@ const RegisterForm: FC = () => {
           type: 'error' as const,
         };
         sendToastIfNoResponse(err, addToast, offlineRegisterToast);
+
+        const { email, cpf } = err?.response?.data?.fields;
+        if (email) {
+          const alreadyInUseEmailToast = {
+            title: 'Falha ao realizar registro',
+            message: 'Este e-mail já está em uso!',
+            type: 'error' as const,
+          };
+          addToast(alreadyInUseEmailToast);
+        }
+
+        if (cpf) {
+          const alreadyInUseCPFToast = {
+            title: 'Falha ao realizar registro',
+            message: 'Este cpf já está em uso!',
+            type: 'error' as const,
+          };
+          addToast(alreadyInUseCPFToast);
+        }
       }
     },
     validationSchema: Yup.object().shape({
