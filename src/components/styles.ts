@@ -89,6 +89,7 @@ export const AvatarContainer = styled.div<AvatarContainer>`
     width: inherit;
     height: inherit;
     object-fit: cover;
+    font-size: 60%;
   }
 `;
 
