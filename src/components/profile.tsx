@@ -1,4 +1,11 @@
-import React, { FC, useCallback, useContext, useState, useRef } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -29,17 +36,23 @@ const Profile: FC = () => {
     return `Boa tarde, ${name}!`;
   }, [name]);
 
-  const setMenuVisibility = useCallback((state: boolean) => {
-    if (timer?.current) clearTimeout(timer.current);
+  const [menuVisibility, setMenuVisibility] = useState(false);
 
+  useEffect(() => {
     const showAfter = 500;
     const hideAfter = 200;
 
     timer.current = setTimeout(
-      () => setMenuDisplay(state),
-      state ? showAfter : hideAfter,
+      () => setMenuDisplay(menuVisibility),
+      menuVisibility ? showAfter : hideAfter,
     );
-  }, []);
+
+    return () => {
+      if (timer?.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [menuVisibility]);
 
   return (
     <ProfileWrapper>
