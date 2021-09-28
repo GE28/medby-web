@@ -818,5 +818,5 @@ export const DefaultModal = styled.div`
   align-items: center;
   justify-content: center;
 
-  background-color: var(--color-black-70));
+  background-color: var(--color-black-70);
 `;
