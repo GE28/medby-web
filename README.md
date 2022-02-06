@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+# Medby-web
+Esta é uma UI que consome a API do [Medby](https://github.com/GE28/medby-web), construída em React.js.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Principais tecnologias utilizadas 
+* **[Node.js](https://nodejs.org/pt-br/)**: Um runtime de desenvolvimento JavaScript que permite que a linguagem seja utilizada em nível back-end e sem a necessidade de um navegador.
+* **[TypeScript](https://www.typescriptlang.org/)**: Uma linguagem de programação que estende o JavaScript comum para possibilitar a tipagem do código.
+* **[React.js](https://pt-br.reactjs.org/)**: Uma biblioteca JavaScript muito conhecida para a construção de interfaces de usuário web
+* **[Create React App](https://github.com/facebook/create-react-app)**: Ferramenta oficial para criar projetos React com o mínimo de configurações necessárias.
+* **[Formik](https://formik.org/):** Uma biblioteca que facilita a criação de formulários em aplicações React
 
-## Available Scripts
+## Como usar
+Por padrão a aplicação executa no endereço [http://localhost:3000](http://localhost:3000/)
 
-In the project directory, you can run:
+É necessário ter o NodeJS (versão 13 ou superior) disponível na máquina
 
-### `yarn start`
+* É recomendado que faça a instalação através de um gerenciador de pacotes (https://nodejs.org/en/download/package-manager/)
+* Ou baixe o instalador para a sua plataforma através do site oficial (https://nodejs.org/en/download/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Também é necessária a parte back-end da aplicação **em execução** para o funcionamento correto. Siga as instruções em: https://github.com/GE28/medby-web
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Primeiro, clone este repositório através do comando abaixo:**
+```bash
+git clone https://www.github.com/GE28/medby-web
+```
 
-### `yarn test`
+**Após isso, navegue até o diretório do projeto e instale os arquivos necessários para a execução do código:**
+```bash
+cd ./medby-web
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Para executar em modo de desenvolvimento:**
+```bash
+npm start
+```
 
-### `yarn build`
+**Também é possível criar uma versão otimizada da aplicação, pronta para ser executada, através dos comandos:**
+```bash
+npm build
+```
+E então, um arquivo .js será criado na pasta `build`, que poderá ser executado em navegadores.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Licença
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Medby-web está sob licença [MIT](./LICENSE).
