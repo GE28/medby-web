@@ -34,11 +34,10 @@ npm install
 npm start
 ```
 
-**Também é possível criar uma versão otimizada da aplicação, pronta para ser executada, através dos comandos:**
+**Também é possível criar uma versão otimizada da aplicação, pronta para produção, através do comando:**
 ```bash
 npm build
 ```
-E então, um arquivo .js será criado na pasta `build`, que poderá ser executado em navegadores.
 
 ## Licença
 
