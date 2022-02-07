@@ -11,7 +11,7 @@ Esta é uma UI que consome a API do [Medby](https://github.com/GE28/medby-web), 
 ## Como usar
 Por padrão a aplicação executa no endereço [http://localhost:3000](http://localhost:3000/)
 
-É necessário ter o NodeJS (versão 13 ou superior) disponível na máquina
+É necessário ter o Node.js (versão 13 ou superior) disponível na máquina
 
 * É recomendado que faça a instalação através de um gerenciador de pacotes (https://nodejs.org/en/download/package-manager/)
 * Ou baixe o instalador para a sua plataforma através do site oficial (https://nodejs.org/en/download/)
