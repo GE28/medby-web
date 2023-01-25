@@ -1,5 +1,5 @@
 # Medby-web
-Esta é uma UI que consome a [API do Medby](https://github.com/GE28/medby-web), construída em React.js.
+Esta é uma aplicação WEB, construída em React.js, que consome a [API do Medby](https://github.com/GE28/medby).
 
 ## Principais tecnologias utilizadas 
 * **[Node.js](https://nodejs.org/pt-br/)**: Um runtime de desenvolvimento JavaScript que permite que a linguagem seja utilizada em nível back-end e sem a necessidade de um navegador.
